@@ -1,0 +1,97 @@
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html, body,  {
+  height: 86%;
+  width: 100vw;
+}
+
+#main {
+  width:100%;
+  display: flex;
+}
+
+#main div {
+  flex: 1;
+}
+
+.back-news{
+  font-size: 14px;
+  color: #00a195;
+  text-decoration: none;
+  display: inline;
+  margin-left: 4px;
+
+}
+
+ion-card{
+  margin: 0;
+  box-shadow: none;
+}
+
+.ion-back{
+  color: #00a195;
+  position: relative;
+  fill: #00a195;
+  font-size: 14px;
+}
+
+ion-buttons{
+  margin-top:12px;
+  margin-left:12px;
+}
+img{
+  border: 1px solid #00a195;
+}
+.date{
+  font-size: 10px;
+  color: #00a195;
+  display: inline;
+  margin-left: 4px;
+}
+
+.ion-calendar{
+  color: #00a195;
+  position: relative;
+  fill: #00a195;
+  font-size: 10px;
+}
+
+ion-card-title{
+  color: #ff6f00;
+  font-size: 14px;
+}
+
+ion-label{
+  font-size: 10px !important;
+}
+.item-inner{
+  padding-inline-end: 0 !important;
+}
+
+
+ion-row{
+  margin-top: 10vh;
+}
+ion-col{
+  color: var(--ion-color-medium);
+
+  align-items: center;
+}
+ion-toolbar{
+  --background: transparent;
+  --border-style: none;
+  ion-button{
+    ion-icon{
+      font-size: 50px;
+    }
+  }
+}
+
+scroll-y{
+  --background: transparent;
+
+}

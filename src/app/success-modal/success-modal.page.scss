@@ -1,0 +1,18 @@
+ion-row{
+  margin-top: 10vh;
+}
+ion-col{
+  margin-bottom: 20px;
+  color: var(--ion-color-medium);
+  margin-top:50%;
+  align-items: center;
+}
+ion-toolbar{
+  --background: transparent;
+  --border-style: none;
+  ion-button{
+    ion-icon{
+      font-size: 50px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<!--<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <ion-img [src]="'assets/active-schools.svg'"></ion-img>
+        Active schools
+    </ion-title>
+  </ion-toolbar>
+</ion-header>-->
+
+<ion-content class="auth-form">
+  <ion-grid>
+      <ion-row class="ion-start-content">
+        <ion-img [src]="'assets/active-schools.svg'" class="ion-logo"></ion-img>
+        <ion-col class="ion-principal-text">
+          <p>active schools</p>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col class="align-self-center">
+        <ion-button [routerLink]="['/registration']" expand="block">Register</ion-button>
+
+        <span class="divider line one-line">or</span>
+
+        <span class="already">Already a user?</span>
+
+        <ion-button [routerLink]="['/login']" expand="block">Sign In</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

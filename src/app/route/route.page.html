@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div id="main">
+      <div>
+        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button" style="margin: 0px 10px;width:20%"></ion-img>
+      </div>
+      <div>
+          <a routerLink ="/settings"> <ion-img [src]="'assets/settings.svg'" class="ion-left-button" style="margin: 0px 10px; width:20%; float: right"></ion-img></a>
+      </div>
+     </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="profile">
+    <ion-img [src]="'assets/profile.svg'" class="ion-profile"></ion-img>
+  </div>
+  <div id="mapid"></div>
+  <div id="popupVideo" class="videoPopUp" style="width: 250px">
+    <div class="challengeTitle">
+      <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
+    </div>
+    <div class="challengeDemo">
+      <iframe src="assets/videos/sentadilla.mp4" width="100%" height="50%"></iframe>
+    </div>
+    <div class="challengeButtonDemo">
+      <ion-button color="success" expand="block" (click)="openTransparentModal()">Completed</ion-button>
+    </div>
+  </div>
+
+  <div  id="popupImg" class="imgPopUp" style="width: 250px">
+    <div class="challengeTitle">
+      <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
+    </div>
+    <div class="challengeDemo">
+      <img src="assets/icon/demo.svg">
+    </div>
+    <div class="challengeButtonDemo">
+      <ion-button expand="block" style="text-transform: none;" href="https://www.youtube.com/watch?v=VRKdOsad3HQ&ab_channel=Bestcycling">Watch Demo</ion-button>
+      <ion-button color="success" expand="block" (click)="openTransparentModal()">Completed</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+

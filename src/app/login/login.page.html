@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-start-content">
+      <ion-img [src]="'assets/active-schools.svg'" class="ion-logo"></ion-img>
+      <ion-col class="ion-principal-text">
+        <p>active schools</p>
+      </ion-col>
+    </ion-row>
+    <form class="form-login">
+      <ion-item class="ion-item-form" lines="full">
+        <ion-label position="floating" class="user-name" >User</ion-label>
+        <ion-input type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item class="ion-item-form" lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" required></ion-input>
+      </ion-item>
+
+      <ion-row>
+        <ion-col class="enter-container">
+          <ion-button type="submit" routerLink ="/college-tabs" expand="block" class="ion-button-enter">Enter</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="secondary-text-container">
+          <a routerLink ="/forgot-password"class="small-text">Have you forgotten the password?</a>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="secondary-text-container">
+          <a routerLink ="/registration"class="small-text">Are you a new user</a>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>
+

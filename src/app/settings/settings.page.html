@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div id="main">
+      <div>
+        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button" style="margin: 0px 10px;width:20%"></ion-img>
+      </div>
+      <div>
+        <a routerLink ="/college-tabs"> <ion-img [src]="'assets/exit.svg'" class="ion-left-button" style="margin: 0px 10px; width:10%; float: right"></ion-img></a>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+  <ion-row class="ion-start-content">
+    <ion-img [src]="'assets/settings-logo.svg'" class="ion-logo"></ion-img>
+    <ion-col class="ion-principal-text">
+      <p>settings</p>
+    </ion-col>
+  </ion-row>
+  <form class="form-login">
+    <ion-item class="ion-item-form" lines="full">
+      <ion-label position="floating" class="user-name" >step target</ion-label>
+      <ion-input type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-item-form" lines="full">
+      <ion-label position="floating">calories target</ion-label>
+      <ion-input type="password" required></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="enter-container">
+        <ion-button block outline type="submit" expand="block" color="secondary" class="ion-button-enter">Edit Profile</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="delete-profile">
+        <ion-button block outline type="submit" expand="block"  color="secondary" class="ion-button-enter2">Delete Profile</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-grid>
+</ion-content>
