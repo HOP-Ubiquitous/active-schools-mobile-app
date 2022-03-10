@@ -2,19 +2,6 @@
   box-sizing: border-box;
 }
 
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 .ion-profile{
   margin-bottom: -1em;
@@ -42,10 +29,46 @@
 }
 
 .rating-content{
+  margin-top: 5%;
   width:100%;
   img{
-    width: 40%;
+    width: 65%;
   }
+}
 
+.column {
+  background-color: #ededed;
+  float: left;
+  width: 50%;
+  padding: 2px;
+  text-align: center;
+  p{
+    color: #00a195;
+    font-size: 12px;
+    line-height: 0pt;
+    font-weight: bold;
+  }
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.zig-zag-top{
+  background:
+    linear-gradient(-45deg, #ededed 16px, #ededed 16px, #ededed 16px,  transparent 0),
+    linear-gradient(45deg, #ededed 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 24px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+  bottom: 64px;
+  left:0;
 }
 
