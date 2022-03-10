@@ -35,6 +35,15 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'resume-missions',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../resume-missions/resume-missions.module').then(m => m.ResumeMissionsPageModule)
+          }
+        ]
+      },
     ]
   }, {
     path: '',
