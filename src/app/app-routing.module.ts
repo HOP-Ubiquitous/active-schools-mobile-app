@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'success-modal',
     loadChildren: () => import('./success-modal/success-modal.module').then( m => m.SuccessModalPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
 ];
 

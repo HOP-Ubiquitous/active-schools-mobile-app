@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.ion-profile{
+  margin-bottom: -1em;
+}
+
+#main {
+  width:100%;
+  display: flex;
+}
+
+#main div {
+  flex: 1;
+}
+.no-scroll {
+  --overflow: hidden;
+}
+
+
+.avatar{
+  height: 50%;width:100%;
+  img{
+    max-width: 80%;
+    margin: 10%;
+  }
+}
+
+.rating-content{
+  width:100%;
+  img{
+    width: 40%;
+  }
+
+}
+
