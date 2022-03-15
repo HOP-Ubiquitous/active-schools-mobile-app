@@ -1,22 +1,118 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div id="main">
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
       <div>
-        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button" style="margin: 0px 10px;width:20%"></ion-img>
+        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button">
+        </ion-img>
       </div>
+
       <div>
-          <a routerLink ="/settings"> <ion-img [src]="'assets/settings.svg'" class="ion-left-button" style="margin: 0px 10px; width:20%; float: right"></ion-img></a>
+        <a routerLink="/settings">
+          <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img>
+        </a>
       </div>
-     </div>
+
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="profile">
-    <ion-img [src]="'assets/profile.svg'" class="ion-profile"></ion-img>
+
+  <div class="profile-container">
+
+    <div class="profile-user-level">
+
+      <div class="profile-user-level-container">
+
+        <img src="assets/icon/missions_icons/profile-frame.svg">
+
+        <div class="profile-user-level-bar"></div>
+
+        <div class="profile-user-image-container">
+          <div class="profile-user-image-container-inner">
+            <img src="assets/icon/missions_icons/profile-image.svg">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="profile-user-data">
+      <div class="profile-user-data-top-container">
+        <span>John Doe</span>
+      </div>
+      <div class="profile-user-data-bottom-container">
+        <ion-icon name="location"></ion-icon>
+        <span>C.P. Diego Marín | 6ºB | Ceutí</span>
+      </div>
+    </div>
+
+    <div class="profile-user-challenge">
+
+      <div class="profile-user-challenge-progress-container">
+        <div class="profile-user-challenge-progress-bar"></div>
+
+        <div class="profile-user-challenge-inner">
+          <div class="profile-user-challenge-icon-container">
+            <img src="assets/icon/missions_icons/profile-challenge-walk.svg">
+          </div>
+          <div class="profile-user-challenge-data-container">
+            <span>5.783 /</span>
+            <span>10.000</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
+
+  <div class="challenge-container">
+
+    <div class="challenge-title-container">
+      <div class="challenge-title-icon-container">
+        <ion-icon name="heart"></ion-icon>
+      </div>
+      <div class="challenge-title-text-container">
+        <span>Challenge Name</span>
+      </div>
+      <div class="challenge-title-close-container">
+        <ion-icon name="close"></ion-icon>
+      </div>
+    </div>
+
+    <div class="challenge-instructions-gallery-container">
+      <div class="challenge-instructions-gallery-inner-container">
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-1.svg">
+        </div>
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-2.svg">
+        </div>
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-1.svg">
+        </div>
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-2.svg">
+        </div>
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-1.svg">
+        </div>
+        <div class="challenges-instructions-image-container">
+          <img src="assets/icon/challenge-squats-2.svg">
+        </div>
+      </div>
+    </div>
+
+    <div class="zig-zag-bottom"></div>
+
+  </div>
+
   <div id="mapid"></div>
-  <div id="popupVideo" class="videoPopUp" style="width: 250px">
+
+  <!-- <div id="popupVideo" class="videoPopUp" style="width: 250px">
     <div class="challengeTitle">
       <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
     </div>
@@ -28,7 +124,7 @@
     </div>
   </div>
 
-  <div  id="popupImg" class="imgPopUp" style="width: 250px">
+  <div id="popupImg" class="imgPopUp" style="width: 250px">
     <div class="challengeTitle">
       <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
     </div>
@@ -36,10 +132,10 @@
       <img src="assets/icon/demo.svg">
     </div>
     <div class="challengeButtonDemo">
-      <ion-button expand="block" style="text-transform: none;" href="https://www.youtube.com/watch?v=VRKdOsad3HQ&ab_channel=Bestcycling">Watch Demo</ion-button>
+      <ion-button expand="block" style="text-transform: none;"
+        href="https://www.youtube.com/watch?v=VRKdOsad3HQ&ab_channel=Bestcycling">Watch Demo</ion-button>
       <ion-button color="success" expand="block" (click)="openTransparentModal()">Completed</ion-button>
     </div>
-  </div>
+  </div> -->
+
 </ion-content>
-
-

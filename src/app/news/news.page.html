@@ -1,29 +1,67 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div id="main">
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
       <div>
-        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button" style="margin: 0px 10px;width:20%"></ion-img>
+        <ion-img [src]="'assets/active-schools.svg'" class="ion-left-button">
+        </ion-img>
       </div>
+
       <div>
-        <a routerLink ="/settings"> <ion-img [src]="'assets/settings.svg'" class="ion-left-button" style="margin: 0px 10px; width:20%; float: right"></ion-img></a>
+        <a routerLink="/settings">
+          <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img>
+        </a>
       </div>
+
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngFor="let item of data; index as i">
-    <ion-item>
-      <ion-thumbnail slot="start" class="ios hydrated">
-        <img class="new-image" src="{{item.image}}">
-      </ion-thumbnail>
-      <ion-label >
-        <h3>{{item.title}}</h3>
-        <ion-icon name="calendar" class="ion-calendar"></ion-icon>
+<ion-content [fullscreen]="true">
+
+  <div class="news-container">
+
+    <a (click)="openTransparentModal()" *ngFor="let item of data; index as i">
+
+      <div class="news-container-inner">
+
+        <div class="news-left-container">
+          <img class="new-image" src="{{item.image}}">
+        </div>
+        <div class="news-right-container">
+
+          <div class="news-title-container">
+            <h3>{{item.title}}</h3>
+          </div>
+
+          <div class="news-calendar-container">
+            <ion-icon name="calendar" class="ion-calendar"></ion-icon>
+            <p>{{item.date}}</p>
+          </div>
+
+          <div class="news-text-container">
+            <p>{{item.content}}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- <ion-item>
+        <ion-thumbnail slot="start" class="ios hydrated">
+          <img class="new-image" src="{{item.image}}">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{item.title}}</h3>
+          <ion-icon name="calendar" class="ion-calendar"></ion-icon>
           <p class="date">{{item.date}}</p>
           <p class="content">{{item.content}}</p>
           <a (click)="openTransparentModal()" class="read-more">Read more..</a>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+        </ion-label>
+      </ion-item> -->
+    </a>
+
+  </div>
+
 </ion-content>

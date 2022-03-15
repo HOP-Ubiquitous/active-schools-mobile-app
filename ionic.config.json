@@ -1,5 +1,7 @@
 {
   "name": "active-schools",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

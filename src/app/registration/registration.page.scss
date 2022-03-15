@@ -6,17 +6,20 @@ ion-content{
 .ion-start-content{
   margin:0;
 }
-.ion-principal-text p{
+
+.ion-principal-text p {
   color: #c4c4c4;
   font-family: 'Montserrat', sans-serif;
-  font-size: 33px !important;
+  font-size: 20px !important;
   text-align: center;
   font-weight: bolder;
   margin: 0 !important;
 }
-.ion-logo{
-  width: 25%;
-  margin: 26% 0 0 36%;
+
+.ion-logo {
+  width: 100px;
+  height: auto;
+  margin: 25% auto 0 auto;
 }
 
 .form-registration{
@@ -24,10 +27,12 @@ ion-content{
   align-items: center;
   margin: auto;
 }
+
 .ion-item-form{
   text-align: center;
   color: var(--ion-color-step-250, #00a195);
   font-weight: lighter;
+  font-size: 14px;
 }
 
 .align-self-center{
@@ -62,15 +67,17 @@ ion-content{
 
 .next-button{
   width:100%;
-  height: 50px;
+  height: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
 
   font-family: 'Montserrat', sans-serif !important;
-  font-size: large;
+  font-size: 14px;
   font-weight: lighter;
-  -webkit-clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 50%, calc(100% - 25px) 100%, 20px 100%, 0% 25px);
-  clip-path: polygon(25px 0%, calc(100% - 25px) 0%, 100% 50%, calc(100% - 25px) 100%, 25px 100%, 0% 25px);
+  text-transform: capitalize;
+
+  -webkit-clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
+  clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
 }
 
 ion-button {
@@ -80,8 +87,16 @@ ion-button {
   text-align: center !important;
 }
 
-.ion-question-text{
+.ion-question-text {
   text-align: center;
   color: var(--ion-color-step-250, #00a195);
   font-weight: lighter;
-  }
+}
+
+.ion-question-text p {
+  margin-bottom: 0;
+}
+
+.yes-container .next-button {
+  margin-top: 0;
+}
