@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'src/theme/variables.scss';
 import {SuccessModalPage} from "../success-modal/success-modal.page";
+import * as routes from './route-constants';
 
 @Component({
   selector: 'app-route',
@@ -13,10 +14,18 @@ import {SuccessModalPage} from "../success-modal/success-modal.page";
 export class RoutePage {
   mymap: L.Map;
   marker: [L.Marker];
+  routes: any;
+  selectedRoute: any;
+  challenges: any;
+  selectedChallenge: any;
+  openChallengeWindow: boolean;
 
   constructor(private modalCtrl:ModalController, public animationCtrl: AnimationController)  {
     // @ts-ignore
     this.marker = []
+    this.challenges = routes.CHALLENGES;
+    this.routes = routes.ROUTES;
+    this.openChallengeWindow = false;
   }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
@@ -28,10 +37,10 @@ export class RoutePage {
       renderer: L.canvas(),
     });
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-      attribution: '© OpenStreetMap',
-      id: 'mapbox/streets-v11',
-      accessToken: 'pk.eyJ1IjoiZXZhdmZlciIsImEiOiJja3RhdW9xOGIwZm5xMnZrNG4zYWJ4Y2ZpIn0._RYp5RY3A3bhaRWBfreVDw',
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
 
     }).addTo(mymap);
 
@@ -43,57 +52,44 @@ export class RoutePage {
     mymap.on('zoomend', function(this) {
      console.log(mymap.getZoom())
       var currentZoom = mymap.getZoom();
-      self.deleteMarker()
-      self.createMarker()
-      self.paintMarker()
+      self.deleteMarker();
+      self.createMarker();
     });
 
-    this.mymap = mymap;;
-    this.createMarker()
-    this.paintMarker()
+    this.mymap = mymap;
+    this.createMarker();
     this.drawRoute()
   }
+
   createMarker() {
-    const flashIcon = new L.Icon({
-      className: 'flashIcon',
-      iconUrl: './assets/icon/Flash.svg',
-      iconSize: [this.mymap.getZoom() * 4.5, this.mymap.getZoom() * 4.5],
-      iconAnchor: [this.mymap.getZoom() * 2, this.mymap.getZoom() * 2]});
 
-    const heartIcon = new L.Icon({
-      iconUrl: './assets/icon/Heart.svg',
-      iconSize: [this.mymap.getZoom() * 4.5, this.mymap.getZoom() * 4.5],
-      iconAnchor: [this.mymap.getZoom() * 2, this.mymap.getZoom() * 2]});
-
-    const WeightIcon = new L.Icon({
-      iconUrl: './assets/icon/Weight_1.svg',
-      iconSize: [this.mymap.getZoom() * 4.5, this.mymap.getZoom() * 4.5],
-      iconAnchor: [this.mymap.getZoom() * 2, this.mymap.getZoom() * 2]});
-
-    const WeightIcon2 = new L.Icon({
-      iconUrl: './assets/icon/Weight_2.svg',
-      iconSize: [this.mymap.getZoom() * 4.5, this.mymap.getZoom()  * 4.5],
-      iconAnchor: [this.mymap.getZoom() * 2, this.mymap.getZoom() * 2]});
+    const vm = this;
 
     const MyPoint = new L.Icon({
       iconUrl: './assets/icon/my_point.svg',
-      iconSize: [this.mymap.getZoom() /2, this.mymap.getZoom() /2],
-      iconAnchor: [this.mymap.getZoom() /2, this.mymap.getZoom() /2]});
+      iconSize: [this.mymap.getZoom(), this.mymap.getZoom()],
+      iconAnchor: [this.mymap.getZoom(), this.mymap.getZoom()]});
+
+    this.marker.push(L.marker([38.078611, -1.272742], {icon: MyPoint}));
 
 
     //Markers in Murcia
-    this.marker.push(L.marker([37.996325, -1.134241], {icon: flashIcon}));
+    /* this.marker.push(L.marker([37.996325, -1.134241], {icon: flashIcon}));
     this.marker.push(L.marker([38.004739, -1.127669], {icon: heartIcon}));
     this.marker.push(L.marker([38.002316, -1.130772], {icon: WeightIcon}));
-    this.marker.push(L.marker([38.000052, -1.136747], {icon: WeightIcon2}));
+    this.marker.push(L.marker([38.000052, -1.136747], {icon: WeightIcon2})); */
 
     //Markers in Ceuti
 
-    this.marker.push(L.marker([38.077854 , -1.271694], {icon: flashIcon}));
+    /* this.marker.push(L.marker([38.077854 , -1.271694], {icon: flashIcon}));
     this.marker.push(L.marker([38.078809 , -1.272323], {icon: WeightIcon2}));
-    this.marker.push(L.marker([38.078611, -1.272742], {icon: MyPoint}));
     this.marker.push(L.marker([38.07838, -1.273626], {icon: WeightIcon}));
-    this.marker.push(L.marker([38.078034, -1.275159], {icon: heartIcon}));
+    this.marker.push(L.marker([38.078034, -1.275159], {icon: heartIcon})); */
+
+    this.marker.forEach(function(singleMarker) {
+      singleMarker.addTo(vm.mymap);
+    });
+
   }
 
   deleteMarker() {
@@ -106,48 +102,187 @@ export class RoutePage {
     this.marker = []
   }
 
-  paintMarker() {
-    let popupVideo = document.getElementById('popupVideo');
-    let popupImg = document.getElementById('popupImg');
-    for (var i = 0; i <= this.marker.length; i++) {
-      if (this.mymap != undefined && this.marker[i] != undefined) {
-        if (this.marker[i].options.icon.options.className == "flashIcon" || this.marker[i].options.icon.options.className == "heartIcon" || this.marker[i].options.icon.options.className == "WeightIcon") {
-          this.marker[i].addTo(this.mymap).bindPopup(popupVideo).on('click', function(e) {
-            popupVideo.classList.remove("videoPopUp");
-          });
+  drawRoute() {
+    
+    //Ceuti Route
+
+    const vm = this;
+    let markersIcon = [];
+
+    const sprintIcon = new L.Icon({
+      className: 'sprintIcon',
+      iconUrl: './assets/icon/challenges/challenge-sprint-marker.svg',
+      iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
+      iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]});
+
+    const heartIcon = new L.Icon({
+      className: 'heartIcon',
+      iconUrl: './assets/icon/challenges/challenge-heart-marker.svg',
+      iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
+      iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]});
+
+    const weightIcon = new L.Icon({
+      className: 'weightIcon',
+      iconUrl: './assets/icon/challenges/challenge-weight-marker.svg',
+      iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
+      iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]});
+
+    const agilityIcon = new L.Icon({
+      className: 'agilityIcon',
+      iconUrl: './assets/icon/challenges/challenge-agility-marker.svg',
+      iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom()  * 3],
+      iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]});
+
+    const stepsIcon = new L.Icon({
+      className: 'stepsIcon',
+      iconUrl: './assets/icon/challenges/challenge-steps-marker.svg',
+      iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom()  * 3],
+      iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]});  
+
+    markersIcon.push(sprintIcon);
+    markersIcon.push(heartIcon);
+    markersIcon.push(weightIcon);
+    markersIcon.push(agilityIcon);
+    markersIcon.push(stepsIcon);
+
+    this.routes.forEach(function(route) {
+
+      let waypoints = [];
+      route.waypoints.forEach(function(waypoint) {
+
+        waypoints.push(L.latLng(waypoint[0],waypoint[1]));
+
+      });
+
+      L.Routing.control({
+        waypoints: waypoints,
+        addWaypoints: false,
+        createMarker: function(i, wp, nWps) {
+          
+          let marker;
+  
+          if (i === 0) {
+  
+            const randomChallenge = Math.floor(Math.random() * markersIcon.length);
+
+            let popup = L.popup({
+              autoClose: false,
+              closeOnClick: false
+            }).setContent('Start: ' + route.start).openPopup();
+
+            marker = L.marker(wp.latLng, {
+              icon: markersIcon[randomChallenge]
+            }).bindPopup(popup);
+  
+          } else if ( i === nWps - 1) {
+  
+            const randomChallenge = Math.floor(Math.random() * markersIcon.length);
+            marker = L.marker(wp.latLng, {
+              icon: markersIcon[randomChallenge]
+            });
+  
+          } else {
+  
+            const randomChallenge = Math.floor(Math.random() * markersIcon.length);
+            marker = L.marker(wp.latLng, {
+              icon: markersIcon[randomChallenge]
+            });
+  
+          }
+  
+          return marker;
+        
+        },
+        // @ts-ignore
+        lineOptions: {
+          styles: [{color: '#00a195', opacity: 1, weight: 3}]
         }
-        else {
-          this.marker[i].addTo(this.mymap).bindPopup(popupImg).on('click', function(e) {
-            popupVideo.classList.remove("popupImg");
-          });
-        }
-      }
-    }
+      }).addTo(vm.mymap);
+
+    });
+
+    this.paintMarker();
   }
 
-  drawRoute() {
-    //Ceuti Route
-    L.Routing.control({
-      waypoints: [L.latLng(38.077854 , -1.271694), L.latLng(38.078034, -1.275159)],
-      addWaypoints: false,
-      createMarker: function() { return null; },
-      // @ts-ignore
-      lineOptions: {
-        styles: [{color: '#00a195', opacity: 1, weight: 3}]
-      }
-    }).addTo(this.mymap);
-    //Murcia Route
-    L.Routing.control({
-      waypoints: [L.latLng(37.996325, -1.134241), L.latLng(38.004739, -1.127669)],
-      addWaypoints: false,
-      createMarker: function() { return null; },
-      // @ts-ignore
-      lineOptions: {
-        styles: [{color: '#00a195', opacity: 1, weight: 3}]
-      }
-    }).addTo(this.mymap);
+  paintMarker() {
 
+    const vm = this;
+    const challengeList = this.challenges;
 
+    console.log(this.marker);
+
+    if (this.mymap != undefined) {
+      this.mymap.eachLayer(function(layer) {
+
+        //@ts-ignore
+        if (layer.options.icon !== undefined) {
+
+          //@ts-ignore
+          if (layer.options.icon.options.className === "sprintIcon") {
+          
+            layer.on('click', function(e) {
+  
+              let challengeIndex = 0;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
+  
+            });
+  
+            //@ts-ignore
+          } else if (layer.options.icon.options.className === "heartIcon") {
+  
+            layer.on('click', function(e) {
+  
+              let challengeIndex = 1;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
+  
+            });
+  
+            //@ts-ignore
+          } else if (layer.options.icon.options.className === "weightIcon") {
+  
+            layer.on('click', function(e) {
+  
+              let challengeIndex = 2;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
+  
+            });
+  
+            //@ts-ignore
+          } else if (layer.options.icon.options.className === "agilityIcon") {
+  
+            layer.on('click', function(e) {
+  
+              let challengeIndex = 3;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
+  
+            });
+  
+            //@ts-ignore
+          } else if (layer.options.icon.options.className === "stepsIcon") {
+  
+            layer.on('click', function(e) {
+  
+              let challengeIndex = 4;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
+  
+            });
+  
+          }
+
+        }
+
+      });
+    }
+
+  }
+
+  panToRoute(event) {
+    this.mymap.panTo(L.latLng(this.routes[event.detail.value].waypoints[0][0],this.routes[event.detail.value].waypoints[0][1]));
   }
 
   async openTransparentModal(){

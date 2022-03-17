@@ -69,73 +69,139 @@
 
   </div>
 
-  <div class="challenge-container">
+  <div class="challenge-container"
+       [ngClass]="{ 'challenge-container-expanded' : expandChallenge }"
+       *ngIf="openChallengeWindow == true">
 
     <div class="challenge-title-container">
       <div class="challenge-title-icon-container">
-        <ion-icon name="heart"></ion-icon>
+        <img src="{{selectedChallenge.icon}}">
       </div>
       <div class="challenge-title-text-container">
-        <span>Challenge Name</span>
+        <span>{{selectedChallenge.name}}</span>
       </div>
-      <div class="challenge-title-close-container">
+      <div class="challenge-title-close-container" (click)="openChallengeWindow = !openChallengeWindow">
         <ion-icon name="close"></ion-icon>
       </div>
     </div>
 
-    <div class="challenge-instructions-gallery-container">
-      <div class="challenge-instructions-gallery-inner-container">
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-1.svg">
-        </div>
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-2.svg">
-        </div>
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-1.svg">
-        </div>
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-2.svg">
-        </div>
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-1.svg">
-        </div>
-        <div class="challenges-instructions-image-container">
-          <img src="assets/icon/challenge-squats-2.svg">
+    <div class="challenge-container-inner">
+
+      <div class="challenge-target-container">
+        <div class="challenge-target-container-inner">
+          <div class="challenge-target-diamond">
+            <span>{{selectedChallenge.target}}</span>
+          </div>
         </div>
       </div>
+
+      <div class="challenge-instructions-gallery-container" *ngIf="selectedChallenge.instructions.length > 0">
+        <div class="challenge-instructions-gallery-inner-container">
+          
+          <div class="challenges-instructions-image-container"
+               *ngFor="let image of selectedChallenge.instructions; index as i">
+            <img src="{{image}}">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="challenge-demostration-video" *ngIf="showVideoDemostration">
+        <video autoplay *ngIf="selectedChallenge.video.type === 'local'">
+          <source type="video/mp4" src="{{selectedChallenge.video.url}}" />
+        </video>
+
+        <object *ngIf="selectedChallenge.video.type === 'youtube'" data="{{selectedChallenge.video.url}}"></object>
+      </div>
+
+      <ion-button (click)="showVideoDemostration = !showVideoDemostration" type="submit" expand="block" class="challenge-demostration-button">
+        <div class="challenge-demostration-icon-container">
+          <ion-icon name="play"></ion-icon>
+        </div>
+        Watch video demostration
+      </ion-button>
+
+      <div class="challenge-reward-container">
+        
+        <div class="challenge-reward-diamond">
+          <span>XP</span>
+          <div class="challenge-reward-diamond-left"></div>
+          <div class="challenge-reward-diamond-right"></div>
+        </div>
+
+        <div class="challenge-reward-tag-container">
+          <img src="assets/icon/challenge-tag.svg">
+          <span>{{selectedChallenge.reward}}</span>
+        </div>
+
+      </div>
+
+      <div class="challenge-upload-button-container">
+        <div class="challenge-upload-button">
+          <ion-icon name="cloud-upload"></ion-icon>
+        </div>
+        <div class="challenge-upload-button-bg"></div>
+      </div>
+
+      <div class="challenge-upload-text-container">
+        <span>Share your challenge!</span>
+      </div>
+
+      <div class="challenge-upload-icon-gallery-container">
+        <div class="challenge-upload-icon-gallery-container-inner">
+          <div class="challenge-upload-icon-gallery-diamond">
+            <ion-icon name="camera"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="challenge-upload-gallery-container">
+        <div class="challenge-upload-gallery-grid">
+
+          <div class="challenge-upload-gallery-image-container"
+               *ngFor="let image of selectedChallenge.gallery; index as i"
+               (click)="image.like = !image.like">
+            
+            <div class="challenge-upload-gallery-like-button-container"
+                 *ngIf="!image.like">
+              <ion-icon name="heart-outline"></ion-icon>
+            </div>
+
+            <div class="challenge-upload-gallery-like-button-container challenge-upload-gallery-like-button-container-active"
+                 *ngIf="image.like">
+              <ion-icon name="heart"></ion-icon>
+            </div>
+
+            <img src="{{image.image}}">
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
     <div class="zig-zag-bottom"></div>
+
+    <div class="challenge-expand-button-container" (click)="expandChallenge = !expandChallenge">
+      <ion-icon name="arrow-down"></ion-icon>
+    </div>
 
   </div>
 
   <div id="mapid"></div>
 
-  <!-- <div id="popupVideo" class="videoPopUp" style="width: 250px">
-    <div class="challengeTitle">
-      <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
-    </div>
-    <div class="challengeDemo">
-      <iframe src="assets/videos/sentadilla.mp4" width="100%" height="50%"></iframe>
-    </div>
-    <div class="challengeButtonDemo">
-      <ion-button color="success" expand="block" (click)="openTransparentModal()">Completed</ion-button>
-    </div>
-  </div>
-
-  <div id="popupImg" class="imgPopUp" style="width: 250px">
-    <div class="challengeTitle">
-      <h1 style="font-size:16px; font-weight: lighter;color: #00a195"> ♥ Challenge</h1>
-    </div>
-    <div class="challengeDemo">
-      <img src="assets/icon/demo.svg">
-    </div>
-    <div class="challengeButtonDemo">
-      <ion-button expand="block" style="text-transform: none;"
-        href="https://www.youtube.com/watch?v=VRKdOsad3HQ&ab_channel=Bestcycling">Watch Demo</ion-button>
-      <ion-button color="success" expand="block" (click)="openTransparentModal()">Completed</ion-button>
-    </div>
-  </div> -->
-
 </ion-content>
+
+<ion-item>
+  <ion-label>Routes</ion-label>
+  <ion-select interface="action-sheet"
+              class="custom-options"
+              (ionChange)="panToRoute($event)">
+    <ion-select-option *ngFor="let route of routes; index as i"
+                       [value]="i">
+                       {{route.start}}
+    </ion-select-option>
+  </ion-select>
+</ion-item>

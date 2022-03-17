@@ -226,6 +226,7 @@ html, body, #mapid {
   width: calc(100% - 20px);
   height: 160px;
   margin: 80px 10px 0 10px;
+  transition: 0.3s ease all;
   position: fixed;
   z-index: 9999;
   background: #fff;
@@ -249,6 +250,13 @@ html, body, #mapid {
        color: #00a195;
        line-height: 30px;
        text-align: center;
+     }
+
+     img {
+       height: 15px;
+       width: 15px;
+       object-fit: contain;
+       object-position: center;
      }
 
     }
@@ -284,69 +292,415 @@ html, body, #mapid {
 
   }
 
-  .challenge-instructions-gallery-container {
-    width: calc(100% - 20px);
-    height: 100px;
-    margin: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
+  .challenge-container-inner {
+    width: 100%;
+    height: calc(100% - 32px);
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    .challenge-instructions-gallery-inner-container {
-      width: 410px;
-      height: 100%;
-      display: inline-block;
-      justify-content: left;
-
-
-      .challenges-instructions-image-container {
-        height: 100%;
-        width: 60px;
-        margin-right: 10px;
-        display: inline-block;
-        border: 1px solid #00a195;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        position: relative;
-        overflow: hidden;
-
-        img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-          object-position: center;
+    .challenge-target-container {
+      width: calc(100% - 20px);
+      height: 50px;
+      position: relative;
+      margin: 0 auto -15px auto;
+      z-index: 999;
+  
+      .challenge-target-container-inner {
+        width: 50px;
+        height: 50px;
+        margin: auto;
+  
+        .challenge-target-diamond {
+          width: 50px;
+          height: 50px;
+          background: #ff6f00;
+          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          span {
+            color: #fff;
+            font-weight: 800;
+          }
         }
       }
-
-      .challenges-instructions-image-container::before {
+  
+    }
+  
+    .challenge-target-container::before, .challenge-target-container::after {
+      content: '';
+      position: absolute;
+      width: calc(50% - 35px);
+      height: 1px;
+      background: #dedede;
+      top: 24px;
+    }
+  
+    .challenge-target-container::before {
+      left: 0;
+    }
+  
+    .challenge-target-container::after {
+      right: 0;
+    }
+  
+    .challenge-instructions-gallery-container {
+      width: calc(100% - 20px);
+      height: 100px;
+      margin: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
+  
+      .challenge-instructions-gallery-inner-container {
+        width: 410px;
+        height: 100%;
+        display: inline-block;
+        justify-content: left;
+  
+  
+        .challenges-instructions-image-container {
+          height: 100%;
+          width: 60px;
+          margin-right: 10px;
+          display: inline-block;
+          border: 1px solid #00a195;
+          box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          position: relative;
+          overflow: hidden;
+  
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+  
+        .challenges-instructions-image-container::before {
+            content:'';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top:0;
+            right: 0;
+            border-style: solid;
+            border-width: 5px;
+            border-color: #00a195 #00a195 transparent transparent;
+        }
+  
+        .challenges-instructions-image-container::after {
           content:'';
           position: absolute;
           width: 0;
           height: 0;
-          top:0;
-          right: 0;
+          bottom: 0;
+          left: 0;
           border-style: solid;
           border-width: 5px;
-          border-color: #00a195 #00a195 transparent transparent;
+          border-color: transparent transparent #00a195 #00a195;
+        }
+  
+        .challenges-instructions-image-container:last-child {
+          margin: 0;
+        }
+  
       }
+    }
 
-      .challenges-instructions-image-container::after {
-        content:'';
+    .challenge-demostration-video {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: 20px auto 0 auto;
+
+      video, object {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+      }
+    }
+  
+    .challenge-demostration-button{
+      position: relative;
+      width: calc(100% - 20px);
+      height: 40px;
+      margin: 20px auto;
+    
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 12px;
+      font-weight: lighter;
+      text-transform: capitalize;
+    
+      -webkit-clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
+      clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
+
+      .challenge-demostration-icon-container {
+        height: 30px;
+        width: 30px;
         position: absolute;
-        width: 0;
-        height: 0;
-        bottom: 0;
-        left: 0;
-        border-style: solid;
-        border-width: 5px;
-        border-color: transparent transparent #00a195 #00a195;
+        top: 5px;
+        left: -5px;
+        background: #fff;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-icon {
+          color: #ff6f00;
+        }
+      }
+    }
+
+    .challenge-reward-container {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: auto;
+
+      .challenge-reward-diamond {
+        width: 50px;
+        height: 50px;
+        background: #00a195;
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+
+        span {
+          font-weight: 800;
+          color: #fff;
+          z-index: 1;
+        }
+
+        .challenge-reward-diamond-left {
+          width: 25px;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: rgb(0,161,149);
+          background: linear-gradient(0deg, rgba(0,161,149,1) 0%, rgba(0,81,75,1) 100%);
+        }
+
+        .challenge-reward-diamond-right {
+          width: 25px;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          background: rgb(49,178,168);
+          background: linear-gradient(0deg, rgba(49,178,168,1) 0%, rgba(0,121,112,1) 100%);
+        }
       }
 
-      .challenges-instructions-image-container:last-child {
-        margin: 0;
+      .challenge-reward-tag-container {
+        width: 100%;
+        height: 52px;
+        position: relative;
+        text-align: center;
+
+        img {
+          width: 100%;
+          height: 52px;
+          object-fit: contain;
+          object-position: center;
+        }
+
+        span {
+          position: relative;
+          font-size: 18px;
+          font-weight: 800;
+          color: #00a195;
+          bottom: 34px;
+        }
+
       }
 
     }
+
+    .challenge-upload-button-container {
+      width: calc(100% - 20px);
+      height: 70px;
+      margin: 20px auto 10px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      .challenge-upload-button {
+        width: 50px;
+        height: 50px;
+        background-color: #ff6f00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        position: relative;
+        z-index: 1;
+
+        ion-icon {
+          color: #fff
+        }
+
+      }
+
+      .challenge-upload-button-bg {
+        width: 50px;
+        height: 50px;
+        background-color: #ff6f00;
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        opacity: 1;
+        position: absolute;
+        animation: 1s infinite ease;
+        animation-name: upload-button;
+      }
+
+      @keyframes upload-button {
+        from {
+          width: 50px;
+          height: 50px;
+          opacity: 1;
+        }
+        to {
+          width: 70px;
+          height: 70px;
+          opacity: 0;
+        }
+      }
+
+    }
+
+    .challenge-upload-text-container {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: auto;
+      text-align: center;
+
+      span {
+        color: #00a195;
+        font-size: 16px;
+        font-weight: 800;
+      }
+    }
+
+    .challenge-upload-icon-gallery-container {
+      width: calc(100% - 20px);
+      height: 50px;
+      position: relative;
+      margin: 10px auto 5px auto;
+  
+      .challenge-upload-icon-gallery-container-inner {
+        width: 50px;
+        height: 50px;
+        margin: auto;
+  
+        .challenge-upload-icon-gallery-diamond {
+          width: 50px;
+          height: 50px;
+          background: #ff6f00;
+          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+  
+          ion-icon {
+            color: #ff6f00;
+            font-weight: 800;
+            position: relative;
+            z-index: 99;
+          }
+        }
+
+        .challenge-upload-icon-gallery-diamond::after {
+          content: '';
+          width: 48px;
+          height: 48px;
+          background: #fff;
+          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          top: 1px;
+          left: 1px;
+          position: absolute;
+        }
+      }
+  
+    }
+  
+    .challenge-upload-icon-gallery-container::before, .challenge-upload-icon-gallery-container::after {
+      content: '';
+      position: absolute;
+      width: calc(50% - 35px);
+      height: 1px;
+      background: #dedede;
+      top: 24px;
+    }
+  
+    .challenge-upload-icon-gallery-container::before {
+      left: 0;
+    }
+  
+    .challenge-upload-icon-gallery-container::after {
+      right: 0;
+    }
+
+    .challenge-upload-gallery-container {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: auto;
+
+      .challenge-upload-gallery-grid {
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+
+        .challenge-upload-gallery-image-container {
+          height: 100%;
+          aspect-ratio: 4 / 3;
+          background: red;
+          position: relative;
+          overflow: hidden;
+
+          .challenge-upload-gallery-like-button-container {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #00a195;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            ion-icon {
+              color: #fff;
+              font-size: 8px;
+            }
+          }
+
+          .challenge-upload-gallery-like-button-container-active {
+            background: #dc3545;
+          }
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+        }
+      }
+    }
+
   }
 
   .zig-zag-bottom {
@@ -367,4 +721,30 @@ html, body, #mapid {
     left:0;
   }
 
+  .challenge-expand-button-container {
+    position: absolute;
+    width: 60px;
+    height: 24px;
+    background: #ff6f00;
+    right: 0;
+    bottom: -35px;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-icon {
+      padding-left: 16px;
+      color: #fff;
+    }
+  }
+
+}
+
+.challenge-container-expanded {
+  height: calc(100% - 200px);
+}
+
+.action-sheet-button.sc-ion-action-sheet-ios {
+  font-size: 14px !important;
 }
