@@ -198,6 +198,11 @@
               position: absolute;
               top: 0;
               left: 0;
+              transition: 0.5s ease all;
+            }
+
+            .row-progress-bar-100 {
+              width: 100% !important;
             }
   
           }
@@ -248,3 +253,120 @@
   }
 }
 
+.reward-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: 5s ease forwards;
+  animation-name: reward-bg-appear;
+
+  .reward-container-inner {
+    height: 200px;
+    width: auto;
+    position: relative;
+
+    .reward-diamond {
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      object-position: center;
+      position: relative;
+      animation: 5s ease forwards;
+      animation-name: reward-diamond-appear;
+    }
+
+    .reward-tag-container {
+      width: 90%;
+      height: auto;
+      margin: auto 5%;
+      position: relative;
+      top: -50px;
+      text-align: center;
+      animation: 5s ease forwards;
+      animation-name: reward-tag-appear;
+
+      span {
+        font-size: 28px;
+        font-weight: 800;
+        color: #00a195;
+        position: relative;
+        top: -41px;
+      }
+    }
+  }
+}
+
+@keyframes reward-bg-appear {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes reward-diamond-appear {
+  0% {
+    top: 40px;
+    opacity: 0;
+  }
+  10% {
+    top: 40px;
+    opacity: 0;
+  }
+  20% {
+    top: 0;
+    opacity: 1;
+  }
+  80% {
+    top: 0;
+    opacity: 1;
+  }
+  90% {
+    top: 40px;
+    opacity: 0;
+  }
+  100% {
+    top: 40px;
+    opacity: 0;
+  }
+}
+
+@keyframes reward-tag-appear {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  20% {
+    top: 0;
+    opacity: 0;
+  }
+  30% {
+    top: -50px;
+    opacity: 1;
+  }
+  70% {
+    top: -50px;
+    opacity: 1;
+  }
+  80% {
+    top: 0;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+}

@@ -137,9 +137,11 @@
       </div>
 
       <div class="challenge-upload-button-container">
-        <div class="challenge-upload-button">
+        
+        <div class="challenge-upload-button" (click)="shareChallenge()">
           <ion-icon name="cloud-upload"></ion-icon>
         </div>
+
         <div class="challenge-upload-button-bg"></div>
       </div>
 
@@ -185,7 +187,8 @@
     <div class="zig-zag-bottom"></div>
 
     <div class="challenge-expand-button-container" (click)="expandChallenge = !expandChallenge">
-      <ion-icon name="arrow-down"></ion-icon>
+      <ion-icon *ngIf="!expandChallenge" name="arrow-down"></ion-icon>
+      <ion-icon *ngIf="expandChallenge" name="arrow-up"></ion-icon>
     </div>
 
   </div>
@@ -205,3 +208,17 @@
     </ion-select-option>
   </ion-select>
 </ion-item>
+
+<div class="reward-container" *ngIf="openRewardWindow">
+  
+  <div class="reward-container-inner">
+    <img class="reward-diamond" src="assets/icon/challenge-reward.svg">
+    
+    <div class="reward-tag-container">
+      <img class="reward-tag" src="assets/icon/challenge-tag.svg">
+      <span>1000</span>
+    </div>
+
+  </div>
+
+</div>

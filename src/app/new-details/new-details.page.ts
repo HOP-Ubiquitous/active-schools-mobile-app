@@ -9,9 +9,18 @@ import {ModalController} from "@ionic/angular";
 export class NewDetailsPage implements OnInit {
 
   constructor(private modalCtrl: ModalController) { }
+  data: any;
+  selectedPost: any;
 
   ngOnInit() {
+    fetch('./assets/json/news.json').then(res => res.json())
+      .then(json => {
+        this.data = json;
+        this.selectedPost = this.data[0];
+        console.log(this.selectedPost);
+      });
   }
+
   dismiss(){
     this.modalCtrl.dismiss();
   }

@@ -19,6 +19,7 @@ export class RoutePage {
   challenges: any;
   selectedChallenge: any;
   openChallengeWindow: boolean;
+  openRewardWindow: boolean;
 
   constructor(private modalCtrl:ModalController, public animationCtrl: AnimationController)  {
     // @ts-ignore
@@ -26,12 +27,13 @@ export class RoutePage {
     this.challenges = routes.CHALLENGES;
     this.routes = routes.ROUTES;
     this.openChallengeWindow = false;
+    this.openRewardWindow = false;
   }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit() {
     var mymap = L.map('mapid', {
-      center: [25.3791924, 55.4765436],
+      center: [38.078611, -1.272742],
       zoom: 15,
       zoomControl: false,
       renderer: L.canvas(),
@@ -57,8 +59,8 @@ export class RoutePage {
     });
 
     this.mymap = mymap;
-    this.createMarker();
     this.drawRoute()
+    this.createMarker();
   }
 
   createMarker() {
@@ -71,20 +73,6 @@ export class RoutePage {
       iconAnchor: [this.mymap.getZoom(), this.mymap.getZoom()]});
 
     this.marker.push(L.marker([38.078611, -1.272742], {icon: MyPoint}));
-
-
-    //Markers in Murcia
-    /* this.marker.push(L.marker([37.996325, -1.134241], {icon: flashIcon}));
-    this.marker.push(L.marker([38.004739, -1.127669], {icon: heartIcon}));
-    this.marker.push(L.marker([38.002316, -1.130772], {icon: WeightIcon}));
-    this.marker.push(L.marker([38.000052, -1.136747], {icon: WeightIcon2})); */
-
-    //Markers in Ceuti
-
-    /* this.marker.push(L.marker([38.077854 , -1.271694], {icon: flashIcon}));
-    this.marker.push(L.marker([38.078809 , -1.272323], {icon: WeightIcon2}));
-    this.marker.push(L.marker([38.07838, -1.273626], {icon: WeightIcon}));
-    this.marker.push(L.marker([38.078034, -1.275159], {icon: heartIcon})); */
 
     this.marker.forEach(function(singleMarker) {
       singleMarker.addTo(vm.mymap);
@@ -283,6 +271,17 @@ export class RoutePage {
 
   panToRoute(event) {
     this.mymap.panTo(L.latLng(this.routes[event.detail.value].waypoints[0][0],this.routes[event.detail.value].waypoints[0][1]));
+  }
+
+  shareChallenge() {
+
+    const vm = this;
+    this.openRewardWindow = true;
+
+    setTimeout(function() {
+      vm.openRewardWindow = false;
+    }, 5000);
+
   }
 
   async openTransparentModal(){

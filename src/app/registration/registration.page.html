@@ -70,22 +70,25 @@
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Sex</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-select>
+            <ion-select-option value="female">Female</ion-select-option>
+            <ion-select-option value="male">Male</ion-select-option>
+          </ion-select>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Weight</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="number" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Height</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="number" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Address</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="text" required></ion-input>
         </ion-item>
 
         <ion-row>
@@ -110,22 +113,22 @@
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">City</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="text" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Establishment</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="text" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Course</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="text" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Teacher</ion-label>
-          <ion-input type="password" required></ion-input>
+          <ion-input type="text" required></ion-input>
         </ion-item>
 
         <ion-row>
@@ -144,11 +147,11 @@
 
         <ion-row class="ask-question-container">
           <ion-col class="yes-container">
-            <ion-button type="submit" expand="block" class="next-button">Yes</ion-button>
+            <ion-button (click)="activeStepIndex = 4" type="submit" expand="block" class="next-button">Yes</ion-button>
           </ion-col>
 
           <ion-col class="yes-container">
-            <ion-button type="submit" expand="block" class="next-button">No</ion-button>
+            <ion-button (click)="activeStepIndex = 4" type="submit" expand="block" class="next-button">No</ion-button>
           </ion-col>
         </ion-row>
 
@@ -173,8 +176,7 @@
 
         <ion-row>
           <ion-col class="next-container">
-            <ion-button [routerLink]="['/searching-smart-band']" type="submit" expand="block" class="next-button">Finish
-            </ion-button>
+            <ion-button [routerLink]="['/searching-smart-band']" type="submit" expand="block" class="next-button">Finish</ion-button>
             <ion-button (click)="activeStepIndex = 4" type="submit" expand="block" class="next-button">Back</ion-button>
           </ion-col>
         </ion-row>

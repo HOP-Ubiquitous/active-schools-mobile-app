@@ -21,7 +21,7 @@ export class NewsPage implements OnInit {
   async openTransparentModal(){
     const modal = await this.modalCtrl.create({
       component: NewDetailsPage,
-      cssClass: 'transparent-modal'
+      cssClass: 'transparent-modal',
     });
     await modal.present()
   }
