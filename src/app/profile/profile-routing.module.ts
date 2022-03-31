@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
+  },  {
+    path: 'evolution',
+    loadChildren: () => import('./evolution/evolution.module').then( m => m.EvolutionPageModule)
   }
+
 ];
 
 @NgModule({

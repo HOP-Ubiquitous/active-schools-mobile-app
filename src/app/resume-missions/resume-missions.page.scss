@@ -17,6 +17,13 @@
   aspect-ratio: 1;
 }
 
+.main-nav ion-icon {
+  height: 25px;
+  aspect-ratio: 1;
+  font-size: 24px;
+  display: block;
+}
+
 .no-scroll {
   --overflow: hidden;
 }
@@ -232,6 +239,36 @@
   width: 100%;
   top: -32px;
   left:0;
+}
+
+.challenge-expand-button-container {
+  position: absolute;
+  width: 164px;
+  height: 24px;
+  background: #ff6f00;
+  left: 0;
+  top: -35px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 100%, 0 100%, 0 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+  ion-icon {
+    padding-left: 16px;
+    color: #fff;
+  }
+
+  span {
+    color: #fff;
+    font-size: 12px;
+  }
+}
+
+.challenge-second-button {
+  left: 138px;
+  background: red;
+  z-index: 2;
 }
 
 .list-container{

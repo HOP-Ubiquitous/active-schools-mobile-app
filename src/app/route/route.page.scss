@@ -10,6 +10,15 @@ body {
 html, body, #mapid {
   height: 100%;
   width: 100vw;
+  overflow: hidden !important;
+}
+
+#mapid {
+  height: calc(100vh - 70px);
+  width: 100vw;
+  // top: 57px;
+  position: relative;
+  overflow: hidden !important;
 }
 
 .main-nav-container {
@@ -31,32 +40,18 @@ html, body, #mapid {
   aspect-ratio: 1;
 }
 
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.main-nav ion-icon {
+  height: 25px;
+  aspect-ratio: 1;
+  font-size: 24px;
+  display: block;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+ion-content {
+  width: 100vw;
+  height: calc(100vh - 77px);
+  position: relative;
+  --overflow: hidden;
 }
 
 .profile-container{
@@ -867,3 +862,9 @@ html, body, #mapid {
     opacity: 0;
   }
 }
+
+// ion-item {
+//   width: 100%;
+//   position: absolute;
+//   bottom: 0;
+// }

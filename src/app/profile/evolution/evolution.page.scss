@@ -1,4 +1,11 @@
-.main-nav-container {
+a{
+    text-decoration: none;
+  }
+  .ion-start-content{
+    margin:0;
+  }
+  
+  .main-nav-container {
     box-shadow: none !important;
     border-bottom: 1px solid #00a195;
   }
@@ -16,7 +23,10 @@
     height: 25px;
     aspect-ratio: 1;
   }
-
-.bottom-tab-bar {
-    border-top: 1px solid #00a195;
-}
+  
+  .main-nav ion-icon {
+    height: 25px;
+    aspect-ratio: 1;
+    font-size: 24px;
+    display: block;
+  }

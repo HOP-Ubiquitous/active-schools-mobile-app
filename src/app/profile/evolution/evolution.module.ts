@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CollegeTabsPageRoutingModule } from './college-tabs-routing.module';
+import { EvolutionPageRoutingModule } from './evolution-routing.module';
 
-import { CollegeTabsPage } from './college-tabs.page';
+import { EvolutionPage } from './evolution.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CollegeTabsPageRoutingModule
+    EvolutionPageRoutingModule
   ],
-  declarations: [CollegeTabsPage]
+  declarations: [EvolutionPage]
 })
-
-
-export class CollegeTabsPageModule { }
+export class EvolutionPageModule {}

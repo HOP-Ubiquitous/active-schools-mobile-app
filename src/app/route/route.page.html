@@ -9,7 +9,8 @@
 
       <div>
         <a routerLink="/settings">
-          <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img>
+          <!-- <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img> -->
+          <ion-icon name="settings" class="ion-left-button"></ion-icon>
         </a>
       </div>
 
@@ -69,9 +70,8 @@
 
   </div>
 
-  <div class="challenge-container"
-       [ngClass]="{ 'challenge-container-expanded' : expandChallenge }"
-       *ngIf="openChallengeWindow == true">
+  <div class="challenge-container" [ngClass]="{ 'challenge-container-expanded' : expandChallenge }"
+    *ngIf="openChallengeWindow == true">
 
     <div class="challenge-title-container">
       <div class="challenge-title-icon-container">
@@ -97,9 +97,9 @@
 
       <div class="challenge-instructions-gallery-container" *ngIf="selectedChallenge.instructions.length > 0">
         <div class="challenge-instructions-gallery-inner-container">
-          
+
           <div class="challenges-instructions-image-container"
-               *ngFor="let image of selectedChallenge.instructions; index as i">
+            *ngFor="let image of selectedChallenge.instructions; index as i">
             <img src="{{image}}">
           </div>
 
@@ -114,7 +114,8 @@
         <object *ngIf="selectedChallenge.video.type === 'youtube'" data="{{selectedChallenge.video.url}}"></object>
       </div>
 
-      <ion-button (click)="showVideoDemostration = !showVideoDemostration" type="submit" expand="block" class="challenge-demostration-button">
+      <ion-button (click)="showVideoDemostration = !showVideoDemostration" type="submit" expand="block"
+        class="challenge-demostration-button">
         <div class="challenge-demostration-icon-container">
           <ion-icon name="play"></ion-icon>
         </div>
@@ -122,7 +123,7 @@
       </ion-button>
 
       <div class="challenge-reward-container">
-        
+
         <div class="challenge-reward-diamond">
           <span>XP</span>
           <div class="challenge-reward-diamond-left"></div>
@@ -137,7 +138,7 @@
       </div>
 
       <div class="challenge-upload-button-container">
-        
+
         <div class="challenge-upload-button" (click)="shareChallenge()">
           <ion-icon name="cloud-upload"></ion-icon>
         </div>
@@ -161,16 +162,15 @@
         <div class="challenge-upload-gallery-grid">
 
           <div class="challenge-upload-gallery-image-container"
-               *ngFor="let image of selectedChallenge.gallery; index as i"
-               (click)="image.like = !image.like">
-            
-            <div class="challenge-upload-gallery-like-button-container"
-                 *ngIf="!image.like">
+            *ngFor="let image of selectedChallenge.gallery; index as i" (click)="image.like = !image.like">
+
+            <div class="challenge-upload-gallery-like-button-container" *ngIf="!image.like">
               <ion-icon name="heart-outline"></ion-icon>
             </div>
 
-            <div class="challenge-upload-gallery-like-button-container challenge-upload-gallery-like-button-container-active"
-                 *ngIf="image.like">
+            <div
+              class="challenge-upload-gallery-like-button-container challenge-upload-gallery-like-button-container-active"
+              *ngIf="image.like">
               <ion-icon name="heart"></ion-icon>
             </div>
 
@@ -199,21 +199,18 @@
 
 <ion-item>
   <ion-label>Routes</ion-label>
-  <ion-select interface="action-sheet"
-              class="custom-options"
-              (ionChange)="panToRoute($event)">
-    <ion-select-option *ngFor="let route of routes; index as i"
-                       [value]="i">
-                       {{route.start}}
+  <ion-select interface="action-sheet" class="custom-options" (ionChange)="panToRoute($event)">
+    <ion-select-option *ngFor="let route of routes; index as i" [value]="i">
+      {{route.start}}
     </ion-select-option>
   </ion-select>
 </ion-item>
 
 <div class="reward-container" *ngIf="openRewardWindow">
-  
+
   <div class="reward-container-inner">
     <img class="reward-diamond" src="assets/icon/challenge-reward.svg">
-    
+
     <div class="reward-tag-container">
       <img class="reward-tag" src="assets/icon/challenge-tag.svg">
       <span>1000</span>
