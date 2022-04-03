@@ -24,6 +24,7 @@ export class RoutePage {
   userLocationOptions: {};
   userLatitude: any = 0;
   userLongitude: any = 0;
+  routesLayer: any;
 
   constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private geolocation: Geolocation) {
     // @ts-ignore
@@ -62,14 +63,14 @@ export class RoutePage {
     var self = this;
     mymap.on('zoomend', function (this) {
       var currentZoom = mymap.getZoom();
-      self.deleteMarker();
+      //self.deleteMarker();
       // self.createMarker();
     });
 
     this.mymap = mymap;
     this.drawRoute()
-    this.getCurrentCoordinates();
     // this.createMarker();
+
   }
 
   //TODO Testear geolocalización en dispositivo
@@ -77,35 +78,7 @@ export class RoutePage {
   //TODO Descubrir porqué en PC la geolocalización devuelve una localización incorrecta
   //TODO Descubrir porqué en PC no se pinta aun teniendo una localización incorrecta del usuario, el marcador no se pinta
 
-  getCurrentCoordinates() {
-    this.geolocation.getCurrentPosition({ timeout: 3000 }).then((resp) => {
-      this.userLatitude = resp.coords.latitude;
-      this.userLongitude = resp.coords.longitude;
-      this.createMarker();
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }
-
-  createMarker() {
-
-    const vm = this;
-
-    const MyPoint = new L.Icon({
-      iconUrl: './assets/icon/my_point.svg',
-      iconSize: [this.mymap.getZoom(), this.mymap.getZoom()],
-      iconAnchor: [this.mymap.getZoom(), this.mymap.getZoom()]
-    });
-
-    this.marker.push(L.marker([this.userLatitude, this.userLongitude], { icon: MyPoint }));
-
-    this.marker.forEach(function (singleMarker) {
-      singleMarker.addTo(vm.mymap);
-    });
-
-  }
-
-  deleteMarker() {
+  /* deleteMarker() {
     for (var i = 0; i <= this.marker.length; i++) {
       if (this.mymap != undefined && this.marker[i] != undefined) {
         this.mymap.removeLayer(this.marker[i])
@@ -113,7 +86,7 @@ export class RoutePage {
     }
     // @ts-ignore
     this.marker = []
-  }
+  } */
 
   drawRoute() {
 
@@ -121,6 +94,7 @@ export class RoutePage {
 
     const vm = this;
     let markersIcon = [];
+    let routesArray = [];
 
     const sprintIcon = new L.Icon({
       className: 'sprintIcon',
@@ -172,7 +146,7 @@ export class RoutePage {
 
       });
 
-      L.Routing.control({
+      let routeMap = L.Routing.control({
         waypoints: waypoints,
         addWaypoints: false,
         createMarker: function (i, wp, nWps) {
@@ -296,6 +270,38 @@ export class RoutePage {
 
       });
     }
+
+    this.getCurrentCoordinates();
+
+  }
+
+  getCurrentCoordinates() {
+    this.geolocation.getCurrentPosition({ timeout: 3000 }).then((resp) => {
+      this.userLatitude = resp.coords.latitude;
+      this.userLongitude = resp.coords.longitude;
+      this.createMarker();
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+
+  createMarker() {
+
+    const vm = this;
+
+    const MyPoint = new L.Icon({
+      iconUrl: './assets/icon/my_point.svg',
+      iconSize: [this.mymap.getZoom(), this.mymap.getZoom()],
+      iconAnchor: [this.mymap.getZoom(), this.mymap.getZoom()]
+    });
+
+    this.marker.push(L.marker([this.userLatitude, this.userLongitude], { icon: MyPoint }));
+
+    this.marker.forEach(function (singleMarker) {
+      singleMarker.addTo(vm.mymap);
+    });
+
+    this.mymap.panTo(L.latLng(this.userLatitude, this.userLongitude));
 
   }
 
