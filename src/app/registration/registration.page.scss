@@ -1,10 +1,10 @@
-ion-content{
+ion-content {
   //--ion-background-color: red;
   //font-size:36px !important;
 }
 
-.ion-start-content{
-  margin:0;
+.ion-start-content {
+  margin: 0;
 }
 
 .ion-principal-text p {
@@ -19,54 +19,94 @@ ion-content{
 .ion-logo {
   width: 150px;
   height: auto;
-  margin: 100px auto 30px auto;
+  margin: 20px auto 30px auto;
 }
 
-.form-registration{
+.form-registration {
   width: 90%;
   align-items: center;
   margin: auto;
 }
 
-.ion-item-form{
+.ion-item-form {
   text-align: center;
   color: var(--ion-color-step-250, #00a195);
   font-weight: lighter;
   font-size: 14px;
 }
 
-.align-self-center{
-  margin-top:20px;
+.align-self-center {
+  margin-top: 20px;
 }
 
-.login-button{
+.login-button {
   background-color: red;
 }
 
-.menu-line {
-  background: #ff6f00;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  height: 2px;
-  left: 16px;
-  top: 60px;
-}
-
-.menu-button {
+.menu-line-container {
+  width: calc(100% - 40px);
   height: 20px;
-  width: 20px;
-  -webkit-clip-path: polygon(0% 50%,50% 100%,100% 50%,50% 0%);
-  clip-path: polygon(0% 50%,50% 100%,100% 50%,50% 0%);
-  background: #ff6f00;
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  text-align: center;
+
+  .menu-line-bg {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+
+    .menu-line {
+      width: 1%;
+      height: 100%;
+      background: #ff6f00;
+      transition: 0.3s ease all;
+    }
+
+    .menu-line-33 {
+      width: 33%;
+    }
+
+    .menu-line-66 {
+      width: 66%;
+    }
+
+    .menu-line-100 {
+      width: 100%;
+    }
+  }
+
+  .menu-diamond-group-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .menu-diamond-container {
+      height: 100%;
+      aspect-ratio: 1;
+
+      .menu-button {
+        height: 100%;
+        width: 100%;
+        -webkit-clip-path: polygon(0% 50%, 50% 100%, 100% 50%, 50% 0%);
+        clip-path: polygon(0% 50%, 50% 100%, 100% 50%, 50% 0%);
+        background: #ccc;
+        transition: 0.3s ease all;
+      }
+
+      .menu-button-active {
+        background: #ff6f00;
+      }
+    }
+  }
 }
 
-.next-button{
-  width:100%;
+.next-button {
+  width: 100%;
   height: 40px;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -83,7 +123,8 @@ ion-content{
 ion-button {
   --border: #222;
 }
-.next-container{
+
+.next-container {
   text-align: center !important;
 }
 

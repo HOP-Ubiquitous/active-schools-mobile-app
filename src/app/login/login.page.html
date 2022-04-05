@@ -8,24 +8,24 @@
     <form class="form-login">
       <ion-item class="ion-item-form" lines="full">
         <ion-label position="floating" class="user-name">User</ion-label>
-        <ion-input type="text" required></ion-input>
+        <ion-input type="text" [(ngModel)]="userData.username" name="username" required></ion-input>
       </ion-item>
 
       <ion-item class="ion-item-form" lines="full">
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" required></ion-input>
+        <ion-input type="password" [(ngModel)]="userData.password" name="password" required></ion-input>
       </ion-item>
 
       <ion-row>
         <ion-col class="enter-container">
-          <ion-button type="submit" routerLink="/college-tabs/route" expand="block" class="ion-button-enter">Enter
+          <ion-button type="submit" (click)="login()" expand="block" class="ion-button-enter">Enter
           </ion-button>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="secondary-text-container login-footer">
-          <a routerLink="/forgot-password" class="small-text">Have you forgotten the password?</a>
+          <a routerLink="/forgot-password" class="small-text">Forgot your password?</a>
           <br>
           <span>·</span>
           <br>

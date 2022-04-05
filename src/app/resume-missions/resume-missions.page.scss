@@ -44,7 +44,7 @@
 }
 
 .profile-place-data-container ion-icon {
-  color:#ff6f00;
+  color: #ff6f00;
   line-height: 30px;
   font-size: 12px;
   top: 2px;
@@ -58,11 +58,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 32px;
 
   .profile-user-level {
     height: 150px;
     aspect-ratio: 1;
     border-radius: 30px;
+    position: relative;
+
+    .profile-user-info-button-container {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      right: 0;
+
+      ion-icon {
+        width: 100%;
+        height: 100%;
+        color: #ff6f00;
+      }
+
+    }
 
     .profile-user-level-container {
       height: 100%;
@@ -113,18 +129,69 @@
 
     }
 
+    .profile-user-level-number-container {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      left: calc(50% - 25px);
+      bottom: -20px;
+      z-index: 2;
+
+      .profile-user-level-number-container-inner {
+        width: 100%;
+        height: 100%;
+        background: green;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .profile-user-level-number-container-bg-left {
+          width: 50%;
+          height: 100%;
+          background: rgb(0, 161, 149);
+          background: linear-gradient(180deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
+        }
+
+        .profile-user-level-number-container-bg-right {
+          width: 50%;
+          height: 100%;
+          background: rgb(49, 178, 168);
+          background: linear-gradient(180deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
+        }
+      }
+
+      .profile-user-level-number-text-container {
+        position: absolute;
+        display: block;
+        height: 100%;
+        width: 100%;
+        line-height: 50px;
+        text-align: center;
+        top: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+
+        span {
+          font-size: 10px;
+          font-weight: 400;
+        }
+      }
+    }
+
   }
 
 }
 
 .profile-stats-container {
-  
+
   height: 50%;
   width: 100%;
   background-color: #ededed;
   position: relative;
   padding: 0 20px;
-  
+
   .rows-container {
     width: 100%;
     height: 100%;
@@ -138,7 +205,7 @@
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid #00a195;
-  
+
       .row-left-container {
         height: 40px;
         aspect-ratio: 1;
@@ -146,25 +213,25 @@
         justify-content: center;
         align-items: center;
         position: relative;
-  
-        img{
+
+        img {
           height: 25px;
           width: auto;
         }
-  
+
       }
-  
+
       .row-right-container {
         width: calc(100% - 40px);
         height: 40px;
-  
+
         .row-right-top-container {
           width: 100%;
           height: 20px;
           display: flex;
           justify-content: space-between;
           align-items: center;
-  
+
           .row-right-top-left-text {
             width: 75%;
             font-size: 10px;
@@ -175,7 +242,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
           }
-  
+
           .row-right-top-right-text {
             font-size: 10px;
             font-weight: 800;
@@ -183,21 +250,21 @@
             line-height: 20px;
             color: #00a195
           }
-  
+
         }
-  
+
         .row-right-bottom-container {
           width: 100%;
           height: 20px;
           display: flex;
           align-items: center;
-  
+
           .row-progress-bar-bg {
             width: 100%;
             height: 5px;
             background: #dedede;
             position: relative;
-  
+
             .row-progress-bar {
               // width: 30%;
               height: 5px;
@@ -211,13 +278,13 @@
             .row-progress-bar-100 {
               width: 100% !important;
             }
-  
+
           }
-  
+
         }
-  
+
       }
-  
+
     }
 
   }
@@ -227,7 +294,7 @@
 .zig-zag-top {
   position: absolute;
   background:
-    linear-gradient(-45deg, #ededed 16px, #ededed 16px, #ededed 16px,  transparent 0),
+    linear-gradient(-45deg, #ededed 16px, #ededed 16px, #ededed 16px, transparent 0),
     linear-gradient(45deg, #ededed 16px, transparent 0);
   background-position: left top;
   background-repeat: repeat-x;
@@ -238,14 +305,14 @@
   height: 32px;
   width: 100%;
   top: -32px;
-  left:0;
+  left: 0;
 }
 
 .challenge-expand-button-container {
   position: absolute;
   width: 164px;
   height: 24px;
-  background: #ff6f00;
+  background: #ff9a4d;
   left: 0;
   top: -35px;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 100%, 0 100%, 0 0);
@@ -267,21 +334,30 @@
 
 .challenge-second-button {
   left: 138px;
-  background: red;
+  background: #ff9a4d;
   z-index: 2;
 }
 
-.list-container{
+.challenge-button-active {
+  background: #ff6f00;
+}
+
+.list-container {
   --ion-background-color: #ededed !important;
 }
-.daily-activity-content{
+
+.daily-activity-content {
   height: 219px;
-  img{
-    width: 10%; margin-right: 10px;
+
+  img {
+    width: 10%;
+    margin-right: 10px;
   }
-  ion-item{
+
+  ion-item {
     font-size: 12px;
-    .percentage{
+
+    .percentage {
       display: contents;
       float: right;
       color: #00a195;
@@ -294,7 +370,7 @@
   position: fixed;
   height: 100%;
   width: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 9;
   display: flex;
   justify-content: center;
@@ -343,12 +419,15 @@
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -359,22 +438,27 @@
     top: 40px;
     opacity: 0;
   }
+
   10% {
     top: 40px;
     opacity: 0;
   }
+
   20% {
     top: 0;
     opacity: 1;
   }
+
   80% {
     top: 0;
     opacity: 1;
   }
+
   90% {
     top: 40px;
     opacity: 0;
   }
+
   100% {
     top: 40px;
     opacity: 0;
@@ -386,22 +470,27 @@
     top: 0;
     opacity: 0;
   }
+
   20% {
     top: 0;
     opacity: 0;
   }
+
   30% {
     top: -50px;
     opacity: 1;
   }
+
   70% {
     top: -50px;
     opacity: 1;
   }
+
   80% {
     top: 0;
     opacity: 0;
   }
+
   100% {
     top: 0;
     opacity: 0;

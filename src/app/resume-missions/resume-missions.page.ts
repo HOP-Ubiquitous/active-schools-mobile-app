@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ResumeMissionsPage implements OnInit {
   successReward: boolean;
   openRewardWindow: boolean;
+  showDailyChallenges: boolean;
+  showAchievements: boolean
 
   constructor() {
     this.successReward = false;
@@ -15,6 +17,8 @@ export class ResumeMissionsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.showDailyChallenges = true;
+    this.showAchievements = false;
   }
 
   getReward() {
@@ -23,7 +27,7 @@ export class ResumeMissionsPage implements OnInit {
     this.successReward = true;
     this.openRewardWindow = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
       vm.openRewardWindow = false;
     }, 5000);
 

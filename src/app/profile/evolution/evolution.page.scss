@@ -1,32 +1,312 @@
-a{
-    text-decoration: none;
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+.ion-start-content {
+  margin: 0;
+}
+
+.main-nav-container {
+  box-shadow: none !important;
+  border-bottom: 1px solid #00a195;
+}
+
+.main-nav {
+  width: 100%;
+  height: 40px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.main-nav div {
+  height: 25px;
+  aspect-ratio: 1;
+}
+
+.main-nav ion-icon {
+  height: 25px;
+  aspect-ratio: 1;
+  font-size: 24px;
+  display: block;
+}
+
+.profile-user-container {
+  height: calc(70% - 30px);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 32px;
+
+  .profile-user-level {
+    height: 150px;
+    aspect-ratio: 1;
+    border-radius: 30px;
+    position: relative;
+
+    .profile-user-info-button-container {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      right: 0;
+
+      ion-icon {
+        width: 100%;
+        height: 100%;
+        color: #ff6f00;
+      }
+
+    }
+
+    .profile-user-level-container {
+      height: 100%;
+      aspect-ratio: 1;
+      position: relative;
+
+      img {
+        position: relative;
+        z-index: 1;
+      }
+
+      .profile-user-level-bar {
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .profile-user-image-container {
+        height: calc(100% - 24px);
+        position: absolute;
+        top: -12px;
+        left: 12px;
+
+        .profile-user-image-container-inner {
+          height: 100%;
+          aspect-ratio: 1;
+          text-align: center;
+
+          img {
+            width: 80%;
+            transform-origin: bottom center;
+            animation: 2s ease infinite;
+            animation-name: profile-idle;
+          }
+
+          @keyframes profile-idle {
+            0% {
+              transform: scaleY(1) scaleX(1);
+            }
+
+            50% {
+              transform: scaleY(0.95) scaleX(1.05);
+            }
+
+            100% {
+              transform: scaleY(1) scaleX(1);
+            }
+          }
+
+        }
+
+        .profile-user-image-shadow {
+          width: 70%;
+          height: 20px;
+          border-radius: 100%;
+          background: #ddd;
+          position: absolute;
+          bottom: calc(-50% - 2px);
+          left: 10px;
+        }
+
+      }
+
+    }
+
   }
-  .ion-start-content{
-    margin:0;
+
+}
+
+.profile-stats-container {
+
+  height: 30%;
+  width: 100%;
+  background-color: #ededed;
+  position: relative;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .profile-user-level-number-container {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: calc(50% - 25px);
+    top: 0;
+    z-index: 2;
+
+    .profile-user-level-number-container-inner {
+      width: 100%;
+      height: 100%;
+      background: green;
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .profile-user-level-number-container-bg-left {
+        width: 50%;
+        height: 100%;
+        background: rgb(0, 161, 149);
+        background: linear-gradient(180deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
+      }
+
+      .profile-user-level-number-container-bg-right {
+        width: 50%;
+        height: 100%;
+        background: rgb(49, 178, 168);
+        background: linear-gradient(180deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
+      }
+    }
+
+    .profile-user-level-number-text-container {
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 100%;
+      line-height: 50px;
+      text-align: center;
+      top: 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+
+      span {
+        font-size: 10px;
+        font-weight: 400;
+      }
+    }
   }
-  
-  .main-nav-container {
-    box-shadow: none !important;
-    border-bottom: 1px solid #00a195;
-  }
-  
-  .main-nav {
+
+  .evolution-items-list-container {
     width: 100%;
-    height: 40px;
-    display: inline-flex;
-    justify-content: space-between;
+    height: 50px;
+    overflow-x: auto;
+    display: flex;
+    //justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    position: relative;
+    scroll-behavior: smooth;
+
+    .evolution-items-line-bg {
+      width: 9900px;
+      height: 5px;
+      background: #ccc;
+      position: absolute;
+      clip-path: polygon(2.5px 0, calc(100% - 2.5px) 0, 100% 2.5px, calc(100% - 2.5px) 100%, 2.5px 100%, 0 2.5px);
+
+      .evolution-items-line {
+        width: 50%;
+        height: 100%;
+        background: #ff6f00;
+        position: absolute;
+        clip-path: polygon(2.5px 0, calc(100% - 2.5px) 0, 100% 2.5px, calc(100% - 2.5px) 100%, 2.5px 100%, 0 2.5px);
+      }
+    }
+
+    .evolution-items-diamond-group {
+      width: 9900px;
+      height: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      top: 0;
+
+      .evolution-item-diamond-container {
+        height: 100%;
+        aspect-ratio: 1;
+
+        .evolution-item-diamond {
+          height: 100%;
+          width: 100%;
+          background: #ff9a4d;
+          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            height: 50%;
+            aspect-ratio: 1;
+            opacity: 0.5;
+          }
+        }
+
+        .evolution-item-diamond-active {
+          background: #ff6f00;
+
+          img {
+            opacity: 1;
+          }
+        }
+
+      }
+
+    }
+
   }
-  
-  .main-nav div {
-    height: 25px;
-    aspect-ratio: 1;
+
+  .evolution-item-achieved-container {
+    width: calc(100% - 40px);
+    height: 50px;
+    position: absolute;
+    bottom: 10px;
+
+    span {
+      display: block;
+      width: 100%;
+      line-height: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: #00a195;
+    }
+
+    .evolution-item-achieved-name {
+      line-height: 30px;
+      font-size: 16px;
+      font-weight: 600;
+    }
   }
-  
-  .main-nav ion-icon {
-    height: 25px;
-    aspect-ratio: 1;
-    font-size: 24px;
-    display: block;
+
+  .row:nth-child(3) {
+    border-top: 1px solid #00a195;
   }
+
+}
+
+
+.zig-zag-top {
+  position: absolute;
+  background:
+    linear-gradient(-45deg, #ededed 16px, #ededed 16px, #ededed 16px, transparent 0),
+    linear-gradient(45deg, #ededed 16px, transparent 0);
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 24px 32px;
+  content: " ";
+  display: block;
+
+  height: 32px;
+  width: 100%;
+  top: -32px;
+  left: 0;
+}

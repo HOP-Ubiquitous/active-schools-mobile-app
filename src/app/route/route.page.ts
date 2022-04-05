@@ -5,6 +5,8 @@ import 'leaflet-routing-machine';
 import 'src/theme/variables.scss';
 import { SuccessModalPage } from "../success-modal/success-modal.page";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { RoutesService } from '../services/routes/routes.service';
+import { ChallengesService } from '../services/challenges/challenges.service';
 import * as routes from './route-constants';
 
 @Component({
@@ -25,12 +27,14 @@ export class RoutePage {
   userLatitude: any = 0;
   userLongitude: any = 0;
   routesLayer: any;
+  routesData: any[];
 
-  constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private geolocation: Geolocation) {
+  constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private geolocation: Geolocation, private routesService: RoutesService,
+    private challengeService: ChallengesService) {
     // @ts-ignore
     this.marker = []
-    this.challenges = routes.CHALLENGES;
-    this.routes = routes.ROUTES;
+    //this.challenges = routes.CHALLENGES;
+    //this.routes = routes.ROUTES;
     this.openChallengeWindow = false;
     this.openRewardWindow = false;
     this.userLocationOptions = {
@@ -48,6 +52,12 @@ export class RoutePage {
       zoomControl: false,
       renderer: L.canvas(),
     });
+
+    this.routesService.getRoutes();
+    this.routes = this.routesService.routesData;
+
+    this.challengeService.getChallenges();
+    this.challenges = this.challengeService.challengesData;
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -94,7 +104,6 @@ export class RoutePage {
 
     const vm = this;
     let markersIcon = [];
-    let routesArray = [];
 
     const sprintIcon = new L.Icon({
       className: 'sprintIcon',
@@ -146,9 +155,13 @@ export class RoutePage {
 
       });
 
-      let routeMap = L.Routing.control({
+      L.Routing.control({
         waypoints: waypoints,
         addWaypoints: false,
+        router: L.Routing.osrmv1({ // No se puede hacer más de una petición por segundo
+          language: 'en',
+          profile: 'foot'
+        }),
         createMarker: function (i, wp, nWps) {
 
           let marker;
@@ -329,6 +342,3 @@ export class RoutePage {
   }
 
 }
-
-
-

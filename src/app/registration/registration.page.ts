@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from '../services/register/register.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,15 +8,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationPage implements OnInit {
   activeStepIndex: any;
+  registerData: {};
 
-  constructor() {
-    this.activeStepIndex = 1;
-  }
+  constructor(private registerService: RegisterService) { }
 
   ngOnInit() {
+    this.activeStepIndex = 1;
+    this.registerData = {
+      name: '',
+      surname: '',
+      sex: '',
+      weight: '',
+      height: '',
+      address: '',
+      country: '',
+      province: '',
+      city: '',
+      schoolName: '',
+      course: '',
+      teacher: '',
+      transport: '',
+      distance: '',
+      medicalCenter: '',
+      doctor: ''
+    }
   }
-  clickButton() {
-    console.log("jaskdns");
+
+  registerUser() {
+
+    console.log(this.registerData);
+    debugger;
+    this.registerService.postUserRegister(this.registerData);
+
   }
 
 }

@@ -1,13 +1,37 @@
 <ion-content>
-  <div class="menu-line">
-    <div class="menu-button">
+
+  <div class="menu-line-container">
+
+    <div class="menu-line-bg">
+      <div class="menu-line" [ngClass]="{ 'menu-line-33' : activeStepIndex === 2,
+                        'menu-line-66' : activeStepIndex === 3,
+                        'menu-line-100' : activeStepIndex === 4 }">
+      </div>
     </div>
-    <div class="menu-button">
+
+    <div class="menu-diamond-group-container">
+
+      <div class="menu-diamond-container">
+        <div class="menu-button menu-button-active"></div>
+      </div>
+
+      <div class="menu-diamond-container">
+        <div class="menu-button"
+          [ngClass]="{ 'menu-button-active' : activeStepIndex === 2 || activeStepIndex === 3 || activeStepIndex === 4 }">
+        </div>
+      </div>
+
+      <div class="menu-diamond-container">
+        <div class="menu-button" [ngClass]="{ 'menu-button-active' : activeStepIndex === 3 || activeStepIndex === 4 }">
+        </div>
+      </div>
+
+      <div class="menu-diamond-container">
+        <div class="menu-button" [ngClass]="{ 'menu-button-active' : activeStepIndex === 4 }"></div>
+      </div>
+
     </div>
-    <div class="menu-button">
-    </div>
-    <div class="menu-button">
-    </div>
+
   </div>
 
   <ion-grid>
@@ -60,17 +84,17 @@
       <div *ngIf="activeStepIndex == 1">
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Name</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.name" name="name" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Surname</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.surname" name="surname" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Sex</ion-label>
-          <ion-select>
+          <ion-select [(ngModel)]="registerData.sex" name="sex">
             <ion-select-option value="female">Female</ion-select-option>
             <ion-select-option value="male">Male</ion-select-option>
           </ion-select>
@@ -78,17 +102,17 @@
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Weight</ion-label>
-          <ion-input type="number" required></ion-input>
+          <ion-input type="number" [(ngModel)]="registerData.weight" name="weight" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Height</ion-label>
-          <ion-input type="number" required></ion-input>
+          <ion-input type="number" [(ngModel)]="registerData.height" name="height" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Address</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.address" name="address" required></ion-input>
         </ion-item>
 
         <ion-row>
@@ -103,32 +127,32 @@
       <div *ngIf="activeStepIndex == 2">
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Country</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.country" name="country" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Province</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.province" name="province" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">City</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.city" name="city" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Establishment</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.schoolName" name="schoolName" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Course</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.course" name="course" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Teacher</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.teacher" name="teacher" required></ion-input>
         </ion-item>
 
         <ion-row>
@@ -147,6 +171,7 @@
 
         <ion-row class="ask-question-container">
           <ion-col class="yes-container">
+            <!-- TODO Añadir resupuesta a registerData -->
             <ion-button (click)="activeStepIndex = 4" type="submit" expand="block" class="next-button">Yes</ion-button>
           </ion-col>
 
@@ -166,17 +191,22 @@
       <div *ngIf="activeStepIndex == 4">
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Centre</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.medicalCenter" name="medicalCenter" required></ion-input>
         </ion-item>
 
         <ion-item lines="full" class="ion-item-form">
           <ion-label position="floating">Doctor</ion-label>
-          <ion-input type="text" required></ion-input>
+          <ion-input type="text" [(ngModel)]="registerData.doctor" name="doctor" required></ion-input>
         </ion-item>
 
         <ion-row>
           <ion-col class="next-container">
-            <ion-button [routerLink]="['/searching-smart-band']" type="submit" expand="block" class="next-button">Finish</ion-button>
+            <!-- <ion-button [routerLink]="['/searching-smart-band']" type="submit" expand="block" class="next-button">Finish
+            </ion-button> -->
+
+            <ion-button (click)="registerUser()" type="submit" expand="block" class="next-button">Finish
+            </ion-button>
+
             <ion-button (click)="activeStepIndex = 4" type="submit" expand="block" class="next-button">Back</ion-button>
           </ion-col>
         </ion-row>
