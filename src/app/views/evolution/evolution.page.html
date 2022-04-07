@@ -1,0 +1,85 @@
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a routerLink="/tabs/profile">
+          <ion-icon name="close" class="ion-left-button"></ion-icon>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="profile-user-container">
+    <div class="profile-user-level">
+
+      <!-- <div class="profile-user-info-button-container">
+        <ion-icon name="information-circle"></ion-icon>
+      </div> -->
+
+      <div class="profile-user-level-container">
+
+        <!-- <img src="assets/icon/missions_icons/profile-frame.svg"> -->
+
+        <!-- <div class="profile-user-level-bar"></div> -->
+
+        <div class="profile-user-image-container">
+          <div class="profile-user-image-container-inner">
+            <img src="assets/icon/missions_icons/profile-image.svg">
+          </div>
+
+          <div class="profile-user-image-shadow"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="profile-stats-container">
+
+    <div class="zig-zag-top"></div>
+
+    <div class="profile-user-level-number-container">
+      <div class="profile-user-level-number-container-inner">
+        <div class="profile-user-level-number-container-bg-left"></div>
+        <div class="profile-user-level-number-container-bg-right"></div>
+      </div>
+      <span class="profile-user-level-number-text-container"><span>L.</span>99</span>
+    </div>
+
+    <div class="evolution-items-list-container">
+
+      <div class="evolution-items-line-bg">
+        <div class="evolution-items-line" [ngStyle]="{width: lastItemAchieved * 100 + 'px'}"></div>
+      </div>
+
+      <div class="evolution-items-diamond-group">
+
+        <div class="evolution-item-diamond-container" *ngFor="let item of items; index as i">
+          <div class="evolution-item-diamond" [ngClass]="{ 'evolution-item-diamond-active' : item.achieved === true }">
+            <img src="{{item.icon}}">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="evolution-item-achieved-container">
+      <span>Last Achieved Item</span>
+      <span class="evolution-item-achieved-name">{{items[lastItemAchieved].name}}</span>
+    </div>
+
+  </div>
+
+</ion-content>

@@ -1,30 +1,26 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { CollegeTabsPage } from './college-tabs/college-tabs.page';
+import { TabsPage } from './views/tabs/tabs.page';
 
 
 //TODO Las rutas no están bien configuradas, revisar e incluir la configuración para rutas anidadas y tabs.
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  /* {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  }, */
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./views/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'registration',
-    loadChildren: () => import('./registration/registration.module').then(m => m.RegistrationPageModule)
+    loadChildren: () => import('./views/registration/registration.module').then(m => m.RegistrationPageModule)
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+    loadChildren: () => import('./views/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
   {
     path: 'searching-smart-band',
-    loadChildren: () => import('./searching-smart-band/searching-smart-band.module').then(m => m.SearchingSmartBandPageModule)
+    loadChildren: () => import('./views/searching-smart-band/searching-smart-band.module').then(m => m.SearchingSmartBandPageModule)
   },
 
   // {
@@ -60,40 +56,40 @@ const routes: Routes = [
 
 
   {
-    path: 'college-tabs',
-    loadChildren: () => import('./college-tabs/college-tabs.module').then(m => m.CollegeTabsPageModule)
+    path: 'tabs',
+    loadChildren: () => import('./views/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'settings',
-    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
+    loadChildren: () => import('./views/settings/settings.module').then(m => m.SettingsPageModule)
   },
   {
     path: 'route',
-    loadChildren: () => import('./route/route.module').then(m => m.RoutePageModule)
+    loadChildren: () => import('./views/route/route.module').then(m => m.RoutePageModule)
   },
   {
     path: 'news',
-    loadChildren: () => import('./news/news.module').then(m => m.NewsPageModule)
+    loadChildren: () => import('./views/news/news.module').then(m => m.NewsPageModule)
   },
   {
     path: 'new-details',
-    loadChildren: () => import('./new-details/new-details.module').then(m => m.NewDetailsPageModule)
+    loadChildren: () => import('./views/new-details/new-details.module').then(m => m.NewDetailsPageModule)
   },
   {
     path: 'success-modal',
-    loadChildren: () => import('./success-modal/success-modal.module').then(m => m.SuccessModalPageModule)
+    loadChildren: () => import('./views/success-modal/success-modal.module').then(m => m.SuccessModalPageModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+    loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {
     path: 'evolution',
-    loadChildren: () => import('./profile/evolution/evolution.module').then(m => m.EvolutionPageModule)
+    loadChildren: () => import('./views/evolution/evolution.module').then(m => m.EvolutionPageModule)
   },
   {
-    path: 'resume-missions',
-    loadChildren: () => import('./resume-missions/resume-missions.module').then(m => m.ResumeMissionsPageModule)
+    path: 'achievements',
+    loadChildren: () => import('./views/achievements/achievements.module').then(m => m.AchievementsPageModule)
   }
 ];
 

@@ -1,0 +1,42 @@
+<!-- TODO Poner un unico header común, ajustando y cambiando unicamente el ion-content -->
+
+<!-- <ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a routerLink="/settings">
+          <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom" class="bottom-tab-bar">
+
+    <ion-tab-button tab="route" routeLink="/route">
+      <ion-icon name="location-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" routeLink="/profile" class="inner-left-btn">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="achievements" routeLink="/achievements" class="inner-right-btn">
+      <ion-icon name="star-outline"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="news" routeLink="/news">
+      <ion-icon name="bookmark-outline"></ion-icon>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

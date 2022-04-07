@@ -30,9 +30,9 @@ export class LoginService {
     // return promise;
 
     //TODO revisar cómo hacerlo con state.go o $location.path
-    debugger;
+    
     if (data !== undefined) {
-      window.location.href = window.location.origin + '/college-tabs/route';
+      window.location.href = window.location.origin + '/tabs/route';
       console.log(window.location.href);
     }
 

@@ -1,0 +1,96 @@
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a routerLink="/tabs/route">
+          <ion-icon name="close" class="ion-left-button"></ion-icon>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-img [src]="'assets/active-schools.svg'" class="ion-logo"></ion-img>
+  <ion-col class="ion-principal-text">
+    <p>settings</p>
+  </ion-col>
+
+  <ion-list>
+
+    <!-- TODO - Añadir label con título (Steps Number y Sleeping Hours) y valor seleccionado -->
+
+    <!-- <div class="label-item-container">
+      <ion-label range-left>Steps Number</ion-label>
+      <ion-label range-rigth>10000</ion-label>
+    </div> -->
+    <ion-item>
+      <ion-range min="2000" max="30000" step="100" value="10000">
+        <ion-icon size="small" slot="start" name="walk"></ion-icon>
+        <ion-icon slot="end" name="walk"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <!-- <div class="label-item-container">
+      <ion-label range-left>Sleeping Hours</ion-label>
+      <ion-label range-rigth>10</ion-label>
+    </div> -->
+    <ion-item>
+      <ion-range min="5" max="12" step="1" value="8">
+        <ion-icon size="small" slot="start" name="alarm"></ion-icon>
+        <ion-icon slot="end" name="alarm"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-grid>
+
+    <form class="form-login">
+
+      <ion-row>
+        <ion-col class="enter-container">
+          <ion-button type="submit" routerLink="/tabs/route" expand="block" class="ion-button-enter">
+            Edit Profile
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="enter-container">
+          <ion-button type="submit" routerLink="/tabs/route" expand="block"
+            class="ion-button-enter ion-button-delete">
+            Delete Profile
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col class="enter-container">
+          <ion-button block outline type="submit" expand="block" color="secondary" class="ion-button-enter">
+            Edit Profile
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="delete-profile">
+          <ion-button block outline type="submit" expand="block" color="secondary" class="ion-button-enter2">
+            Delete Profile
+          </ion-button>
+        </ion-col>
+      </ion-row> -->
+
+    </form>
+
+  </ion-grid>
+
+</ion-content>
