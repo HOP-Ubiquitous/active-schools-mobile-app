@@ -4,6 +4,7 @@ import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core'
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@awesome-cordova-plugins/device-orientation';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
+import 'leaflet-rotatedmarker';
 import 'src/theme/variables.scss';
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -29,6 +30,8 @@ export class RoutePage {
   userLongitude: any = 0;
   routesLayer: any;
   routesData: any[];
+  userMarker: any;
+  deviceDegrees: any;
 
   constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private geolocation: Geolocation,
     private routesService: RoutesService, private challengeService: ChallengesService) {
@@ -285,7 +288,7 @@ export class RoutePage {
 
       });
     }
-    
+
     window.setInterval(() => vm.getCurrentCoordinates(), 2000);
 
     //this.getCurrentCoordinates();
@@ -297,9 +300,15 @@ export class RoutePage {
     const vm = this;
     let allLayers = [];
 
-    DeviceOrientation.getCurrentHeading().then(
-      (data: DeviceOrientationCompassHeading) => console.log('Orientación: ' + data),
-      (error: any) => console.log('Orientación: ' + error)
+    DeviceOrientation.getCurrentHeading().then((data: DeviceOrientationCompassHeading) => {
+
+      this.deviceDegrees = data.magneticHeading;
+
+      console.log('Orientación: ' + data)
+
+    }, (error: any) => {
+      console.log('Orientación: ' + error)
+    }
     );
 
     this.geolocation.getCurrentPosition({ timeout: 3000, enableHighAccuracy: true }).then((resp) => {
@@ -308,7 +317,7 @@ export class RoutePage {
 
       if (this.mymap !== undefined) {
 
-        this.mymap.eachLayer(function(layer) {
+        this.mymap.eachLayer(function (layer) {
 
           allLayers.push(layer);
 
@@ -316,12 +325,12 @@ export class RoutePage {
 
         //@ts-ignore
         if (this.findInArray(allLayers, 'userMarker') === true) {
-              
+
           console.log('Update User Marker!');
           vm.updateMarker();
 
         } else {
-          
+
           console.log('Create User Marker!');
           vm.createMarker();
 
@@ -332,22 +341,26 @@ export class RoutePage {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-    
+
   }
 
-  findInArray (array, itemToSearch) {
+  findInArray(array, itemToSearch) {
 
     let i = 0;
-    
+
     while (i < array.length) {
-      
+
       if (array[i].options.icon !== undefined) {
 
-        if (array[i].options.icon.options.className === itemToSearch) {
-          console.log('User Marker Encontrado');
-          return true;
-        } else {
-          console.log('User Marker No Encontrado');
+        if (array[i].options.icon.options !== undefined) {
+
+          if (array[i].options.icon.options.className === itemToSearch) {
+            console.log('User Marker Encontrado');
+            return true;
+          } else {
+            console.log('User Marker No Encontrado');
+          }
+
         }
 
       }
@@ -357,25 +370,31 @@ export class RoutePage {
     };
 
     return false;
-    
+
   }
 
   createMarker() {
 
     const vm = this;
 
-    const MyPoint = new L.Icon({
+    this.userMarker = new L.Icon({
       className: 'userMarker',
-      iconUrl: './assets/icon/my_point.svg',
-      iconSize: [this.mymap.getZoom(), this.mymap.getZoom()],
-      iconAnchor: [this.mymap.getZoom(), this.mymap.getZoom()]
+      iconUrl: './assets/icon/user-marker.svg',
+      iconSize: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5],
+      iconAnchor: [this.mymap.getZoom() / 2, this.mymap.getZoom() - 0.35],
     });
 
-    this.marker.push(L.marker([this.userLatitude, this.userLongitude], { icon: MyPoint }));
+    //@ts-ignore
+    this.userMarker = L.marker([this.userLatitude, this.userLongitude], { icon: this.userMarker, rotationAngle: this.deviceDegrees })
+
+    this.marker.push(this.userMarker);
 
     this.marker.forEach(function (singleMarker) {
       singleMarker.addTo(vm.mymap);
     });
+
+    //var point = document.getElementsByClassName('userMarker')[0] as HTMLElement;
+    //point.style.transform += ' rotate(45deg) !important';
 
     //this.mymap.panTo(L.latLng(this.userLatitude, this.userLongitude));
     this.mymap.setView([this.userLatitude, this.userLongitude], 15);
@@ -397,6 +416,9 @@ export class RoutePage {
 
             //@ts-ignore
             layer.setLatLng([vm.userLatitude, vm.userLongitude]);
+
+            vm.userMarker.setRotationAngle(vm.deviceDegrees);
+
             console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
 
           }
@@ -406,6 +428,9 @@ export class RoutePage {
       });
 
     }
+
+    //var point = document.getElementsByClassName('userMarker')[0] as HTMLElement;
+    //point.style.transform += ' rotate(45deg) !important';
 
   }
 
@@ -422,6 +447,11 @@ export class RoutePage {
       vm.openRewardWindow = false;
     }, 5000);
 
+  }
+
+  getRandom(min, max) {
+    console.log('Angulo del Marcador: ' + Math.random() * (max - min) + min);
+    return Math.random() * (max - min) + min;
   }
 
   async openTransparentModal() {

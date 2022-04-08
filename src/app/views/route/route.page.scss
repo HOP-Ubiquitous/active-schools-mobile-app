@@ -7,7 +7,9 @@ body {
   margin: 0;
 }
 
-html, body, #mapid {
+html,
+body,
+#mapid {
   height: 100%;
   width: 100vw;
   overflow: hidden !important;
@@ -54,7 +56,7 @@ ion-content {
   --overflow: hidden;
 }
 
-.profile-container{
+.profile-container {
   width: calc(100% - 20px);
   height: 60px;
   border-radius: 30px;
@@ -67,7 +69,8 @@ ion-content {
   align-items: center;
 }
 
-.profile-user-level, .profile-user-challenge {
+.profile-user-level,
+.profile-user-challenge {
   height: 60px;
   aspect-ratio: 1;
   border-radius: 30px;
@@ -103,7 +106,8 @@ ion-content {
   padding: 10px;
 }
 
-.profile-user-data-top-container, .profile-user-data-bottom-container {
+.profile-user-data-top-container,
+.profile-user-data-bottom-container {
   height: 50%;
   width: 100%;
   box-sizing: border-box;
@@ -126,7 +130,7 @@ ion-content {
 }
 
 .profile-user-data-bottom-container ion-icon {
-  color:#ff6f00;
+  color: #ff6f00;
   line-height: 25px;
   font-size: 12px;
   top: 2px;
@@ -234,25 +238,25 @@ ion-content {
     align-items: center;
 
     .challenge-title-icon-container {
-     width: 30px;
-     height: 30px;
-     display: flex;
-     justify-content: center;
-     align-items: center; 
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-     ion-icon {
-       font-size: 20px;
-       color: #00a195;
-       line-height: 30px;
-       text-align: center;
-     }
+      ion-icon {
+        font-size: 20px;
+        color: #00a195;
+        line-height: 30px;
+        text-align: center;
+      }
 
-     img {
-       height: 15px;
-       width: 15px;
-       object-fit: contain;
-       object-position: center;
-     }
+      img {
+        height: 15px;
+        width: 15px;
+        object-fit: contain;
+        object-position: center;
+      }
 
     }
 
@@ -274,7 +278,7 @@ ion-content {
       height: 30px;
       display: flex;
       justify-content: center;
-      align-items: center; 
+      align-items: center;
 
       ion-icon {
         font-size: 20px;
@@ -299,12 +303,12 @@ ion-content {
       position: relative;
       margin: 0 auto -15px auto;
       z-index: 999;
-  
+
       .challenge-target-container-inner {
         width: 50px;
         height: 50px;
         margin: auto;
-  
+
         .challenge-target-diamond {
           width: 50px;
           height: 50px;
@@ -313,7 +317,7 @@ ion-content {
           display: flex;
           justify-content: center;
           align-items: center;
-  
+
           span {
             color: #fff;
             font-weight: 800;
@@ -321,10 +325,11 @@ ion-content {
           }
         }
       }
-  
+
     }
-  
-    .challenge-target-container::before, .challenge-target-container::after {
+
+    .challenge-target-container::before,
+    .challenge-target-container::after {
       content: '';
       position: absolute;
       width: calc(50% - 35px);
@@ -332,29 +337,29 @@ ion-content {
       background: #dedede;
       top: 24px;
     }
-  
+
     .challenge-target-container::before {
       left: 0;
     }
-  
+
     .challenge-target-container::after {
       right: 0;
     }
-  
+
     .challenge-instructions-gallery-container {
       width: calc(100% - 20px);
       height: 100px;
       margin: auto;
       overflow-x: auto;
       overflow-y: hidden;
-  
+
       .challenge-instructions-gallery-inner-container {
         width: 410px;
         height: 100%;
         display: inline-block;
         justify-content: left;
-  
-  
+
+
         .challenges-instructions-image-container {
           height: 100%;
           width: 60px;
@@ -366,7 +371,7 @@ ion-content {
           -webkit-box-sizing: border-box;
           position: relative;
           overflow: hidden;
-  
+
           img {
             height: 100%;
             width: 100%;
@@ -374,21 +379,21 @@ ion-content {
             object-position: center;
           }
         }
-  
+
         .challenges-instructions-image-container::before {
-            content:'';
-            position: absolute;
-            width: 0;
-            height: 0;
-            top:0;
-            right: 0;
-            border-style: solid;
-            border-width: 5px;
-            border-color: #00a195 #00a195 transparent transparent;
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 0;
+          top: 0;
+          right: 0;
+          border-style: solid;
+          border-width: 5px;
+          border-color: #00a195 #00a195 transparent transparent;
         }
-  
+
         .challenges-instructions-image-container::after {
-          content:'';
+          content: '';
           position: absolute;
           width: 0;
           height: 0;
@@ -398,11 +403,11 @@ ion-content {
           border-width: 5px;
           border-color: transparent transparent #00a195 #00a195;
         }
-  
+
         .challenges-instructions-image-container:last-child {
           margin: 0;
         }
-  
+
       }
     }
 
@@ -411,23 +416,24 @@ ion-content {
       height: auto;
       margin: 20px auto 0 auto;
 
-      video, object {
+      video,
+      object {
         width: 100%;
         aspect-ratio: 16 / 9;
       }
     }
-  
-    .challenge-demostration-button{
+
+    .challenge-demostration-button {
       position: relative;
       width: calc(100% - 20px);
       height: 40px;
       margin: 20px auto;
-    
+
       font-family: 'Montserrat', sans-serif !important;
       font-size: 12px;
       font-weight: lighter;
       text-transform: capitalize;
-    
+
       -webkit-clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
       clip-path: polygon(20px 0%, calc(100% - 20px) 0%, 100% 50%, calc(100% - 20px) 100%, 20px 100%, 0% 20px);
 
@@ -479,8 +485,8 @@ ion-content {
           position: absolute;
           left: 0;
           top: 0;
-          background: rgb(0,161,149);
-          background: linear-gradient(0deg, rgba(0,161,149,1) 0%, rgba(0,81,75,1) 100%);
+          background: rgb(0, 161, 149);
+          background: linear-gradient(0deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
         }
 
         .challenge-reward-diamond-right {
@@ -489,8 +495,8 @@ ion-content {
           position: absolute;
           right: 0;
           top: 0;
-          background: rgb(49,178,168);
-          background: linear-gradient(0deg, rgba(49,178,168,1) 0%, rgba(0,121,112,1) 100%);
+          background: rgb(49, 178, 168);
+          background: linear-gradient(0deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
         }
       }
 
@@ -564,6 +570,7 @@ ion-content {
           height: 50px;
           opacity: 1;
         }
+
         to {
           width: 70px;
           height: 70px;
@@ -591,12 +598,12 @@ ion-content {
       height: 50px;
       position: relative;
       margin: 10px auto 5px auto;
-  
+
       .challenge-upload-icon-gallery-container-inner {
         width: 50px;
         height: 50px;
         margin: auto;
-  
+
         .challenge-upload-icon-gallery-diamond {
           width: 50px;
           height: 50px;
@@ -606,7 +613,7 @@ ion-content {
           justify-content: center;
           align-items: center;
           position: relative;
-  
+
           ion-icon {
             color: #ff6f00;
             font-weight: 800;
@@ -626,10 +633,11 @@ ion-content {
           position: absolute;
         }
       }
-  
+
     }
-  
-    .challenge-upload-icon-gallery-container::before, .challenge-upload-icon-gallery-container::after {
+
+    .challenge-upload-icon-gallery-container::before,
+    .challenge-upload-icon-gallery-container::after {
       content: '';
       position: absolute;
       width: calc(50% - 35px);
@@ -637,11 +645,11 @@ ion-content {
       background: #dedede;
       top: 24px;
     }
-  
+
     .challenge-upload-icon-gallery-container::before {
       left: 0;
     }
-  
+
     .challenge-upload-icon-gallery-container::after {
       right: 0;
     }
@@ -703,18 +711,18 @@ ion-content {
     position: absolute;
     background:
       linear-gradient(45deg, #fff 16px, transparent 0),
-      linear-gradient(-45deg, #fff 16px, #fff 16px, #fff 16px,  transparent 0);
+      linear-gradient(-45deg, #fff 16px, #fff 16px, #fff 16px, transparent 0);
     background-position: left top;
     background-repeat: repeat-x;
     background-size: 24px 32px;
     transform: rotate(180deg);
     content: " ";
     display: block;
-  
+
     height: 32px;
     width: 100%;
     bottom: -32px;
-    left:0;
+    left: 0;
   }
 
   .challenge-expand-button-container {
@@ -749,7 +757,7 @@ ion-content {
   position: fixed;
   height: 100%;
   width: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 9;
   display: flex;
   justify-content: center;
@@ -798,12 +806,15 @@ ion-content {
   0% {
     opacity: 0;
   }
+
   10% {
     opacity: 1;
   }
+
   90% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -814,22 +825,27 @@ ion-content {
     top: 40px;
     opacity: 0;
   }
+
   10% {
     top: 40px;
     opacity: 0;
   }
+
   20% {
     top: 0;
     opacity: 1;
   }
+
   80% {
     top: 0;
     opacity: 1;
   }
+
   90% {
     top: 40px;
     opacity: 0;
   }
+
   100% {
     top: 40px;
     opacity: 0;
@@ -841,30 +857,33 @@ ion-content {
     top: 0;
     opacity: 0;
   }
+
   20% {
     top: 0;
     opacity: 0;
   }
+
   30% {
     top: -50px;
     opacity: 1;
   }
+
   70% {
     top: -50px;
     opacity: 1;
   }
+
   80% {
     top: 0;
     opacity: 0;
   }
+
   100% {
     top: 0;
     opacity: 0;
   }
 }
 
-// ion-item {
-//   width: 100%;
-//   position: absolute;
-//   bottom: 0;
-// }
+.userMarker {
+  transform: rotate(0deg);
+}
