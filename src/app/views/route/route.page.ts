@@ -380,12 +380,19 @@ export class RoutePage {
     this.userMarker = new L.Icon({
       className: 'userMarker',
       iconUrl: './assets/icon/user-marker.svg',
-      iconSize: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5],
-      iconAnchor: [this.mymap.getZoom() / 2, this.mymap.getZoom() - 0.35],
+      iconSize: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5 * 1.0148],
+      //iconAnchor: [this.mymap.getZoom() / 2, this.mymap.getZoom() / 6],
     });
 
     //@ts-ignore
-    this.userMarker = L.marker([this.userLatitude, this.userLongitude], { icon: this.userMarker, rotationAngle: this.deviceDegrees })
+    this.userMarker = L.marker([this.userLatitude, this.userLongitude], { icon: this.userMarker, rotationAngle: this.deviceDegrees, rotationOrigin: 'bottom center' });
+
+    /* this.userMarker = L.marker([this.userLatitude, this.userLongitude], {
+      icon: this.userMarker,
+      //@ts-ignore
+      rotationAngle: this.getRandom(0, 360),
+      rotationOrigin: 'bottom center'
+    }) */
 
     this.marker.push(this.userMarker);
 
@@ -393,10 +400,7 @@ export class RoutePage {
       singleMarker.addTo(vm.mymap);
     });
 
-    //var point = document.getElementsByClassName('userMarker')[0] as HTMLElement;
-    //point.style.transform += ' rotate(45deg) !important';
-
-    //this.mymap.panTo(L.latLng(this.userLatitude, this.userLongitude));
+ 
     this.mymap.setView([this.userLatitude, this.userLongitude], 15);
 
   }
@@ -418,6 +422,7 @@ export class RoutePage {
             layer.setLatLng([vm.userLatitude, vm.userLongitude]);
 
             vm.userMarker.setRotationAngle(vm.deviceDegrees);
+            //vm.userMarker.setRotationAngle(vm.getRandom(0, 360));
 
             console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
 
@@ -428,9 +433,6 @@ export class RoutePage {
       });
 
     }
-
-    //var point = document.getElementsByClassName('userMarker')[0] as HTMLElement;
-    //point.style.transform += ' rotate(45deg) !important';
 
   }
 
