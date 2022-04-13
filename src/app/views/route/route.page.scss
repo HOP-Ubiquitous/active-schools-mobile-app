@@ -52,7 +52,7 @@ body,
 ion-content {
   width: 100vw;
   height: calc(100vh - 77px);
-  position: relative;
+  position: fixed;
   --overflow: hidden;
 }
 
@@ -62,11 +62,12 @@ ion-content {
   border-radius: 30px;
   margin: 10px;
   position: fixed;
-  z-index: 9999;
+  z-index: 999999999;
   background: #fff;
   display: inline-flex;
   justify-content: space-around;
   align-items: center;
+  top: 75px;
 }
 
 .profile-user-level,
@@ -229,33 +230,42 @@ ion-content {
   position: fixed;
   z-index: 9999;
   background: #fff;
+  top: 75px;
 
   .challenge-title-container {
     width: 100%;
-    height: 30px;
+    height: 40px;
+    border-bottom: 1px solid #00a195;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .challenge-title-icon-container {
-      width: 30px;
-      height: 30px;
+      width: 60px;
+      height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
+      background: #00a195;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, calc(100% - 20px) 100%, 0 100%);
+      margin-right: 5px;
 
       ion-icon {
-        font-size: 20px;
+        font-size: 25px;
         color: #00a195;
-        line-height: 30px;
+        line-height: 20px;
         text-align: center;
+        position: relative;
+        left: -5px;
       }
 
       img {
-        height: 15px;
-        width: 15px;
+        height: 20px;
+        width: 20px;
         object-fit: contain;
         object-position: center;
+        position: relative;
+        left: -5px;
       }
 
     }
@@ -274,16 +284,16 @@ ion-content {
     }
 
     .challenge-title-close-container {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
 
       ion-icon {
-        font-size: 20px;
+        font-size: 25px;
         color: #00a195;
-        line-height: 30px;
+        line-height: 40px;
         text-align: center;
       }
 
@@ -296,6 +306,18 @@ ion-content {
     height: calc(100% - 32px);
     overflow-y: auto;
     overflow-x: hidden;
+
+    .challenge-container-info {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: 10px auto;
+      text-align: justify;
+
+      span {
+        font-size: 12px;
+        color: #666;
+      }
+    }
 
     .challenge-target-container {
       width: calc(100% - 20px);
@@ -354,15 +376,15 @@ ion-content {
       overflow-y: hidden;
 
       .challenge-instructions-gallery-inner-container {
-        width: 410px;
+        width: 100%;
         height: 100%;
-        display: inline-block;
-        justify-content: left;
+        display: flex;
+        justify-content: space-between;
 
 
         .challenges-instructions-image-container {
           height: 100%;
-          width: 60px;
+          width: calc(25% - 10px);
           margin-right: 10px;
           display: inline-block;
           border: 1px solid #00a195;
@@ -451,6 +473,66 @@ ion-content {
 
         ion-icon {
           color: #ff6f00;
+        }
+      }
+    }
+
+    .challenge-stats-container {
+      width: calc(100% - 20px);
+      height: auto;
+      margin: 5px auto 15px auto;
+      border-style: solid;
+      border-width: 1px;
+      border-color: #ccc transparent;
+
+      .challenge-stats-container-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          width: 50%;
+          height: auto;
+
+          .challenge-stats-diamond {
+            width: 50px;
+            height: 50px;
+            background: #00a195;
+            -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+            clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin: 20px auto;
+
+            span {
+              font-weight: 800;
+              color: #fff;
+              z-index: 1;
+            }
+
+            .challenge-stats-diamond-left {
+              width: 25px;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              background: rgb(0, 161, 149);
+              background: linear-gradient(0deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
+            }
+
+            .challenge-stats-diamond-right {
+              width: 25px;
+              height: 100%;
+              position: absolute;
+              right: 0;
+              top: 0;
+              background: rgb(49, 178, 168);
+              background: linear-gradient(0deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
+            }
+          }
         }
       }
     }

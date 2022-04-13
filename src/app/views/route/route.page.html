@@ -74,18 +74,26 @@
     *ngIf="openChallengeWindow == true">
 
     <div class="challenge-title-container">
+
       <div class="challenge-title-icon-container">
         <img src="{{selectedChallenge.icon}}">
       </div>
+
       <div class="challenge-title-text-container">
         <span>{{selectedChallenge.name}}</span>
       </div>
+
       <div class="challenge-title-close-container" (click)="openChallengeWindow = !openChallengeWindow">
         <ion-icon name="close"></ion-icon>
       </div>
+
     </div>
 
     <div class="challenge-container-inner">
+
+      <div class="challenge-container-info">
+        <span>{{selectedChallenge.description}}</span>
+      </div>
 
       <div class="challenge-target-container">
         <div class="challenge-target-container-inner">
@@ -121,6 +129,43 @@
         </div>
         Watch video demostration
       </ion-button>
+
+      <div class="challenge-stats-container">
+
+        <div>
+          <span>Number of times the challenge has been completed</span>
+        </div>
+
+        <div class="challenge-stats-container-inner">
+
+          <div class="challenge-stats-left-container">
+            <div class="challenge-stats-diamond">
+              <span>{{selectedStatsChallenge.completed24h}}</span>
+              <div class="challenge-stats-diamond-left"></div>
+              <div class="challenge-stats-diamond-right"></div>
+            </div>
+
+            <div>
+              <span>In the last 24h</span>
+            </div>
+
+          </div>
+
+          <div class="challenge-stats-right-container">
+            <div class="challenge-stats-diamond">
+              <span>{{selectedStatsChallenge.completed7d}}</span>
+              <div class="challenge-stats-diamond-left"></div>
+              <div class="challenge-stats-diamond-right"></div>
+            </div>
+
+            <div>
+              <span>In the last 7d</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
 
       <div class="challenge-reward-container">
 
