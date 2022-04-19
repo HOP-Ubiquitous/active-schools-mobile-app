@@ -485,6 +485,18 @@ ion-content {
       border-width: 1px;
       border-color: #ccc transparent;
 
+      .challenge-stats-title-container {
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+
+        span {
+          font-size: 14px;
+          color: #00a195;
+          font-weight: 600;
+        }
+      }
+
       .challenge-stats-container-inner {
         display: flex;
         justify-content: space-between;
@@ -519,8 +531,8 @@ ion-content {
               position: absolute;
               left: 0;
               top: 0;
-              background: rgb(0, 161, 149);
-              background: linear-gradient(0deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
+              background: rgb(255, 111, 0);
+              background: linear-gradient(180deg, rgba(255, 111, 0, 1) 0%, rgba(166, 72, 0, 1) 100%);
             }
 
             .challenge-stats-diamond-right {
@@ -529,8 +541,19 @@ ion-content {
               position: absolute;
               right: 0;
               top: 0;
-              background: rgb(49, 178, 168);
-              background: linear-gradient(0deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
+              background: rgb(255, 174, 112);
+              background: linear-gradient(180deg, rgba(255, 174, 112, 1) 0%, rgba(207, 89, 0, 1) 100%);
+            }
+          }
+
+          .challenge-stats-time-details-container {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 10px;
+
+            span {
+              font-size: 12px;
+              color: #ff6f00;
             }
           }
         }

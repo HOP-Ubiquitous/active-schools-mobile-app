@@ -416,7 +416,7 @@ export class RoutePage {
 
     }
 
-    window.setInterval(() => vm.getCurrentCoordinates(), 2000);
+    window.setInterval(() => vm.getCurrentCoordinates(), 500);
 
   }
 
@@ -436,7 +436,7 @@ export class RoutePage {
     }
     );
 
-    this.geolocation.getCurrentPosition({ timeout: 3000, enableHighAccuracy: true }).then((resp) => {
+    this.geolocation.getCurrentPosition({ timeout: 500, enableHighAccuracy: true }).then((resp) => {
       this.userLatitude = resp.coords.latitude;
       this.userLongitude = resp.coords.longitude;
 
@@ -451,12 +451,12 @@ export class RoutePage {
         //@ts-ignore
         if (this.findInArray(allLayers, 'userMarker') === true) {
 
-          console.log('Update User Marker!');
+          //console.log('Update User Marker!');
           vm.updateMarker();
 
         } else {
 
-          console.log('Create User Marker!');
+          //console.log('Create User Marker!');
           vm.createMarker();
 
         }
@@ -480,10 +480,10 @@ export class RoutePage {
         if (array[i].options.icon.options !== undefined) {
 
           if (array[i].options.icon.options.className === itemToSearch) {
-            console.log('User Marker Encontrado');
+            //console.log('User Marker Encontrado');
             return true;
           } else {
-            console.log('User Marker No Encontrado');
+            //console.log('User Marker No Encontrado');
           }
 
         }
@@ -549,7 +549,7 @@ export class RoutePage {
             vm.userMarker.setRotationAngle(vm.deviceDegrees);
             //vm.userMarker.setRotationAngle(vm.getRandom(0, 360));
 
-            console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
+            //console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
 
           }
 
@@ -569,7 +569,7 @@ export class RoutePage {
 
     //@ts-ignore
     if (layer.options.icon !== undefined) {
-      console.log(layer);
+
       let latLng = layer.getLatLng();
 
       let fence = {

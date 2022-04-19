@@ -29,7 +29,6 @@
     "@ionic-native/native-geocoder": "^5.36.0",
     "@ionic/angular": "^6.0.0-rc.4",
     "@ionic/core": "^6.0.14",
-    "cordova-android": "10.1.1",
     "cordova-plugin-geolocation": "^4.1.0",
     "leaflet": "^1.7.1",
     "leaflet-marker-rotation": "^0.4.0",
@@ -61,6 +60,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "cordova-android": "^10.1.1",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "2.0.2",
@@ -100,10 +100,9 @@
       },
       "cordova-plugin-nativegeocoder": {},
       "cordova-plugin-device-orientation": {},
-      "cordova-plugin-geofence": {}
+      "cordova-plugin-geofence": {},
+      "cordova-plugin-add-swift-support": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
