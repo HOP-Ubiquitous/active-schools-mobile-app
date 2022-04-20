@@ -246,6 +246,11 @@
 
 </ion-content>
 
+<div class="user-fixed-position-container" [ngClass]="{ 'user-fixed-position-container-active' : userFixedPosition }"
+  (click)="userFixedPosition = !userFixedPosition">
+  <ion-icon name="locate"></ion-icon>
+</div>
+
 <ion-item>
   <ion-label>Routes</ion-label>
   <ion-select interface="action-sheet" class="custom-options" (ionChange)="panToRoute($event)">

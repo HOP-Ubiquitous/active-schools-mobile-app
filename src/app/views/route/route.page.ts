@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { ModalController, AnimationController, Platform } from '@ionic/angular';
 import { AwesomeCordovaNativePlugin } from '@awesome-cordova-plugins/core'
 import { DeviceOrientation, DeviceOrientationCompassHeading } from '@awesome-cordova-plugins/device-orientation';
-import { Geofence } from '@ionic-native/geofence';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet-rotatedmarker';
 import 'src/theme/variables.scss';
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+//import { Geofence } from '@ionic-native/geofence';
+//import { Push, PushObject, PushOptions } from '@awesome-cordova-plugins/push/ngx';
 import { RoutesService } from '../../services/routes/routes.service';
 import { ChallengesService } from '../../services/challenges/challenges.service';
 
@@ -35,6 +36,7 @@ export class RoutePage {
   deviceDegrees: any;
   selectedRouteData: any;
   selectedStatsChallenge: any;
+  userFixedPosition: boolean;
 
   constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private platform: Platform, private geolocation: Geolocation,
     private routesService: RoutesService, private challengeService: ChallengesService) {
@@ -42,6 +44,7 @@ export class RoutePage {
     this.marker = []
     //this.challenges = routes.CHALLENGES;
     //this.routes = routes.ROUTES;
+    this.userFixedPosition = false;
     this.openChallengeWindow = false;
     this.openRewardWindow = false;
     this.userLocationOptions = {
@@ -69,12 +72,12 @@ export class RoutePage {
     this.challengeService.getChallenges();
     this.challenges = this.challengeService.challengesData;
 
-    Geofence.initialize().then(
+    // Geofence.initialize().then(
 
-      () => console.log('Geofence loaded'),
-      (error) => console.log(error)
+    //   () => console.log('Geofence loaded'),
+    //   (error) => console.log(error)
 
-    )
+    // )
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -113,7 +116,7 @@ export class RoutePage {
                 <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
               </div>
               <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-              
+
               <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
                 <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
               </div>
@@ -320,44 +323,6 @@ export class RoutePage {
     if (this.mymap != undefined) {
       this.mymap.eachLayer(function (layer) {
 
-        if (routeList !== undefined || routeList.length > 0) {
-
-          routeList.forEach(function (route) {
-
-            if (route.challenges !== undefined || route.challenges.length > 0) {
-
-              route.challenges.forEach(function (routeChallenge) {
-
-                let i = 0;
-
-                while (i < challengeList.length) {
-                  if (challengeList[i].id === routeChallenge.id) {
-
-                    //@ts-ignore
-                    if (layer.options.icon !== undefined) {
-
-                      vm.addGeoFence(layer);
-
-                    }
-
-                    break;
-
-                  } else {
-
-                    i++;
-
-                  }
-
-                }
-
-              });
-
-            }
-
-          });
-
-        }
-
         layer.on('click', function (e) {
 
           let tmpDiv = document.createElement('div');
@@ -547,6 +512,10 @@ export class RoutePage {
             layer.setLatLng([vm.userLatitude, vm.userLongitude]);
 
             vm.userMarker.setRotationAngle(vm.deviceDegrees);
+
+            if (vm.userFixedPosition === true) {
+              vm.mymap.panTo(L.latLng(vm.userLatitude, vm.userLongitude));
+            }
             //vm.userMarker.setRotationAngle(vm.getRandom(0, 360));
 
             //console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
@@ -559,54 +528,72 @@ export class RoutePage {
 
     }
 
+    this.updateGeoFence();
+
   }
 
   panToRoute(event) {
     this.mymap.panTo(L.latLng(this.routes[event.detail.value].waypoints[0][0], this.routes[event.detail.value].waypoints[0][1]));
   }
 
-  addGeoFence(layer) {
+  updateGeoFence() {
 
-    //@ts-ignore
-    if (layer.options.icon !== undefined) {
+    const vm = this;
+    const distanceLimit = 20;
 
-      let latLng = layer.getLatLng();
+    if (this.mymap != undefined) {
+      this.mymap.eachLayer(function (layer) {
 
-      let fence = {
-        id: Math.random().toString(36).substr(2, 9), //any unique ID
-        latitude: latLng.lat, //center of geofence radius
-        longitude: latLng.lng,
-        radius: 20, //radius to edge of geofence in meters
-        transitionType: 3, //see 'Transition Types' below
-        notification: { //notification settings
-          id: Math.random().toString(36).substr(2, 9), //any unique ID
-          title: 'You crossed a fence', //notification title
-          text: 'You just arrived to Gliwice city center.', //notification body
-          openAppOnClick: true //open app when notification is tapped
-        }
-      }
+        //@ts-ignore
+        if (layer.options.icon !== undefined) {
 
-      Geofence.addOrUpdate(fence).then(
-        () => {
+          //@ts-ignore
+          if (layer.options.icon.options.className !== "userMarker") {
 
-          if (layer.options.icon !== undefined) {
-
+            //@ts-ignore
+            let distanceToUser = L.latLng([layer._latlng.lat, layer._latlng.lng]).distanceTo([vm.userLatitude, vm.userLongitude]);
+            //@ts-ignore
             let layerHtml = layer.options.icon.options.html;
-            layerHtml = layerHtml.replace('unactive', 'active');
-
+            //@ts-ignore
             let layerInnerHtml = layer._icon.innerHTML;
-            layerInnerHtml = layerInnerHtml.replace('unactive', 'active');
 
-            layer.options.icon.options.html = layerHtml;
-            layer._icon.innerHTML = layerInnerHtml;
+            if (distanceToUser <= distanceLimit) {
+
+              let activeIncludes = layerHtml.includes('-unactive');
+              let activeInnerIncludes = layerInnerHtml.includes('-unactive');
+
+              if (activeIncludes === true && activeInnerIncludes === true) {
+                layerHtml = layerHtml.replace('unactive', 'active');
+                layerInnerHtml = layerInnerHtml.replace('unactive', 'active');
+
+                //@ts-ignore
+                layer.options.icon.options.html = layerHtml;
+                //@ts-ignore
+                layer._icon.innerHTML = layerInnerHtml;
+              }
+
+            } else {
+
+              let activeIncludes = layerHtml.includes('-active');
+              let activeInnerIncludes = layerInnerHtml.includes('-active');
+
+              if (activeIncludes === true && activeInnerIncludes === true) {
+                layerHtml = layerHtml.replace('active', 'unactive');
+                layerInnerHtml = layerInnerHtml.replace('active', 'unactive');
+
+                //@ts-ignore
+                layer.options.icon.options.html = layerHtml;
+                //@ts-ignore
+                layer._icon.innerHTML = layerInnerHtml;
+              }
+
+            }
 
           }
 
-          layer.fireEvent('click');
-          console.log('Geofence added');
-        },
-        (error) => console.log('Geofence failed to add - Error: ' + error)
-      );
+        }
+
+      });
 
     }
 

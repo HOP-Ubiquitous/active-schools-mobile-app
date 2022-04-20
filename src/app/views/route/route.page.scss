@@ -851,7 +851,7 @@ ion-content {
 }
 
 .challenge-container-expanded {
-  height: calc(100% - 250px);
+  height: calc(100% - 275px);
 }
 
 .action-sheet-button.sc-ion-action-sheet-ios {
@@ -991,4 +991,26 @@ ion-content {
 
 .userMarker {
   transform: rotate(0deg);
+}
+
+.user-fixed-position-container {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background: #ff6f00;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 14px;
+  bottom: 60px;
+  opacity: 0.7;
+
+  ion-icon {
+    color: #fff;
+  }
+}
+
+.user-fixed-position-container-active {
+  opacity: 1;
 }
