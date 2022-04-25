@@ -14,7 +14,6 @@ import { RoutesService } from './services/routes/routes.service';
 import { NewsService } from './services/news/news.service';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,11 +33,6 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
   ],
   providers: [
     Geolocation,
-    NativeGeocoder,
-    {
-      provide: RouteReuseStrategy,
-      useClass: IonicRouteStrategy,
-    }
   ],
   bootstrap: [AppComponent],
 })
