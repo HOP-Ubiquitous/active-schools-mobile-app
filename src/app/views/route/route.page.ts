@@ -9,9 +9,10 @@ import 'src/theme/variables.scss';
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 //import { Geofence } from '@ionic-native/geofence';
-//import { Push, PushObject, PushOptions } from '@awesome-cordova-plugins/push/ngx';
+//import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { RoutesService } from '../../services/routes/routes.service';
 import { ChallengesService } from '../../services/challenges/challenges.service';
+import { SettingsService } from 'src/app/services/settings/settings.service';
 
 @Component({
   selector: 'app-route',
@@ -37,9 +38,10 @@ export class RoutePage {
   selectedRouteData: any;
   selectedStatsChallenge: any;
   userFixedPosition: boolean;
+  settings: any;
 
   constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private platform: Platform, private geolocation: Geolocation,
-    private routesService: RoutesService, private challengeService: ChallengesService) {
+    private routesService: RoutesService, private challengeService: ChallengesService, private settingsService: SettingsService) {
     // @ts-ignore
     this.marker = []
     //this.challenges = routes.CHALLENGES;
@@ -59,6 +61,20 @@ export class RoutePage {
       navigator['app'].exitApp();
     });
 
+    /* this.push.hasPermission().then((res: any) => {
+      if (res.isEnabled) {
+        console.log('Notificaciones Permitidas');
+      } else {
+        console.log('Notificaciones No Permitidas');
+      }
+    });
+
+    this.push.createChannel({
+      id: 'Challenges',
+      description: 'Challenge Channel',
+      importance: 4
+    }).then(() => console.log('Canal de notificaciones Creado!')); */
+
     var mymap = L.map('mapid', {
       center: [38.078611, -1.272742],
       zoom: 15,
@@ -72,12 +88,7 @@ export class RoutePage {
     this.challengeService.getChallenges();
     this.challenges = this.challengeService.challengesData;
 
-    // Geofence.initialize().then(
-
-    //   () => console.log('Geofence loaded'),
-    //   (error) => console.log(error)
-
-    // )
+    this.settings = this.settingsService.options;
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -481,6 +492,13 @@ export class RoutePage {
 
                 //@ts-ignore
                 layer._icon.innerHTML = layerInnerHtml;
+
+                /* vm.openChallengeInfo(layer);
+
+                if (vm.settings.pushNotifications === true) {
+                  vm.sendChallengePushNotification(layer);
+                } */
+
               }
 
             } else {
@@ -503,6 +521,86 @@ export class RoutePage {
       });
 
     }
+
+  }
+
+  openChallengeInfo(layer) {
+
+    //TODO Hacer que la ventana del reto solo se habra una vez y si es cerrada por el usuario, esta no se vuelva a abrir cuando la posición del usuario se actualice
+
+    const vm = this;
+    const challengeList = this.challenges;
+    const routeList = this.routes;
+
+    let tmpDiv = document.createElement('div');
+
+    //@ts-ignore
+    tmpDiv.innerHTML = layer.options.icon.options.html;
+
+    let challengeId = tmpDiv.querySelector('.marker-container').getAttribute('id');
+
+    if (routeList !== undefined || routeList.length > 0) {
+
+      routeList.forEach(function (route) {
+
+        let i = 0;
+        let x = 0;
+
+        if (route.challenges !== undefined || route.challenges.length > 0) {
+
+          while (i < route.challenges.length) {
+            if (Number(challengeId) === route.challenges[i].id) {
+
+              while (x < challengeList.length) {
+                if (challengeList[x].id === Number(challengeId)) {
+
+                  vm.selectedRouteData = route;
+                  vm.selectedStatsChallenge = route.challenges[i];
+
+                  vm.selectedChallenge = challengeList[x];
+                  vm.openChallengeWindow = true;
+                  break;
+
+                } else {
+
+                  x++;
+
+                }
+              }
+
+              break;
+
+            } else {
+              i++;
+            }
+          }
+
+        }
+
+      })
+
+    }
+
+  }
+
+  sendChallengePushNotification(layer) {
+
+    /* const options: PushOptions = {
+      android: {},
+      ios: {
+        alert: 'true',
+        badge: true,
+        sound: 'false'
+      },
+      windows: {},
+      browser: {
+          pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+      }
+    };
+   
+    const pushObject: PushObject = this.push.init(options);
+   
+    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification)); */
 
   }
 
