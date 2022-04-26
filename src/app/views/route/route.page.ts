@@ -111,105 +111,35 @@ export class RoutePage {
 
     const aerobic = new L.DivIcon({
       className: 'aerobic',
-      html: `<div id="$var-challenge-id" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
-              <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
-                <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
-              </div>
-              <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
-                <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
-              </div>
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-                <img src="./assets/icon/challenges/challenge-success-icon.svg">
-              </div>
-
-            </div>`,
-      //iconUrl: './assets/icon/challenges/challenge-sprint-marker.svg',
+      html: '',
       iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
       iconAnchor: [this.mymap.getZoom() * 3 / 2, this.mymap.getZoom() * 3 / 2]
     });
 
     const balance = new L.DivIcon({
       className: 'balance',
-      html: `<div id="$var-challenge-id" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
-              <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
-                <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
-              </div>
-              <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
-                <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
-              </div>
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-                <img src="./assets/icon/challenges/challenge-success-icon.svg">
-              </div>
-
-            </div>`,
-      //iconUrl: './assets/icon/challenges/challenge-heart-marker.svg',
+      html: '',
       iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
       iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]
     });
 
     const mental = new L.DivIcon({
       className: 'mental',
-      html: `<div id="$var-challenge-id" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
-              <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
-                <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
-              </div>
-              <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
-                <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
-              </div>
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-                <img src="./assets/icon/challenges/challenge-success-icon.svg">
-              </div>
-
-            </div>`,
-      //iconUrl: './assets/icon/challenges/challenge-weight-marker.svg',
+      html: '',
       iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
       iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]
     });
 
     const strength = new L.DivIcon({
       className: 'strength',
-      html: `<div id="$var-challenge-id" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
-              <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
-                <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
-              </div>
-              <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
-                <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
-              </div>
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-                <img src="./assets/icon/challenges/challenge-success-icon.svg">
-              </div>
-
-            </div>`,
-      //iconUrl: './assets/icon/challenges/challenge-agility-marker.svg',
+      html: '',
       iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
       iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]
     });
 
     const stretch = new L.DivIcon({
       className: 'stretch',
-      html: `<div id="$var-challenge-id" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
-              <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
-                <img style="height: 100%; width: auto" src="./assets/icon/challenges/$var-image.svg">
-              </div>
-              <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
-
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
-                <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">$var-completed</span>
-              </div>
-              <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-                <img src="./assets/icon/challenges/challenge-success-icon.svg">
-              </div>
-
-            </div>`,
-      //iconUrl: './assets/icon/challenges/challenge-steps-marker.svg',
+      html: '',
       iconSize: [this.mymap.getZoom() * 3, this.mymap.getZoom() * 3],
       iconAnchor: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5]
     });
@@ -220,7 +150,7 @@ export class RoutePage {
     markersIcon.push(strength);
     markersIcon.push(stretch);
 
-    this.routes.forEach(function (route) {
+    this.routes.forEach(function (route, routeIndex) {
 
       let waypoints = [];
       route.waypoints.forEach(function (waypoint) {
@@ -272,19 +202,14 @@ export class RoutePage {
 
           if (route.challenges[i] !== undefined && route.challenges[i].completed24h !== undefined) {
 
-            //@ts-ignore
-            let layerHtml = marker.options.icon.options.html;
-
-            layerHtml = layerHtml.replace('$var-completed', route.challenges[i].completed24h);
-            layerHtml = layerHtml.replace('$var-challenge-id', route.challenges[i].id);
-
             let x = 0;
 
             while (x < challengeList.length) {
 
               if (challengeList[x].id === route.challenges[i].id) {
 
-                layerHtml = layerHtml.replace('$var-image', 'challenge-' + challengeList[x].category + '-icon');
+                vm.buildPoint(marker, route, routeIndex, route.challenges[i], challengeList[x], x);
+
                 break;
 
               } else {
@@ -292,9 +217,6 @@ export class RoutePage {
                 x++;
               }
             }
-
-            //@ts-ignore
-            marker.options.icon.options.html = layerHtml;
 
           }
 
@@ -310,6 +232,27 @@ export class RoutePage {
     });
 
     this.paintMarker();
+  }
+
+  buildPoint(marker, route, routeIndex, routeChallengeInfo, challenge, challengeIndex) {
+
+    let defaultHtml = `<div route-id="` + route.id + `" challenge-id="` + challenge.id + `" route-index="` + routeIndex + `" challenge-index="` + challengeIndex + `" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
+    <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
+      <img style="height: 100%; width: auto" src="./assets/icon/challenges/challenge-`+ challenge.category + `-icon.svg">
+    </div>
+    <img style="position: absolute; width: 100%; height: 100%" src="./assets/icon/challenges/challenge-marker-unactive.svg">
+
+    <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
+      <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">`+ routeChallengeInfo.completed24h + `</span>
+    </div>
+    <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
+      <img src="./assets/icon/challenges/challenge-success-icon.svg">
+    </div>
+
+    </div>`;
+
+    marker.options.icon.options.html = defaultHtml;
+
   }
 
   paintMarker() {
@@ -328,51 +271,27 @@ export class RoutePage {
           let tmpDiv = document.createElement('div');
 
           //@ts-ignore
-          tmpDiv.innerHTML = layer.options.icon.options.html;
+          tmpDiv.innerHTML = layer._icon.innerHTML;
 
-          let challengeId = tmpDiv.querySelector('.marker-container').getAttribute('id');
-          console.log(challengeId);
+          //let routeId = tmpDiv.querySelector('.marker-container').getAttribute('route-id');
+          let challengeId = Number(tmpDiv.querySelector('.marker-container').getAttribute('challenge-id'));
+          let routeIndex = Number(tmpDiv.querySelector('.marker-container').getAttribute('route-index'));
+          let challengeIndex = Number(tmpDiv.querySelector('.marker-container').getAttribute('challenge-index'));
 
-          if (routeList !== undefined || routeList.length > 0) {
+          let i = 0;
 
-            routeList.forEach(function (route) {
+          while (i < routeList[routeIndex].challenges.length) {
+            if (routeList[routeIndex].challenges[i].id === challengeId) {
+              vm.selectedRouteData = routeList[routeIndex];
+              vm.selectedStatsChallenge = routeList[routeIndex].challenges[i];
 
-              let i = 0;
-              let x = 0;
+              vm.selectedChallenge = challengeList[challengeIndex];
+              vm.openChallengeWindow = true;
 
-              if (route.challenges !== undefined || route.challenges.length > 0) {
+              break;
+            }
 
-                while (i < route.challenges.length) {
-                  if (Number(challengeId) === route.challenges[i].id) {
-
-                    while (x < challengeList.length) {
-                      if (challengeList[x].id === Number(challengeId)) {
-
-                        vm.selectedRouteData = route;
-                        vm.selectedStatsChallenge = route.challenges[i];
-
-                        vm.selectedChallenge = challengeList[x];
-                        vm.openChallengeWindow = true;
-                        break;
-
-                      } else {
-
-                        x++;
-
-                      }
-                    }
-
-                    break;
-
-                  } else {
-                    i++;
-                  }
-                }
-
-              }
-
-            })
-
+            i++
           }
 
         });
@@ -471,7 +390,6 @@ export class RoutePage {
       className: 'userMarker',
       iconUrl: './assets/icon/user-marker.svg',
       iconSize: [this.mymap.getZoom() * 1.5, this.mymap.getZoom() * 1.5 * 1.0148],
-      //iconAnchor: [this.mymap.getZoom() / 2, this.mymap.getZoom() / 6],
     });
 
     //@ts-ignore
@@ -518,8 +436,6 @@ export class RoutePage {
             }
             //vm.userMarker.setRotationAngle(vm.getRandom(0, 360));
 
-            //console.log('Posición: ' + vm.userLatitude + ', ' + vm.userLongitude);
-
           }
 
         }
@@ -552,37 +468,28 @@ export class RoutePage {
 
             //@ts-ignore
             let distanceToUser = L.latLng([layer._latlng.lat, layer._latlng.lng]).distanceTo([vm.userLatitude, vm.userLongitude]);
-            //@ts-ignore
-            let layerHtml = layer.options.icon.options.html;
+
             //@ts-ignore
             let layerInnerHtml = layer._icon.innerHTML;
 
             if (distanceToUser <= distanceLimit) {
 
-              let activeIncludes = layerHtml.includes('-unactive');
               let activeInnerIncludes = layerInnerHtml.includes('-unactive');
 
-              if (activeIncludes === true && activeInnerIncludes === true) {
-                layerHtml = layerHtml.replace('unactive', 'active');
+              if (activeInnerIncludes === true) {
                 layerInnerHtml = layerInnerHtml.replace('unactive', 'active');
 
-                //@ts-ignore
-                layer.options.icon.options.html = layerHtml;
                 //@ts-ignore
                 layer._icon.innerHTML = layerInnerHtml;
               }
 
             } else {
 
-              let activeIncludes = layerHtml.includes('-active');
               let activeInnerIncludes = layerInnerHtml.includes('-active');
 
-              if (activeIncludes === true && activeInnerIncludes === true) {
-                layerHtml = layerHtml.replace('active', 'unactive');
+              if (activeInnerIncludes === true) {
                 layerInnerHtml = layerInnerHtml.replace('active', 'unactive');
 
-                //@ts-ignore
-                layer.options.icon.options.html = layerHtml;
                 //@ts-ignore
                 layer._icon.innerHTML = layerInnerHtml;
               }
