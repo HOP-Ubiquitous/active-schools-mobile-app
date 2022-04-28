@@ -72,13 +72,13 @@ const routes: Routes = [
     loadChildren: () => import('./views/news/news.module').then(m => m.NewsPageModule)
   },
   {
-    path: 'new-details',
-    loadChildren: () => import('./views/new-details/new-details.module').then(m => m.NewDetailsPageModule)
+    path: 'single-new',
+    loadChildren: () => import('./views/single-new/single-new.module').then(m => m.SingleNewPageModule)
   },
-  {
-    path: 'success-modal',
-    loadChildren: () => import('./views/success-modal/success-modal.module').then(m => m.SuccessModalPageModule)
-  },
+  // {
+  //   path: 'success-modal',
+  //   loadChildren: () => import('./views/success-modal/success-modal.module').then(m => m.SuccessModalPageModule)
+  // },
   {
     path: 'profile',
     loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfilePageModule)
@@ -91,6 +91,7 @@ const routes: Routes = [
     path: 'achievements',
     loadChildren: () => import('./views/achievements/achievements.module').then(m => m.AchievementsPageModule)
   }
+
 ];
 
 @NgModule({

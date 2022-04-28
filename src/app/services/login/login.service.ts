@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { USERS } from './login-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +10,12 @@ export class LoginService {
 
   restAPI: string = '';
   userData = [];
+  users = [];
+  loggedUser = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {
+    this.users = USERS;
+  }
 
   ngOnInit() {
 
@@ -29,11 +35,18 @@ export class LoginService {
 
     // return promise;
 
-    //TODO revisar cómo hacerlo con state.go o $location.path
-    
     if (data !== undefined) {
-      window.location.href = window.location.origin + '/tabs/route';
-      console.log(window.location.href);
+      let i = 0;
+
+      while (i < this.users.length) {
+        if (this.users[i].username === data.username && this.users[i].password === data.password) {
+          this.loggedUser = this.users[i];
+          this.router.navigate(['/tabs/route']);
+          break;
+        }
+        i++
+      }
+
     }
 
   }

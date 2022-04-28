@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from "@ionic/angular";
-import { NewDetailsPage } from "../new-details/new-details.page";
+import { Router } from '@angular/router';
 import { NewsService } from 'src/app/services/news/news.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { NewsService } from 'src/app/services/news/news.service';
 export class NewsPage implements OnInit {
   data: any;
 
-  constructor(private modalCtrl:ModalController, private newsService: NewsService) {
+  constructor(private modalCtrl: ModalController, private newsService: NewsService, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,12 +20,10 @@ export class NewsPage implements OnInit {
     this.data = this.newsService.newsData;
   }
 
-  async openTransparentModal(){
-    const modal = await this.modalCtrl.create({
-      component: NewDetailsPage,
-      cssClass: 'transparent-modal',
-    });
-    await modal.present()
+  goToSingleNew(id) {
+    debugger;
+    this.newsService.getSingleNew(id);
+
   }
 
 }

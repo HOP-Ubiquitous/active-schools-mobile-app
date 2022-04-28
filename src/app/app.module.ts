@@ -12,6 +12,8 @@ import { RegisterService } from './services/register/register.service';
 import { ChallengesService } from './services/challenges/challenges.service';
 import { RoutesService } from './services/routes/routes.service';
 import { NewsService } from './services/news/news.service';
+import { SettingsService } from './services/settings/settings.service';
+import { AchievementsService } from './services/achievements/achievements.service';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -29,7 +31,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     RegisterService,
     ChallengesService,
     RoutesService,
-    NewsService
+    NewsService,
+    SettingsService,
+    AchievementsService
   ],
   providers: [
     Geolocation,

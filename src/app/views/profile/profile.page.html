@@ -22,7 +22,8 @@
 
   <div class="profile-place-data-container">
     <ion-icon name="location"></ion-icon>
-    <span>C.P. Diego Marín | 6ºB | Ceutí</span>
+    <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
+      {{userInfo.personalData.city}}</span>
   </div>
 
   <div class="profile-user-container">
@@ -51,7 +52,7 @@
           <div class="profile-user-level-number-container-bg-left"></div>
           <div class="profile-user-level-number-container-bg-right"></div>
         </div>
-        <span class="profile-user-level-number-text-container"><span>L.</span>99</span>
+        <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
       </div>
 
     </div>

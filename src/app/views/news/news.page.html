@@ -22,7 +22,7 @@
 
   <div class="news-container">
 
-    <a (click)="openTransparentModal()" *ngFor="let item of data; index as i">
+    <a (click)="goToSingleNew(item.id)" *ngFor="let item of data; index as i">
 
       <div class="news-container-inner">
 

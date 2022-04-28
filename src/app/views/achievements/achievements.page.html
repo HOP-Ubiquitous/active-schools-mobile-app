@@ -22,7 +22,8 @@
 
   <div class="profile-place-data-container">
     <ion-icon name="location"></ion-icon>
-    <span>C.P. Diego Marín | 6ºB | Ceutí</span>
+    <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
+      {{userInfo.personalData.city}}</span>
   </div>
 
   <div class="profile-user-container">
@@ -51,7 +52,7 @@
           <div class="profile-user-level-number-container-bg-left"></div>
           <div class="profile-user-level-number-container-bg-right"></div>
         </div>
-        <span class="profile-user-level-number-text-container"><span>L.</span>99</span>
+        <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
       </div>
 
     </div>
@@ -61,151 +62,37 @@
 
     <div class="zig-zag-top"></div>
 
-    <div class="challenge-expand-button-container" [ngClass]="{ 'challenge-button-active' : showDailyChallenges }"
+    <div class="challenge-expand-button-container daily-primary-button"
+      [ngClass]="{ 'daily-primary-button-active' : showDailyChallenges }"
       (click)="showDailyChallenges = true; showAchievements = false">
       <span>Daily Challenges</span>
     </div>
 
     <div class="challenge-expand-button-container challenge-second-button"
-      [ngClass]="{ 'challenge-button-active' : showAchievements }"
+      [ngClass]="{ 'challenge-second-button-active' : showAchievements }"
       (click)="showAchievements = true; showDailyChallenges = false">
       <span>Achievements</span>
     </div>
 
     <div class="rows-container" *ngIf="showDailyChallenges">
 
-      <div class="row" (click)="getReward()">
+      <div class="row" (click)="getReward()" *ngFor="let achievement of achievements; index as i">
         <div class="row-left-container">
-          <img src="assets/icon/missions_icons/step_missions.svg">
+          <div class="achievement-diamond-container">
+            <img src="{{achievement.icon}}">
+            <div class="achievement-diamond-left daily-diamond-left"></div>
+            <div class="achievement-diamond-right daily-diamond-right"></div>
+          </div>
         </div>
         <div class="row-right-container">
           <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Complete 10.000 steps</span>
-            <span class="row-right-top-right-text">1000 xp</span>
+            <span class="row-right-top-left-text">{{achievement.title}}</span>
+            <span class="row-right-top-right-text">{{achievement.reward}} xp</span>
           </div>
           <div class="row-right-bottom-container">
             <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 50%" [ngClass]="{ 'row-progress-bar-100' : successReward }">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/heart_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Complete two endurance challenges</span>
-            <span class="row-right-top-right-text">1000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 50%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/agility_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome three agility challenges</span>
-            <span class="row-right-top-right-text">1000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 66%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/agility_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome ten agility challenges</span>
-            <span class="row-right-top-right-text">5000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 20%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/agility_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome twenty agility challenges</span>
-            <span class="row-right-top-right-text">12000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 10%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/height_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome three strength challenges</span>
-            <span class="row-right-top-right-text">1000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 30%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/height_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome ten strength challenges</span>
-            <span class="row-right-top-right-text">5000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 10%"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" (click)="getReward()">
-        <div class="row-left-container">
-          <img src="assets/icon/missions_icons/height_missions.svg">
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Overcome twenty strength challenges</span>
-            <span class="row-right-top-right-text">12000 xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 7%">
+              <div class="row-progress-bar" [ngStyle]="{ width: calculateProgressBar(achievement) + '%' }"
+                [ngClass]="{ 'row-progress-bar-100' : successReward }">
               </div>
             </div>
           </div>
@@ -218,18 +105,24 @@
 
     <div class="rows-container" *ngIf="showAchievements">
 
-      <div class="row" (click)="getReward()">
+      <div class="row" (click)="getReward()" *ngFor="let achievement of achievements; index as i">
         <div class="row-left-container">
-          <img src="assets/icon/missions_icons/step_missions.svg">
+          <div class="achievement-diamond-container">
+            <img src="{{achievement.icon}}">
+            <div class="achievement-diamond-left"></div>
+            <div class="achievement-diamond-right"></div>
+          </div>
         </div>
         <div class="row-right-container">
           <div class="row-right-top-container">
-            <span class="row-right-top-left-text">Complete 10.000 steps</span>
-            <span class="row-right-top-right-text">1000 xp</span>
+            <span class="row-right-top-left-text achievement-color">{{achievement.title}}</span>
+            <span class="row-right-top-right-text achievement-color">{{achievement.reward}} xp</span>
           </div>
           <div class="row-right-bottom-container">
             <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" style="width: 50%" [ngClass]="{ 'row-progress-bar-100' : successReward }">
+              <div class="row-progress-bar achievement-bg"
+                [ngStyle]="{ width: calculateProgressBar(achievement) + '%' }"
+                [ngClass]="{ 'row-progress-bar-100' : successReward }">
               </div>
             </div>
           </div>

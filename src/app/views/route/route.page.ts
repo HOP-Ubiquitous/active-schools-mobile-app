@@ -12,13 +12,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { RoutesService } from '../../services/routes/routes.service';
 import { ChallengesService } from '../../services/challenges/challenges.service';
-import { SettingsService } from 'src/app/services/settings/settings.service';
+import { SettingsService } from '../../services/settings/settings.service';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-route',
   templateUrl: './route.page.html',
   styleUrls: ['./route.page.scss'],
 })
+
 export class RoutePage {
   mymap: L.Map;
   marker: [L.Marker];
@@ -26,6 +28,7 @@ export class RoutePage {
   selectedRoute: any;
   challenges: any;
   selectedChallenge: any;
+  challengeActive: boolean;
   openChallengeWindow: boolean;
   openRewardWindow: boolean;
   userLocationOptions: {};
@@ -39,13 +42,13 @@ export class RoutePage {
   selectedStatsChallenge: any;
   userFixedPosition: boolean;
   settings: any;
+  userInfo: any;
 
   constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private platform: Platform, private geolocation: Geolocation,
-    private routesService: RoutesService, private challengeService: ChallengesService, private settingsService: SettingsService) {
+    private routesService: RoutesService, private challengeService: ChallengesService, private settingsService: SettingsService, private loginService: LoginService) {
     // @ts-ignore
     this.marker = []
-    //this.challenges = routes.CHALLENGES;
-    //this.routes = routes.ROUTES;
+    this.challengeActive = false;
     this.userFixedPosition = false;
     this.openChallengeWindow = false;
     this.openRewardWindow = false;
@@ -56,6 +59,15 @@ export class RoutePage {
   }
 
   ngOnInit() {
+
+    this.routesService.getRoutes();
+    this.routes = this.routesService.routesData;
+
+    this.challengeService.getChallenges();
+    this.challenges = this.challengeService.challengesData;
+
+    this.settings = this.settingsService.options;
+    this.userInfo = this.loginService.loggedUser;
 
     this.platform.backButton.subscribeWithPriority(0, () => {
       navigator['app'].exitApp();
@@ -77,23 +89,15 @@ export class RoutePage {
 
     var mymap = L.map('mapid', {
       center: [38.078611, -1.272742],
-      zoom: 15,
+      zoom: this.settings.mapZoom,
       zoomControl: false,
       renderer: L.canvas(),
     });
 
-    this.routesService.getRoutes();
-    this.routes = this.routesService.routesData;
-
-    this.challengeService.getChallenges();
-    this.challenges = this.challengeService.challengesData;
-
-    this.settings = this.settingsService.options;
-
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
-      maxZoom: 20
+      maxZoom: this.settings.maxMapZoom
 
     }).addTo(mymap);
 
@@ -271,6 +275,7 @@ export class RoutePage {
     const vm = this;
     const challengeList = this.challenges;
     const routeList = this.routes;
+    const settings = this.settings;
 
     console.log(this.marker);
 
@@ -311,13 +316,14 @@ export class RoutePage {
 
     }
 
-    window.setInterval(() => vm.getCurrentCoordinates(), 500);
+    window.setInterval(() => vm.getCurrentCoordinates(), settings.userTimeReportPosition * 1000);
 
   }
 
   getCurrentCoordinates() {
 
     const vm = this;
+    const settings = this.settings;
     let allLayers = [];
 
     DeviceOrientation.getCurrentHeading().then((data: DeviceOrientationCompassHeading) => {
@@ -331,7 +337,7 @@ export class RoutePage {
     }
     );
 
-    this.geolocation.getCurrentPosition({ timeout: 500, enableHighAccuracy: true }).then((resp) => {
+    this.geolocation.getCurrentPosition({ timeout: settings.userTimeReportPosition * 1000, enableHighAccuracy: true }).then((resp) => {
       this.userLatitude = resp.coords.latitude;
       this.userLongitude = resp.coords.longitude;
 
@@ -465,8 +471,11 @@ export class RoutePage {
 
   updateGeoFence() {
 
+    //TODO Actuar solo sobre el punto más cercano y no recorrer todo el array de los puntos.
+    //TODO Desactivar solo el punto activado sin recorrer todo los puntos creados cada vez.
+
     const vm = this;
-    const distanceLimit = 20;
+    const distanceLimit = this.settings.distanceToActive;
 
     if (this.mymap != undefined) {
       this.mymap.eachLayer(function (layer) {
@@ -493,9 +502,11 @@ export class RoutePage {
                 //@ts-ignore
                 layer._icon.innerHTML = layerInnerHtml;
 
-                /* vm.openChallengeInfo(layer);
+                if (vm.challengeActive === false) {
+                  vm.openChallengeInfo(layer);
+                }
 
-                if (vm.settings.pushNotifications === true) {
+                /* if (vm.settings.pushNotifications === true) {
                   vm.sendChallengePushNotification(layer);
                 } */
 
@@ -506,6 +517,8 @@ export class RoutePage {
               let activeInnerIncludes = layerInnerHtml.includes('-active');
 
               if (activeInnerIncludes === true) {
+                vm.challengeActive = false;
+
                 layerInnerHtml = layerInnerHtml.replace('active', 'unactive');
 
                 //@ts-ignore
@@ -526,8 +539,6 @@ export class RoutePage {
 
   openChallengeInfo(layer) {
 
-    //TODO Hacer que la ventana del reto solo se habra una vez y si es cerrada por el usuario, esta no se vuelva a abrir cuando la posición del usuario se actualice
-
     const vm = this;
     const challengeList = this.challenges;
     const routeList = this.routes;
@@ -535,57 +546,34 @@ export class RoutePage {
     let tmpDiv = document.createElement('div');
 
     //@ts-ignore
-    tmpDiv.innerHTML = layer.options.icon.options.html;
+    tmpDiv.innerHTML = layer._icon.innerHTML;
 
-    let challengeId = tmpDiv.querySelector('.marker-container').getAttribute('id');
+    let challengeId = Number(tmpDiv.querySelector('.marker-container').getAttribute('challenge-id'));
+    let routeIndex = Number(tmpDiv.querySelector('.marker-container').getAttribute('route-index'));
+    let challengeIndex = Number(tmpDiv.querySelector('.marker-container').getAttribute('challenge-index'));
 
-    if (routeList !== undefined || routeList.length > 0) {
+    let i = 0;
 
-      routeList.forEach(function (route) {
+    while (i < routeList[routeIndex].challenges.length) {
+      if (routeList[routeIndex].challenges[i].id === challengeId) {
+        vm.selectedRouteData = routeList[routeIndex];
+        vm.selectedStatsChallenge = routeList[routeIndex].challenges[i];
 
-        let i = 0;
-        let x = 0;
+        vm.selectedChallenge = challengeList[challengeIndex];
+        vm.openChallengeWindow = true;
 
-        if (route.challenges !== undefined || route.challenges.length > 0) {
+        break;
+      }
 
-          while (i < route.challenges.length) {
-            if (Number(challengeId) === route.challenges[i].id) {
-
-              while (x < challengeList.length) {
-                if (challengeList[x].id === Number(challengeId)) {
-
-                  vm.selectedRouteData = route;
-                  vm.selectedStatsChallenge = route.challenges[i];
-
-                  vm.selectedChallenge = challengeList[x];
-                  vm.openChallengeWindow = true;
-                  break;
-
-                } else {
-
-                  x++;
-
-                }
-              }
-
-              break;
-
-            } else {
-              i++;
-            }
-          }
-
-        }
-
-      })
-
+      i++
     }
 
   }
 
+  /*
   sendChallengePushNotification(layer) {
 
-    /* const options: PushOptions = {
+    const options: PushOptions = {
       android: {},
       ios: {
         alert: 'true',
@@ -600,9 +588,10 @@ export class RoutePage {
    
     const pushObject: PushObject = this.push.init(options);
    
-    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification)); */
+    pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
 
   }
+  */
 
   shareChallenge() {
 

@@ -66,6 +66,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-support-google-services": "^1.4.1",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -96,6 +97,8 @@
       "cordova-plugin-device-orientation": {},
       "cordova-plugin-add-swift-support": {}
     },
-    "platforms": []
+    "platforms": [
+      "android"
+    ]
   }
 }

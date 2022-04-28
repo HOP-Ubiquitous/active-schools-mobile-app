@@ -1,0 +1,39 @@
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a routerLink="/tabs/news">
+          <ion-icon name="close" class="ion-left-button"></ion-icon>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="single-new-container">
+
+    <div class="single-new-image-container">
+      <img src="{{selectedNew.image}}">
+    </div>
+
+    <div class="single-new-text-container">
+      <h1>{{selectedNew.title}}</h1>
+      <ion-icon name="calendar" class="ion-calendar"></ion-icon>
+      <span class="date">{{selectedNew.date}}</span>
+
+      <p>{{selectedNew.content}}</p>
+
+    </div>
+
+  </div>
+
+</ion-content>

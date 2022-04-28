@@ -42,11 +42,12 @@
 
     <div class="profile-user-data">
       <div class="profile-user-data-top-container">
-        <span>John Doe</span>
+        <p>{{userInfo.personalData.name}} {{userInfo.personalData.surname}}</p>
       </div>
       <div class="profile-user-data-bottom-container">
         <ion-icon name="location"></ion-icon>
-        <span>C.P. Diego Marín | 6ºB | Ceutí</span>
+        <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
+          {{userInfo.personalData.city}}</span>
       </div>
     </div>
 

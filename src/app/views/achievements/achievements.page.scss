@@ -214,9 +214,55 @@
         align-items: center;
         position: relative;
 
-        img {
-          height: 25px;
-          width: auto;
+        .achievement-diamond-container {
+          width: 30px;
+          height: 30px;
+          -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+          margin: 5px;
+
+          img {
+            height: 12px;
+            width: 12px;
+            object-fit: contain;
+            object-position: center;
+            z-index: 1;
+          }
+
+          .achievement-diamond-left {
+            width: 15px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgb(187, 85, 255);
+            background: linear-gradient(180deg, rgba(187, 85, 255, 1) 0%, rgba(129, 34, 140, 1) 100%);
+          }
+
+          .achievement-diamond-right {
+            width: 15px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: rgb(213, 140, 255);
+            background: linear-gradient(180deg, rgba(213, 140, 255, 1) 0%, rgba(129, 67, 200, 1) 100%);
+          }
+
+          .daily-diamond-left {
+            background: rgb(0, 161, 149);
+            background: linear-gradient(0deg, rgba(0, 161, 149, 1) 0%, rgba(0, 81, 75, 1) 100%);
+          }
+
+          .daily-diamond-right {
+            background: rgb(49, 178, 168);
+            background: linear-gradient(0deg, rgba(49, 178, 168, 1) 0%, rgba(0, 121, 112, 1) 100%);
+          }
         }
 
       }
@@ -251,6 +297,10 @@
             color: #00a195
           }
 
+          .achievement-color {
+            color: #d58cff;
+          }
+
         }
 
         .row-right-bottom-container {
@@ -273,6 +323,10 @@
               top: 0;
               left: 0;
               transition: 0.5s ease all;
+            }
+
+            .achievement-bg {
+              background: #d58cff;
             }
 
             .row-progress-bar-100 {
@@ -312,7 +366,6 @@
   position: absolute;
   width: 164px;
   height: 24px;
-  background: #ff9a4d;
   left: 0;
   top: -35px;
   clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 100%, 0 100%, 0 0);
@@ -329,17 +382,34 @@
   span {
     color: #fff;
     font-size: 12px;
+    opacity: 0.5;
+  }
+}
+
+.daily-primary-button {
+  background: #31b2a8;
+}
+
+.daily-primary-button-active {
+  background: #007970;
+
+  span {
+    opacity: 1;
   }
 }
 
 .challenge-second-button {
   left: 138px;
-  background: #ff9a4d;
+  background: #bb55ff;
   z-index: 2;
 }
 
-.challenge-button-active {
-  background: #ff6f00;
+.challenge-second-button-active {
+  background: #81228c;
+
+  span {
+    opacity: 1;
+  }
 }
 
 .list-container {
