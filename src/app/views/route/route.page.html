@@ -116,11 +116,21 @@
       </div>
 
       <div class="challenge-demostration-video" *ngIf="showVideoDemostration">
+
         <video autoplay *ngIf="selectedChallenge.video.type === 'local'">
           <source type="video/mp4" src="{{selectedChallenge.video.url}}" />
         </video>
 
-        <object *ngIf="selectedChallenge.video.type === 'youtube'" data="{{selectedChallenge.video.url}}"></object>
+        <iframe *ngIf="selectedChallenge.video.type === 'external'" [src]="getSafeUrl(selectedChallenge.video.url)"
+          frameborder="0" allowfullscreen>
+        </iframe>
+
+        <!--         
+        <object *ngIf="selectedChallenge.video.type === 'external'"
+          data="{{selectedChallenge.video.url + '?autoplay=1&mute=1&loop=1'}}">
+        </object>
+        -->
+
       </div>
 
       <ion-button (click)="showVideoDemostration = !showVideoDemostration" type="submit" expand="block"
@@ -187,7 +197,21 @@
 
       </div>
 
-      <div class="challenge-upload-button-container">
+      <div class="challenge-upload-button-container" *ngIf="!selectedChallengeSuccess">
+
+        <div class="challenge-upload-button challenge-button-green"
+          (click)="getReward(selectedChallenge.reward, route)">
+          <ion-icon name="checkmark"></ion-icon>
+        </div>
+
+        <div class="challenge-upload-button-bg challenge-button-green"></div>
+      </div>
+
+      <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess">
+        <span>Done?</span>
+      </div>
+
+      <div class="challenge-upload-button-container" *ngIf="selectedChallengeSuccess">
 
         <div class="challenge-upload-button" (click)="shareChallenge()">
           <ion-icon name="cloud-upload"></ion-icon>
@@ -196,7 +220,7 @@
         <div class="challenge-upload-button-bg"></div>
       </div>
 
-      <div class="challenge-upload-text-container">
+      <div class="challenge-upload-text-container" *ngIf="selectedChallengeSuccess">
         <span>Share your challenge!</span>
       </div>
 
@@ -268,7 +292,7 @@
 
     <div class="reward-tag-container">
       <img class="reward-tag" src="assets/icon/challenge-tag.svg">
-      <span>1000</span>
+      <span>{{selectedChallenge.reward}}</span>
     </div>
 
   </div>

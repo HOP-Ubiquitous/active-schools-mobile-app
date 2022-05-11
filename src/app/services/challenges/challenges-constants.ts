@@ -2,7 +2,7 @@ export const CHALLENGES = [
     {
         id: 1,
         icon: 'assets/icon/challenges/challenge-aerobics-icon.svg',
-        name: 'Aeróbico 1',
+        name: 'Aerobic 1',
         category: 'aerobics',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -14,7 +14,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/squats.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-1.mp4'
+            //url: 'https://www.youtube.com/embed/vFYZdutnzvs'
         },
         reward: '1000',
         gallery: [
@@ -43,7 +44,7 @@ export const CHALLENGES = [
     {
         id: 2,
         icon: 'assets/icon/challenges/challenge-aerobics-icon.svg',
-        name: 'Aeróbico 2',
+        name: 'Aerobic 2',
         category: 'aerobics',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x20',
@@ -55,7 +56,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/jumping-jacks.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-2.mp4'
+            //url: 'https://www.youtube.com/embed/ujZigC5gC3c'
         },
         reward: '1000',
         gallery: [
@@ -76,7 +78,7 @@ export const CHALLENGES = [
     {
         id: 3,
         icon: 'assets/icon/challenges/challenge-aerobics-icon.svg',
-        name: 'Aeróbico 3',
+        name: 'Aerobic 3',
         category: 'aerobics',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -88,7 +90,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/push-ups.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-3.mp4'
+            //url: 'https://www.youtube.com/embed/qonJwBpyMLI'
         },
         reward: '1000',
         gallery: [
@@ -117,7 +120,7 @@ export const CHALLENGES = [
     {
         id: 4,
         icon: 'assets/icon/challenges/challenge-aerobics-icon.svg',
-        name: 'Aeróbico 4',
+        name: 'Aerobic 4',
         category: 'aerobics',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: '5min',
@@ -129,7 +132,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/running.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-4.mp4'
+            //url: 'https://www.youtube.com/embed/TV4TKv7iRD8'
         },
         reward: '1000',
         gallery: [
@@ -170,7 +174,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/stretching.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-5.mp4'
+            //url: 'https://www.youtube.com/embed/WR3tlNLz5Ic'
         },
         reward: '1000',
         gallery: [
@@ -198,9 +203,9 @@ export const CHALLENGES = [
     },
     {
         id: 6,
-        icon: 'assets/icon/challenges/challenge-balance-icon.svg',
-        name: 'Balance 1',
-        category: 'balance',
+        icon: 'assets/icon/challenges/challenge-aerobics-icon.svg',
+        name: 'Aerobic 6',
+        category: 'aerobics',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
         instructions: [
@@ -211,7 +216,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/squats.mp4'
+            url: 'assets/icon/challenges/videos/aerobic-6.mp4'
+            //url: 'https://www.youtube.com/embed/7t5qBT105IY'
         },
         reward: '1000',
         gallery: [
@@ -240,7 +246,7 @@ export const CHALLENGES = [
     {
         id: 7,
         icon: 'assets/icon/challenges/challenge-balance-icon.svg',
-        name: 'Balance 2',
+        name: 'Balance 1',
         category: 'balance',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x20',
@@ -252,7 +258,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/jumping-jacks.mp4'
+            url: 'assets/icon/challenges/videos/balance-1.mp4'
+            //url: 'https://www.youtube.com/embed/5PGUt_rComw'
         },
         reward: '1000',
         gallery: [
@@ -273,7 +280,7 @@ export const CHALLENGES = [
     {
         id: 8,
         icon: 'assets/icon/challenges/challenge-balance-icon.svg',
-        name: 'Balance 3',
+        name: 'Balance 2',
         category: 'balance',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -285,7 +292,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/push-ups.mp4'
+            url: 'assets/icon/challenges/videos/balance-2.mp4'
+            //url: 'https://www.youtube.com/embed/xKGeN-T78i8'
         },
         reward: '1000',
         gallery: [
@@ -314,7 +322,7 @@ export const CHALLENGES = [
     {
         id: 9,
         icon: 'assets/icon/challenges/challenge-balance-icon.svg',
-        name: 'Balance 4',
+        name: 'Balance 3',
         category: 'balance',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: '5min',
@@ -326,7 +334,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/running.mp4'
+            url: 'assets/icon/challenges/videos/balance-3.mp4'
+            //url: 'https://www.youtube.com/embed/tdhGQGiP_DA'
         },
         reward: '1000',
         gallery: [
@@ -355,7 +364,7 @@ export const CHALLENGES = [
     {
         id: 10,
         icon: 'assets/icon/challenges/challenge-balance-icon.svg',
-        name: 'Balance 5',
+        name: 'Balance 4',
         category: 'balance',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -367,7 +376,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/stretching.mp4'
+            url: 'assets/icon/challenges/videos/balance-4.mp4'
+            //url: 'https://www.youtube.com/embed/d6MPLiKnEIk'
         },
         reward: '1000',
         gallery: [
@@ -395,9 +405,9 @@ export const CHALLENGES = [
     },
     {
         id: 11,
-        icon: 'assets/icon/challenges/challenge-mental-icon.svg',
-        name: 'Mental 1',
-        category: 'mental',
+        icon: 'assets/icon/challenges/challenge-balance-icon.svg',
+        name: 'Balance 5',
+        category: 'balance',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
         instructions: [
@@ -408,7 +418,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/squats.mp4'
+            url: 'assets/icon/challenges/videos/balance-5.mp4'
+            //url: 'https://www.youtube.com/embed/Lz8yepQDeZM'
         },
         reward: '1000',
         gallery: [
@@ -437,7 +448,7 @@ export const CHALLENGES = [
     {
         id: 12,
         icon: 'assets/icon/challenges/challenge-mental-icon.svg',
-        name: 'Mental 2',
+        name: 'Mental 1',
         category: 'mental',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x20',
@@ -449,7 +460,7 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/jumping-jacks.mp4'
+            url: 'assets/icon/challenges/videos/mental-1.mp4'
         },
         reward: '1000',
         gallery: [
@@ -470,7 +481,7 @@ export const CHALLENGES = [
     {
         id: 13,
         icon: 'assets/icon/challenges/challenge-mental-icon.svg',
-        name: 'Mental 3',
+        name: 'Mental 2',
         category: 'mental',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -482,7 +493,7 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/push-ups.mp4'
+            url: 'assets/icon/challenges/videos/mental-2.mp4'
         },
         reward: '1000',
         gallery: [
@@ -511,7 +522,7 @@ export const CHALLENGES = [
     {
         id: 14,
         icon: 'assets/icon/challenges/challenge-mental-icon.svg',
-        name: 'Mental 4',
+        name: 'Mental 3',
         category: 'mental',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: '5min',
@@ -523,7 +534,7 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/running.mp4'
+            url: 'assets/icon/challenges/videos/mental-3.mp4'
         },
         reward: '1000',
         gallery: [
@@ -552,7 +563,7 @@ export const CHALLENGES = [
     {
         id: 15,
         icon: 'assets/icon/challenges/challenge-mental-icon.svg',
-        name: 'Mental 5',
+        name: 'Mental 4',
         category: 'mental',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
@@ -564,7 +575,7 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/stretching.mp4'
+            url: 'assets/icon/challenges/videos/mental-4.mp4'
         },
         reward: '1000',
         gallery: [
@@ -592,20 +603,20 @@ export const CHALLENGES = [
     },
     {
         id: 16,
-        icon: 'assets/icon/challenges/challenge-strength-icon.svg',
-        name: 'Strength 1',
-        category: 'strength',
+        icon: 'assets/icon/challenges/challenge-mental-icon.svg',
+        name: 'Mental 5',
+        category: 'mental',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         target: 'x50',
         instructions: [
-            'assets/icon/challenge-squats-1.svg',
-            'assets/icon/challenge-squats-2.svg',
-            'assets/icon/challenge-squats-1.svg',
-            'assets/icon/challenge-squats-2.svg'
+            'assets/icon/challenge-stretching-1.svg',
+            'assets/icon/challenge-stretching-2.svg',
+            'assets/icon/challenge-stretching-3.svg',
+            'assets/icon/challenge-stretching-3.svg'
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/squats.mp4'
+            url: 'assets/icon/challenges/videos/mental-5.mp4'
         },
         reward: '1000',
         gallery: [
@@ -614,11 +625,11 @@ export const CHALLENGES = [
                 image: 'assets/images/upload-gallery-1.jpg'
             },
             {
-                like: true,
+                like: false,
                 image: 'assets/images/upload-gallery-2.jpg'
             },
             {
-                like: true,
+                like: false,
                 image: 'assets/images/upload-gallery-3.jpg'
             },
             {
@@ -802,7 +813,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/squats.mp4'
+            url: 'assets/icon/challenges/videos/stretch-1.mp4'
+            //url: 'https://www.youtube.com/embed/CgiGYJ_EHPE'
         },
         reward: '1000',
         gallery: [
@@ -843,7 +855,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/jumping-jacks.mp4'
+            url: 'assets/icon/challenges/videos/stretch-2.mp4'
+            //url: 'https://www.youtube.com/embed/xZAZgTkPIqo'
         },
         reward: '1000',
         gallery: [
@@ -876,7 +889,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/push-ups.mp4'
+            url: 'assets/icon/challenges/videos/stretch-3.mp4'
+            //url: 'https://www.youtube.com/embed/YXoDMKQJevI'
         },
         reward: '1000',
         gallery: [
@@ -917,7 +931,8 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/running.mp4'
+            url: 'assets/icon/challenges/videos/stretch-4.mp4'
+            //url: 'https://www.youtube.com/embed/j2epKuHwElk'
         },
         reward: '1000',
         gallery: [
@@ -958,7 +973,50 @@ export const CHALLENGES = [
         ],
         video: {
             type: 'local',
-            url: 'assets/icon/challenges/videos/stretching.mp4'
+            url: 'assets/icon/challenges/videos/stretch-5.mp4'
+            //url: 'https://www.youtube.com/embed/q6Ee0r1CDhI'
+        },
+        reward: '1000',
+        gallery: [
+            {
+                like: false,
+                image: 'assets/images/upload-gallery-1.jpg'
+            },
+            {
+                like: false,
+                image: 'assets/images/upload-gallery-2.jpg'
+            },
+            {
+                like: false,
+                image: 'assets/images/upload-gallery-3.jpg'
+            },
+            {
+                like: false,
+                image: 'assets/images/upload-gallery-4.jpg'
+            },
+            {
+                like: false,
+                image: 'assets/images/upload-gallery-5.jpg'
+            },
+        ]
+    },
+    {
+        id: 26,
+        icon: 'assets/icon/challenges/challenge-stretch-icon.svg',
+        name: 'Stretch 6',
+        category: 'stretch',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi viverra neque eu ultricies laoreet. Morbi tempus lobortis gravida. Sed eget felis eu velit laoreet finibus ac eu lectus. Nulla a metus nulla. Nunc et mi sed lacus hendrerit faucibus non eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        target: 'x50',
+        instructions: [
+            'assets/icon/challenge-stretching-1.svg',
+            'assets/icon/challenge-stretching-2.svg',
+            'assets/icon/challenge-stretching-3.svg',
+            'assets/icon/challenge-stretching-3.svg'
+        ],
+        video: {
+            type: 'local',
+            url: 'assets/icon/challenges/videos/stretch-6.mp4'
+            //url: 'https://www.youtube.com/embed/Q-4VV1_BRj0'
         },
         reward: '1000',
         gallery: [

@@ -60,7 +60,7 @@ ion-content {
   width: calc(100% - 20px);
   height: 60px;
   border-radius: 30px;
-  margin: 10px;
+  margin: 0 10px 10px;
   position: fixed;
   z-index: 999999999;
   background: #fff;
@@ -230,7 +230,7 @@ ion-content {
 .challenge-container {
   width: calc(100% - 20px);
   height: 160px;
-  margin: 80px 10px 0 10px;
+  margin: 70px 10px 0 10px;
   transition: 0.3s ease all;
   position: fixed;
   z-index: 9999;
@@ -444,9 +444,11 @@ ion-content {
       margin: 20px auto 0 auto;
 
       video,
-      object {
+      object,
+      iframe {
         width: 100%;
         aspect-ratio: 16 / 9;
+        border: none;
       }
     }
 
@@ -673,6 +675,10 @@ ion-content {
         animation-name: upload-button;
       }
 
+      .challenge-button-green {
+        background-color: #00a195;
+      }
+
       @keyframes upload-button {
         from {
           width: 50px;
@@ -855,7 +861,7 @@ ion-content {
 }
 
 .challenge-container-expanded {
-  height: calc(100% - 275px);
+  height: calc(100% - 265px);
 }
 
 .action-sheet-button.sc-ion-action-sheet-ios {

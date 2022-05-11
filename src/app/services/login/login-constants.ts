@@ -1,8 +1,8 @@
 export const USERS = [
     {
         id: 1,
-        username: 'admin',
-        password: 'pass',
+        username: 'test',
+        password: 'test',
         personalData: {
             name: 'Javier',
             surname: 'Sánchez Moya',

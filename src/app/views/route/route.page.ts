@@ -14,6 +14,7 @@ import { RoutesService } from '../../services/routes/routes.service';
 import { ChallengesService } from '../../services/challenges/challenges.service';
 import { SettingsService } from '../../services/settings/settings.service';
 import { LoginService } from '../../services/login/login.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-route',
@@ -40,11 +41,14 @@ export class RoutePage {
   deviceDegrees: any;
   selectedRouteData: any;
   selectedStatsChallenge: any;
+  selectedChallengeSuccess: boolean;
+  selectedRouteIndex: any;
+  selectedChallengeIndex: any;
   userFixedPosition: boolean;
   settings: any;
   userInfo: any;
 
-  constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private platform: Platform, private geolocation: Geolocation,
+  constructor(private modalCtrl: ModalController, public animationCtrl: AnimationController, private platform: Platform, private geolocation: Geolocation, private sanitizer: DomSanitizer,
     private routesService: RoutesService, private challengeService: ChallengesService, private settingsService: SettingsService, private loginService: LoginService) {
     // @ts-ignore
     this.marker = []
@@ -87,6 +91,11 @@ export class RoutePage {
       importance: 4
     }).then(() => console.log('Canal de notificaciones Creado!')); */
 
+    this.drawMap();
+
+  }
+
+  drawMap() {
     var mymap = L.map('mapid', {
       center: [38.078611, -1.272742],
       zoom: this.settings.mapZoom,
@@ -115,7 +124,6 @@ export class RoutePage {
     this.mymap = mymap;
     this.drawRoute()
     // this.createMarker();
-
   }
 
   drawRoute() {
@@ -170,7 +178,7 @@ export class RoutePage {
       let waypoints = [];
       route.waypoints.forEach(function (waypoint) {
 
-        waypoints.push(L.latLng(waypoint[0], waypoint[1]));
+        waypoints.push(L.latLng(waypoint.coords[0], waypoint.coords[1]));
 
       });
 
@@ -185,6 +193,7 @@ export class RoutePage {
         createMarker: function (i, wp, nWps) {
 
           let marker;
+          let successChallenge;
 
           if (i === 0) {
 
@@ -223,7 +232,9 @@ export class RoutePage {
 
               if (challengeList[x].id === route.challenges[i].id) {
 
-                vm.buildPoint(marker, route, routeIndex, route.challenges[i], challengeList[x], x);
+                successChallenge = route.waypoints[i].success;
+
+                vm.buildPoint(marker, route, routeIndex, route.challenges[i], challengeList[x], x, successChallenge);
 
                 break;
 
@@ -249,7 +260,16 @@ export class RoutePage {
     this.paintMarker();
   }
 
-  buildPoint(marker, route, routeIndex, routeChallengeInfo, challenge, challengeIndex) {
+  buildPoint(marker, route, routeIndex, routeChallengeInfo, challenge, challengeIndex, successChallenge) {
+
+    console.log(successChallenge);
+    let successIcon = '';
+
+    if (successChallenge) {
+      successIcon = `<img id="success-icon" src="./assets/icon/challenges/challenge-success-icon.svg">`;
+    } else {
+      successIcon = '<img id="success-icon">';
+    }
 
     let defaultHtml = `<div route-id="` + route.id + `" challenge-id="` + challenge.id + `" route-index="` + routeIndex + `" challenge-index="` + challengeIndex + `" class="marker-container" style="width: ` + this.mymap.getZoom() * 3 + `px; height: ` + this.mymap.getZoom() * 3 + `px; postion: relative; display: flex; justify-content: center; align-items: center">
     <div style="position: absolute; display: block; width: ` + this.mymap.getZoom() + `px; height: ` + this.mymap.getZoom() + `px; text-align: center; z-index: 1">
@@ -260,10 +280,9 @@ export class RoutePage {
     <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; top: 0; right: 0; background: #ff6f00; text-align: center; box-sizing: border-box; border: 1px solid #fff">
       <span style="color: #fff; line-height: 15px; font-size: 7px; display: block; position: relative; top: -1px">`+ routeChallengeInfo.completed24h + `</span>
     </div>
-    <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
-      <img src="./assets/icon/challenges/challenge-success-icon.svg">
-    </div>
-
+      <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; bottom: 0; right: 0">
+      ` + successIcon + `
+      </div>
     </div>`;
 
     marker.options.icon.options.html = defaultHtml;
@@ -300,6 +319,10 @@ export class RoutePage {
             if (routeList[routeIndex].challenges[i].id === challengeId) {
               vm.selectedRouteData = routeList[routeIndex];
               vm.selectedStatsChallenge = routeList[routeIndex].challenges[i];
+              vm.selectedChallengeSuccess = routeList[routeIndex].waypoints[i].success
+
+              vm.selectedRouteIndex = routeIndex;
+              vm.selectedChallengeIndex = i;
 
               vm.selectedChallenge = challengeList[challengeIndex];
               vm.openChallengeWindow = true;
@@ -558,6 +581,10 @@ export class RoutePage {
       if (routeList[routeIndex].challenges[i].id === challengeId) {
         vm.selectedRouteData = routeList[routeIndex];
         vm.selectedStatsChallenge = routeList[routeIndex].challenges[i];
+        vm.selectedChallengeSuccess = routeList[routeIndex].waypoints[i].success;
+
+        vm.selectedRouteIndex = routeIndex;
+        vm.selectedChallengeIndex = i;
 
         vm.selectedChallenge = challengeList[challengeIndex];
         vm.openChallengeWindow = true;
@@ -593,14 +620,43 @@ export class RoutePage {
   }
   */
 
-  shareChallenge() {
+  getReward(reward) {
 
     const vm = this;
     this.openRewardWindow = true;
+    this.selectedChallengeSuccess = true;
+
+    this.routes[this.selectedRouteIndex].waypoints[this.selectedChallengeIndex].success = this.selectedChallengeSuccess;
+    this.routesService.routesData = this.routes;
+
+    this.mymap.eachLayer(function (layer) {
+
+      //@ts-ignore
+      if (layer.options.icon !== undefined) {
+        //@ts-ignore
+        if (vm.routes[vm.selectedRouteIndex].waypoints[vm.selectedChallengeIndex].coords[0] === layer._latlng.lat && vm.routes[vm.selectedRouteIndex].waypoints[vm.selectedChallengeIndex].coords[1] === layer._latlng.lng) {
+          //@ts-ignore
+          console.log(layer.options.icon.options.html);
+          let successImg = document.getElementById('success-icon');
+          console.log(successImg);
+          //@ts-ignore
+          let layerInner = layer._icon.innerHTML;
+
+          layerInner = layerInner.replace('<img id="success-icon">', '<img id="success-icon" src="./assets/icon/challenges/challenge-success-icon.svg">');
+
+          //@ts-ignore
+          layer._icon.innerHTML = layerInner;
+
+        }
+      }
+
+    });
 
     setTimeout(function () {
       vm.openRewardWindow = false;
     }, 5000);
+
+    //TODO Update marcador seleccionado
 
   }
 
@@ -615,6 +671,10 @@ export class RoutePage {
       cssClass: 'transparent-modal'
     });
     await modal.present()
+  }
+
+  getSafeUrl(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url + '?autoplay=1&mute=1&loop=1');
   }
 
 }
