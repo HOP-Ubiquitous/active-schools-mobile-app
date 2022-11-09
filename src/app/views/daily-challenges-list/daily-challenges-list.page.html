@@ -1,0 +1,58 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="star-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Daily Challenges</h1>
+</div>
+
+<div class="rows-container">
+
+  <div
+    class="row"
+    (click)="getReward()"
+    *ngFor="let achievement of selectedDailyChallenges; index as i">
+
+    <div class="row-left-container">
+      <div class="achievement-diamond-container">
+        <ion-icon *ngIf="i === 0" name="footsteps-outline"></ion-icon>
+        <img *ngIf="i !== 0" src="{{achievement.icon}}" />
+        <div class="daily-diamond-left"
+             [ngStyle]="{ 'background': 'linear-gradient(180deg, rgba(0, 161, 149, ' + getOpacity(i) + ') 0%, rgba(0, 81, 75, 1) 100%)' }">
+        </div>
+        <div class="daily-diamond-right"
+             [ngStyle]="{ 'background': 'linear-gradient(180deg, rgba(49, 178, 168, ' + getOpacity(i) + ') 0%, rgba(0, 121, 112, 1) 100%)' }">
+        </div>
+      </div>
+    </div>
+    <div class="row-right-container">
+      <div class="row-right-top-container">
+        <span class="row-right-top-left-text">{{achievement.title}}</span>
+        <span class="row-right-top-right-text">{{achievement.reward}} xp</span>
+      </div>
+      <div class="row-right-bottom-container">
+        <div class="row-progress-bar-bg">
+          <div class="row-progress-bar"
+               [ngStyle]="{ 'width': (getOpacity(i) * 100) + '%', 'background': 'linear-gradient(180deg, rgba(0, 161, 149, ' + getOpacity(i) + ') 0%, rgba(0, 81, 75, 1) 100%)' }"
+               [ngClass]="{ 'row-progress-bar-100' : successReward }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reward-container" *ngIf="openRewardWindow">
+
+  <div class="reward-container-inner">
+    <img class="reward-diamond" src="assets/icon/challenge-reward.svg">
+
+    <div class="reward-tag-container">
+      <img class="reward-tag" src="assets/icon/challenge-tag.svg">
+      <span>1000</span>
+    </div>
+
+  </div>
+
+</div>

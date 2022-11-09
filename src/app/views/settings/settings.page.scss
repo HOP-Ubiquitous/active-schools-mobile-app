@@ -11,7 +11,7 @@ a{
 
 .main-nav-container {
   box-shadow: none !important;
-  border-bottom: 1px solid #00a195;
+  border-bottom: 1px solid var(--primary-green);
 }
 
 .main-nav {
@@ -24,14 +24,14 @@ a{
 }
 
 .main-nav div {
-  height: 25px;
+  height: 20px;
   aspect-ratio: 1;
 }
 
 .main-nav ion-icon {
-  height: 25px;
+  height: 20px;
   aspect-ratio: 1;
-  font-size: 24px;
+  font-size: 20px;
   display: block;
 }
 

@@ -12,7 +12,7 @@ a {
 
 .main-nav-container {
     box-shadow: none !important;
-    border-bottom: 1px solid #00a195;
+    border-bottom: 1px solid var(--primary-green);
 }
 
 .main-nav {
@@ -25,14 +25,14 @@ a {
 }
 
 .main-nav div {
-    height: 25px;
+    height: 20px;
     aspect-ratio: 1;
 }
 
 .main-nav ion-icon {
-    height: 25px;
+    height: 20px;
     aspect-ratio: 1;
-    font-size: 24px;
+    font-size: 20px;
     display: block;
 }
 
@@ -52,7 +52,7 @@ a {
             height: 250px;
             object-fit: cover;
             object-position: center;
-            border: 1px solid #00a195;
+            border: 1px solid var(--primary-green);
         }
     }
 
@@ -61,7 +61,7 @@ a {
 
         h1 {
             margin: 0;
-            color: #ff6f00;
+            color: var(--primary-orange);
             font-size: 14px;
             font-weight: 600;
         }
@@ -69,7 +69,7 @@ a {
         .ion-calendar,
         span {
             font-size: 10px;
-            color: #00a195;
+            color: var(--primary-green);
             margin-right: 5px;
         }
 

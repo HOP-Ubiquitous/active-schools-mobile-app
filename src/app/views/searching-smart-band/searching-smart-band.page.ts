@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-searching-smart-band',
@@ -8,8 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class SearchingSmartBandPage implements OnInit {
   myVar = false;
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
+  
   ngOnInit() {
+  }
+
+  goToLogin = () => {
+    this.router.navigate(['/login']);
+  }
+  
+  goToMain = () => {
+    this.router.navigate(['/tabs/route']);
   }
 
 }

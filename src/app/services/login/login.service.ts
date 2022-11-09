@@ -15,6 +15,7 @@ export class LoginService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.users = USERS;
+    this.loggedUser = {};
   }
 
   ngOnInit() {

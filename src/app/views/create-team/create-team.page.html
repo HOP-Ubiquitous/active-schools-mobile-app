@@ -1,0 +1,26 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="create-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Create Team</h1>
+</div>
+
+<form class="form-registration">
+
+  <ion-item lines="full" class="ion-item-form">
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" [(ngModel)]="teamName" name="name" required></ion-input>
+  </ion-item>
+
+  <ion-row>
+    <ion-col class="next-container">
+      <ion-button (click)="createTeam()" type="submit" expand="block" class="next-button">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+        Create Team
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+</form>

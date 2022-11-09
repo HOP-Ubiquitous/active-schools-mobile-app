@@ -1,0 +1,157 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="people-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>{{subscribedTeam.name}}</h1>
+</div>
+
+<form class="form-registration">
+
+  <div class="profile-user-container">
+    <div class="profile-user-level">
+
+      <div class="profile-user-level-container">
+
+        <div class="profile-user-level-bar"></div>
+
+        <div class="profile-user-image-container">
+          <div class="profile-user-image-container-inner">
+            
+            <div class="profile-user-level-number-container">
+              <div class="profile-user-level-number-container-inner">
+                <div class="profile-user-level-number-container-bg-left"></div>
+                <div class="profile-user-level-number-container-bg-right"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="team-stats-container">
+
+    <div class="single-stat">
+      <ion-icon name="footsteps-outline"></ion-icon>
+      <span>{{subscribedTeam.totalSteps}}</span>
+      <span>Steps</span>
+    </div>
+
+    <div class="single-stat">
+      <ion-icon name="ribbon-outline"></ion-icon>
+      <span>{{subscribedTeam.totalChallenges}}</span>
+      <span>Challenges</span>
+    </div>
+
+    <div class="single-stat">
+      <ion-icon name="map-outline"></ion-icon>
+      <span>{{subscribedTeam.totalRoutesComplete}}</span>
+      <span>Routes</span>
+    </div>
+
+  </div>
+
+  <div class="team-distance-container">
+
+    <div class="team-distance-text">
+      
+      <div class="team-distance-text-group">
+        <span>{{subscribedTeam.totalDistance}} Km</span>
+      </div>
+
+      <div class="team-distance-text-group">
+        <span><ion-icon name="location-outline"></ion-icon> <ion-icon name="chevron-forward-outline"></ion-icon> <span class="bold">Valencia</span></span>
+      </div>
+
+    </div>
+
+    <div class="team-distance-graphics">
+      <ion-icon class="team-arrow" name="chevron-forward-outline"></ion-icon>
+      <ion-icon class="team-flag" name="flag-outline"></ion-icon>
+      <div class="team-distance-line-bg">
+        <div class="team-distance-line"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="team-members-container">
+    
+    <div class="team-members-tabs-container">
+      
+      <div class="team-members-tab"
+           [ngClass]="{ 'team-members-tab-active' : tabMembersActive === 'steps' }"
+           (click)="sortMembers('steps')">
+        <ion-icon name="footsteps-outline"></ion-icon>
+      </div>
+
+      <div class="team-members-tab"
+           [ngClass]="{ 'team-members-tab-active' : tabMembersActive === 'challenges' }"
+           (click)="sortMembers('challenges')">
+        <ion-icon name="ribbon-outline"></ion-icon>
+      </div>
+
+      <div class="team-members-tab"
+           [ngClass]="{ 'team-members-tab-active' : tabMembersActive === 'routes' }"
+           (click)="sortMembers('routes')">
+        <ion-icon name="map-outline"></ion-icon>
+      </div>
+
+      <div class="team-members-tab"
+           [ngClass]="{ 'team-members-tab-active' : tabMembersActive === 'exp' }"
+           (click)="sortMembers('exp')">
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </div>
+
+    </div>
+
+    <div class="team-members-list-container">
+
+      <div class="title-container">
+        <div class="title-container-diamond">
+          <div>
+            <ion-icon name="{{tabMembersIcon}}-outline"></ion-icon>
+          </div>
+        </div>
+        <h1>{{tabMembersTitle}}</h1>
+      </div>
+
+      <div class="single-team-member" *ngFor="let member of filteredMembers; index as i">
+
+        <div class="single-team-member-left">
+          <div class="profile-user-level-number-container">
+            <div class="profile-user-level-number-container-inner">
+              <div class="profile-user-level-number-container-bg-left"></div>
+              <div class="profile-user-level-number-container-bg-right"></div>
+            </div>
+            <!-- <span class="profile-user-level-number-text-container"><span>L.</span>{{member.avatar.level}}</span> -->
+          </div>
+        </div>
+
+        <div class="single-team-member-center">
+          <div class="single-team-member-center-left">
+            <img src="{{member.headIcon}}">
+          </div>
+          <div class="single-team-member-center-right">
+            <h3>{{member.personalData.name}} (L. {{member.avatar.level}})</h3>
+            <h5>Country: {{member.personalData.country}}</h5>
+          </div>
+        </div>
+
+        <div class="single-team-member-right">
+          <span>{{member.avatar[orderMembersByTab]}}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  
+</form>

@@ -1,0 +1,45 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="podium-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Ranking of Teams</h1>
+</div>
+
+<form class="form-registration">
+
+  <div class="teams-container">
+
+    <div class="single-team-container" *ngFor="let team of sortTeamsBy('totalSteps7d'); index as i">
+      
+      <div class="single-team-left">
+
+        <!--
+          TODO Crear escudos de rangos Diamante/Oro/Plata/Bronce basados en el nivel de los equipos
+          TODO Sustituir con estos el rombo y nivel de esta sección
+        -->
+
+        <div class="profile-user-level-number-container">
+          <div class="profile-user-level-number-container-inner">
+            <div class="profile-user-level-number-container-bg-left"></div>
+            <div class="profile-user-level-number-container-bg-right"></div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="single-team-center">
+        <h3>{{team.name}}</h3>
+        <h5>Members: {{team.members.length}} / {{team.max_members}}</h5>
+      </div>
+
+      <div class="single-team-right">
+        <span>{{team.totalSteps7d}}</span>
+      </div>
+
+    </div>
+
+  </div>
+  
+</form>

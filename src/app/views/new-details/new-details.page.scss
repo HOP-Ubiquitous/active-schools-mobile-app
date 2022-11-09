@@ -20,7 +20,7 @@ html, body,  {
 
 .back-news{
   font-size: 14px;
-  color: #00a195;
+  color: var(--primary-green);
   text-decoration: none;
   display: inline;
   margin-left: 4px;
@@ -33,9 +33,9 @@ ion-card{
 }
 
 .ion-back{
-  color: #00a195;
+  color: var(--primary-green);
   position: relative;
-  fill: #00a195;
+  fill: var(--primary-green);
   font-size: 14px;
 }
 
@@ -44,24 +44,24 @@ ion-buttons{
   margin-left:12px;
 }
 img{
-  border: 1px solid #00a195;
+  border: 1px solid var(--primary-green);
 }
 .date{
   font-size: 10px;
-  color: #00a195;
+  color: var(--primary-green);
   display: inline;
   margin-left: 4px;
 }
 
 .ion-calendar{
-  color: #00a195;
+  color: var(--primary-green);
   position: relative;
-  fill: #00a195;
+  fill: var(--primary-green);
   font-size: 10px;
 }
 
 ion-card-title{
-  color: #ff6f00;
+  color: var(--primary-orange);
   font-size: 14px;
 }
 

@@ -9,13 +9,14 @@ export class SettingsService {
 
   constructor() {
     this.options = {
-      pushNotification: false,
-      distanceToActive: 20,
-      userTimeReportPosition: 0.5,
+      pushNotification: true,
+      distanceToActive: 5,
+      userTimeReportPosition: 2,
       mapZoom: 15,
       maxMapZoom: 20,
       steepsTarget: 10000,
-      sleepHoursTarget: 8
+      sleepHoursTarget: 8,
+      sonarNoise: true,
     }
   }
 

@@ -42,3 +42,214 @@ ion-modal::part(content){
   backdrop-filter: blur(12px);
 }
 
+.user-point {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  span {
+    background-color: var(--primary-orange);
+    width: 50%;
+    height: 100%;
+    display: block;
+    left: 0px;
+    top: 0px;
+    //border: 1px solid #fff;
+    //box-sizing: border-box;
+    position: relative;
+    clip-path: polygon(50% 0, 100% 75%, 50% 100%, 0 75%);
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    background: var(--primary-violet-map);
+    border-radius: 50%;
+    opacity: 0;
+    animation: wave 2s ease infinite;
+    z-index: -1;
+    position: absolute;
+  }
+
+  @keyframes wave {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    90% {
+      width: 190%;
+      height: 190%;
+      opacity: 0.5;
+    }
+    100% {
+      width: 250%;
+      height: 250%;
+      opacity: 0;
+    }
+  }
+
+}
+
+.start-point {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    background-color: var(--primary-orange);
+    width: 10px;
+    height: 10px;
+    display: block;
+    left: 0px;
+    top: 0px;
+    //border: 1px solid #fff;
+    //box-sizing: border-box;
+    position: relative;
+    transform: rotate(45deg);
+  }
+
+}
+
+.end-point {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    background-color: var(--primary-green);
+    width: 10px;
+    height: 10px;
+    display: block;
+    left: 0px;
+    top: 0px;
+    //border: 1px solid #fff;
+    //box-sizing: border-box;
+    position: relative;
+    transform: rotate(45deg);
+  }
+
+}
+
+.challenge-point {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: relative;
+
+  span {
+    background-color: var(--primary-violet-map);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    top: 0px;
+    //border: 1px solid #fff;
+    //box-sizing: border-box;
+    position: relative;
+    transform: rotate(45deg);
+    opacity: 0.5;
+
+    &::before {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      font-weight: 900;
+      color: #fff;
+      font-size: 12px;
+      width: 10px;
+      height: 10px;
+      background: var(--primary-violet-map);
+      position: absolute;
+      bottom: 0px;
+      left: 25px;
+      //border: 1px solid #fff;
+      //box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      transform: rotate(-45deg);
+      width: 15px;
+      height: 15px;
+      object-fit: contain;
+      object-position: center;
+    }
+    
+  }
+
+}
+
+.challenge-point-active {
+
+  span {
+    opacity: 1;
+  }
+
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    background: var(--primary-violet-map);
+    border-radius: 50%;
+    opacity: 0;
+    animation: wave-challenge 2s ease infinite;
+    z-index: -1;
+    position: absolute;
+  }
+
+  @keyframes wave-challenge {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+    90% {
+      width: 190%;
+      height: 190%;
+      opacity: 0.5;
+    }
+    100% {
+      width: 250%;
+      height: 250%;
+      opacity: 0;
+    }
+  }
+
+}
+
+.challenge-point-success {
+
+  span {
+    background-color: var(--primary-green);
+    &::before {
+      display: flex;
+      content: '';
+      font-weight: 900;
+      color: #fff;
+      font-size: 12px;
+      width: 5px;
+      height: 5px;
+      background: var(--primary-green);
+      position: absolute;
+      top: 0;
+      left: -10px;
+      // border: 1px solid #fff;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

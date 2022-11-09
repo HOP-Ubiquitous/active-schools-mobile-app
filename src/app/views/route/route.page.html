@@ -10,7 +10,7 @@
       <div>
         <a routerLink="/settings">
           <!-- <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img> -->
-          <ion-icon name="settings" class="ion-left-button"></ion-icon>
+          <ion-icon name="settings-outline" class="ion-left-button"></ion-icon>
         </a>
       </div>
 
@@ -26,13 +26,15 @@
 
       <div class="profile-user-level-container">
 
-        <img src="assets/icon/missions_icons/profile-frame.svg">
+        <!-- <img src="assets/icon/missions_icons/profile-frame.svg"> -->
 
         <div class="profile-user-level-bar"></div>
 
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
-            <img src="assets/icon/missions_icons/profile-image.svg">
+
+            <img src="{{selectedHead}}">
+
           </div>
         </div>
 
@@ -58,11 +60,12 @@
 
         <div class="profile-user-challenge-inner">
           <div class="profile-user-challenge-icon-container">
-            <img src="assets/icon/missions_icons/profile-challenge-walk.svg">
+            <ion-icon name="footsteps-outline"></ion-icon>
+            <!-- <img src="assets/icon/missions_icons/profile-challenge-walk.svg"> -->
           </div>
           <div class="profile-user-challenge-data-container">
-            <span>5.783 /</span>
-            <span>10.000</span>
+            <span>{{dailySteps || 5500}} /</span>
+            <span>10000</span>
           </div>
         </div>
       </div>
@@ -84,7 +87,7 @@
         <span>{{selectedChallenge.name}}</span>
       </div>
 
-      <div class="challenge-title-close-container" (click)="openChallengeWindow = !openChallengeWindow">
+      <div class="challenge-title-close-container" (click)="closeChallengeWindow()">
         <ion-icon name="close"></ion-icon>
       </div>
 
@@ -117,12 +120,17 @@
 
       <div class="challenge-demostration-video" *ngIf="showVideoDemostration">
 
-        <video autoplay *ngIf="selectedChallenge.video.type === 'local'">
-          <source type="video/mp4" src="{{selectedChallenge.video.url}}" />
+        <video autoplay muted *ngIf="showCountdown === true && showVideoDemostration === true">
+          <source type="video/mp4" src="../../../assets/videos/active-schools-countdown.mp4" />
         </video>
 
-        <iframe *ngIf="selectedChallenge.video.type === 'external'" [src]="getSafeUrl(selectedChallenge.video.url)"
-          frameborder="0" allowfullscreen>
+        <iframe *ngIf="showCountdown === false && showVideoDemostration === true"
+                [src]="selectedChallenge.video.url | safeUrl"
+                title="YouTube video player"
+                loading="lazy"
+                frameborder="0"
+                allow="autoplay"
+                allowfullscreen>
         </iframe>
 
         <!--         
@@ -133,8 +141,10 @@
 
       </div>
 
-      <ion-button (click)="showVideoDemostration = !showVideoDemostration" type="submit" expand="block"
-        class="challenge-demostration-button">
+      <ion-button (click)="openVideoDemo()"
+                  type="submit"
+                  expand="block"
+                  class="challenge-demostration-button">
         <div class="challenge-demostration-icon-container">
           <ion-icon name="play"></ion-icon>
         </div>
@@ -197,20 +207,38 @@
 
       </div>
 
-      <div class="challenge-upload-button-container" *ngIf="!selectedChallengeSuccess">
+      <!-- CHALLENGE DESACTIVADO Y SIN COMPLETAR -->
+      <div class="challenge-upload-button-container" *ngIf="!selectedChallengeSuccess && challengeActive">
+
+        <div class="challenge-upload-button challenge-button-violet">
+          <ion-icon name="location-outline"></ion-icon>
+        </div>
+
+        <div class="challenge-upload-button-bg challenge-button-violet"></div>
+      </div>
+
+      <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess && challengeActive">
+        <span>You must get closer to activate the challenge</span>
+      </div>
+      <!-- -->
+
+      <!-- CHALLENGE ACTIVADO PERO SIN COMPLETAR-->
+      <div class="challenge-upload-button-container" *ngIf="!selectedChallengeSuccess && !challengeActive">
 
         <div class="challenge-upload-button challenge-button-green"
-          (click)="getReward(selectedChallenge.reward, route)">
+          (click)="getReward(selectedChallenge)">
           <ion-icon name="checkmark"></ion-icon>
         </div>
 
         <div class="challenge-upload-button-bg challenge-button-green"></div>
       </div>
 
-      <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess">
+      <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess && !challengeActive">
         <span>Done?</span>
       </div>
+      <!-- -->
 
+      <!-- CHALLENGE COMPLETADO -->
       <div class="challenge-upload-button-container" *ngIf="selectedChallengeSuccess">
 
         <div class="challenge-upload-button" (click)="shareChallenge()">
@@ -223,6 +251,7 @@
       <div class="challenge-upload-text-container" *ngIf="selectedChallengeSuccess">
         <span>Share your challenge!</span>
       </div>
+      <!-- -->
 
       <div class="challenge-upload-icon-gallery-container">
         <div class="challenge-upload-icon-gallery-container-inner">
@@ -258,11 +287,11 @@
 
     </div>
 
-    <div class="zig-zag-bottom"></div>
+    <!-- <div class="zig-zag-bottom"></div> -->
 
     <div class="challenge-expand-button-container" (click)="expandChallenge = !expandChallenge">
-      <ion-icon *ngIf="!expandChallenge" name="arrow-down"></ion-icon>
-      <ion-icon *ngIf="expandChallenge" name="arrow-up"></ion-icon>
+      <ion-icon *ngIf="!expandChallenge" name="chevron-down-outline"></ion-icon>
+      <ion-icon *ngIf="expandChallenge" name="chevron-up-outline"></ion-icon>
     </div>
 
   </div>
@@ -280,7 +309,7 @@
   <ion-label>Routes</ion-label>
   <ion-select interface="action-sheet" class="custom-options" (ionChange)="panToRoute($event)">
     <ion-select-option *ngFor="let route of routes; index as i" [value]="i">
-      {{route.start}}
+      {{route.name}}
     </ion-select-option>
   </ion-select>
 </ion-item>

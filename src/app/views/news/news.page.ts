@@ -12,7 +12,12 @@ import { NewsService } from 'src/app/services/news/news.service';
 export class NewsPage implements OnInit {
   data: any;
 
-  constructor(private modalCtrl: ModalController, private newsService: NewsService, private router: Router) {
+  constructor(
+    private modalCtrl: ModalController,
+    private newsService: NewsService,
+    private router: Router
+  ) {
+    
   }
 
   ngOnInit() {
@@ -20,10 +25,8 @@ export class NewsPage implements OnInit {
     this.data = this.newsService.newsData;
   }
 
-  goToSingleNew(id) {
-    debugger;
+  goToSingleNew = (id) => {
     this.newsService.getSingleNew(id);
-
   }
 
 }

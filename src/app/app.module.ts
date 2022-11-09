@@ -15,7 +15,7 @@ import { NewsService } from './services/news/news.service';
 import { SettingsService } from './services/settings/settings.service';
 import { AchievementsService } from './services/achievements/achievements.service';
 
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +36,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AchievementsService
   ],
   providers: [
-    Geolocation,
+    Geolocation
   ],
   bootstrap: [AppComponent],
 })

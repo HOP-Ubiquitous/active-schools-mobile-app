@@ -1,0 +1,59 @@
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a routerLink="/settings">
+          <!-- <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img> -->
+          <ion-icon name="settings-outline" class="ion-left-button"></ion-icon>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="team-main-tabs-container">
+
+    <div class="team-main-tab"
+         [ngClass]="{ 'team-main-tab-active' : selectedTab === 'search' }"
+         (click)="showTabContain('search')"
+         routerLink="/tabs/teams/search-teams">
+      <ion-icon name="search-outline"></ion-icon>
+    </div>
+
+    <div class="team-main-tab"
+         [ngClass]="{ 'team-main-tab-active' : selectedTab === 'ranking' }"
+         (click)="showTabContain('ranking')"
+         routerLink="/tabs/teams/ranking-teams">
+      <ion-icon name="podium-outline"></ion-icon>
+    </div>
+
+    <div class="team-main-tab"
+         *ngIf="!checkTeamId(loggedUser.team_id)" 
+         [ngClass]="{ 'team-main-tab-active' : selectedTab === 'create' }"
+         (click)="showTabContain('create')"
+         routerLink="/tabs/teams/create-team">
+      <ion-icon name="create-outline"></ion-icon>
+    </div>
+
+    <div class="team-main-tab"
+         *ngIf="checkTeamId(loggedUser.team_id)"
+         [ngClass]="{ 'team-main-tab-active' : selectedTab === 'team' }"
+         (click)="showTabContain('team')"
+         routerLink="/tabs/teams/my-team">
+      <ion-icon name="people-outline"></ion-icon>
+    </div>
+
+  </div>
+
+  <router-outlet class="outlet" name="teams"></router-outlet>
+
+</ion-content>

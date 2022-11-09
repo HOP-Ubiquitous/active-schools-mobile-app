@@ -21,7 +21,7 @@ export class NewDetailsPage implements OnInit {
       });
   }
 
-  dismiss(){
+  dismiss = () => {
     this.modalCtrl.dismiss();
   }
 

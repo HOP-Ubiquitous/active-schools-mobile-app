@@ -1,0 +1,60 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="ribbon-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Achievements</h1>
+</div>
+
+<div class="rows-container">
+  <div class="row"
+       (click)="getReward(i)"
+       *ngFor="let achievement of achievements; index as i">
+
+    <div class="row-left-container">
+      <div class="achievement-diamond-container">
+        <img src="{{achievement.icon}}" />
+        <div class="achievement-diamond-left"
+             [ngStyle]="{ 'background': 'linear-gradient(180deg, rgba(187, 85, 255, ' + getOpacity(i) + ') 0%, rgba(129, 34, 140, 1) 100%)' }">
+        </div>
+        <div class="achievement-diamond-right"
+             [ngStyle]="{ 'background': 'linear-gradient(180deg, rgba(213, 140, 255, ' + getOpacity(i) + ') 0%, rgba(129, 67, 200, 1) 100%)' }">
+        </div>
+      </div>
+    </div>
+
+    <div class="row-right-container">
+      <div class="row-right-top-container">
+        <span class="row-right-top-left-text achievement-color">
+          {{achievement.title}}
+        </span>
+        <span class="row-right-top-right-text achievement-color">
+          {{achievement.reward}} xp
+        </span>
+      </div>
+      <div class="row-right-bottom-container">
+        <div class="row-progress-bar-bg">
+          <div class="row-progress-bar achievement-bg"
+               [ngStyle]="{ 'width': (getOpacity(i) * 100) + '%', 'background': 'linear-gradient(180deg, rgba(187, 85, 255, ' + getOpacity(i) + ') 0%, rgba(129, 34, 140, 1) 100%)' }"
+               [ngClass]="{ 'row-progress-bar-100' : successReward }">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reward-container" *ngIf="openRewardWindow">
+
+  <div class="reward-container-inner">
+    <img class="reward-diamond" src="assets/icon/challenge-reward.svg">
+
+    <div class="reward-tag-container">
+      <img class="reward-tag" src="assets/icon/challenge-tag.svg">
+      <span>{{currentReward}}</span>
+    </div>
+
+  </div>
+
+</div>

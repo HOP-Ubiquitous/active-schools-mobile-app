@@ -10,7 +10,7 @@
       <div>
         <a routerLink="/settings">
           <!-- <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img> -->
-          <ion-icon name="settings" class="ion-left-button"></ion-icon>
+          <ion-icon name="settings-outline" class="ion-left-button"></ion-icon>
         </a>
       </div>
 
@@ -27,42 +27,75 @@
   </div>
 
   <div class="profile-user-container">
-    <div class="profile-user-level" routerLink="/evolution">
+    <div class="profile-user-level" (click)="goToEvolution()">
 
       <div class="profile-user-info-button-container">
-        <ion-icon name="information-circle"></ion-icon>
+        <span>3</span>
+        <!-- <ion-icon name="information-circle"></ion-icon> -->
       </div>
 
       <div class="profile-user-level-container">
 
-        <img src="assets/icon/missions_icons/profile-frame.svg">
+        <!-- <img src="assets/icon/missions_icons/profile-frame.svg"> -->
 
         <div class="profile-user-level-bar"></div>
 
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
-            <img src="assets/icon/missions_icons/profile-image.svg">
+            <!-- <img src="assets/icon/missions_icons/profile-image.svg"> -->
+            <img src="{{selectedHead}}">
           </div>
         </div>
 
       </div>
 
-      <div class="profile-user-level-number-container">
-        <div class="profile-user-level-number-container-inner">
-          <div class="profile-user-level-number-container-bg-left"></div>
-          <div class="profile-user-level-number-container-bg-right"></div>
-        </div>
-        <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
-      </div>
-
     </div>
+
+  </div>
+
+  <div class="profile-main-level-container" (click)="goToEvolution()">
+
+    <div class="profile-user-level-number-container">
+      <div class="profile-user-level-number-container-inner">
+        <div class="profile-user-level-number-container-bg-left"></div>
+        <div class="profile-user-level-number-container-bg-right"></div>
+      </div>
+      <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
+    </div>
+
+    <div class="profile-user-level-customize-arrow"></div>
+
+    <div class="profile-user-level-customize-button">
+      <span>Customize Avatar</span>
+    </div>
+
   </div>
 
   <div class="profile-stats-container">
 
-    <div class="zig-zag-top"></div>
+    <div class="team-main-tabs-container">
 
-    <div class="row">
+      <div class="team-main-tab"
+           [ngClass]="{ 'team-main-tab-active' : selectedTab === 'stats' }"
+           (click)="showTabContain('stats')"
+           routerLink="/tabs/profile/stats">
+        <ion-icon name="fitness-outline"></ion-icon>
+      </div>
+  
+      <div class="team-main-tab"
+           [ngClass]="{ 'team-main-tab-active' : selectedTab === 'history' }"
+           (click)="showTabContain('history')"
+           routerLink="/tabs/profile/history">
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </div>
+  
+    </div>
+
+    <router-outlet class="outlet" name="profile"></router-outlet>
+
+    <!-- <div class="zig-zag-top"></div> -->
+
+    <!-- <div class="row">
 
       <div class="profile-stats-inner-container">
         <img src="assets/icon/profile_rates/heart_rate.svg">
@@ -92,7 +125,8 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
+
   </div>
 
 </ion-content>

@@ -1,0 +1,53 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="search-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Search Teams</h1>
+</div>
+
+<form class="form-registration">
+
+  <ion-item lines="full" class="ion-item-form">
+    <ion-label position="floating">
+      Search
+    </ion-label>
+    <ion-input type="text" (ionChange)="searchTeam()" [(ngModel)]="search" name="search"></ion-input>
+  </ion-item>
+
+  <div class="teams-container">
+
+    <div class="single-team-container" *ngFor="let team of filteredTeams; index as i">
+      
+      <div class="single-team-left">
+
+        <!--
+          TODO Crear escudos de rangos Diamante/Oro/Plata/Bronce basados en el nivel de los equipos
+          TODO Sustituir con estos el rombo y nivel de esta sección
+        -->
+
+        <div class="profile-user-level-number-container">
+          <div class="profile-user-level-number-container-inner">
+            <div class="profile-user-level-number-container-bg-left"></div>
+            <div class="profile-user-level-number-container-bg-right"></div>
+          </div>
+          <!-- <span class="profile-user-level-number-text-container"><span>L.</span>{{team.level}}</span> -->
+        </div>
+
+      </div>
+      
+      <div class="single-team-center">
+        <h3>{{team.name}}</h3>
+        <h5>Members: {{team.members.length}} / {{team.max_members}}</h5>
+      </div>
+
+      <div class="single-team-right" (click)="addUserToTeam(loggedUser.id, team.team_id)">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+</form>

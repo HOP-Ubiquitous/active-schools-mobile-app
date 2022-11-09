@@ -1,6 +1,6 @@
 .main-nav-container {
   box-shadow: none !important;
-  border-bottom: 1px solid #00a195;
+  border-bottom: 1px solid var(--primary-green);
 }
 
 .main-nav {
@@ -13,14 +13,14 @@
 }
 
 .main-nav div {
-  height: 25px;
+  height: 20px;
   aspect-ratio: 1;
 }
 
 .main-nav ion-icon {
-  height: 25px;
+  height: 20px;
   aspect-ratio: 1;
-  font-size: 24px;
+  font-size: 20px;
   display: block;
 }
 
@@ -50,12 +50,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #00a195;
+      border-bottom: 1px solid var(--primary-green);
 
       .news-left-container {
         width: 100px;
         height: 100px;
-        border: 1px solid #00a195;
+        border: 1px solid var(--primary-green);
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -80,7 +80,7 @@
           right: 0;
           border-style: solid;
           border-width: 5px;
-          border-color: #00a195 #00a195 transparent transparent;
+          border-color: var(--primary-green) var(--primary-green) transparent transparent;
       }
 
       .news-left-container::after {
@@ -92,7 +92,7 @@
         left: 0;
         border-style: solid;
         border-width: 5px;
-        border-color: transparent transparent #00a195 #00a195;
+        border-color: transparent transparent var(--primary-green) var(--primary-green);
     }
 
       .news-right-container {
@@ -104,7 +104,7 @@
 
           h3 {
             font-size: 12px;
-            color: #ff6f00;
+            color: var(--primary-orange);
             margin: 0;
             font-weight: 800;
             -webkit-line-clamp: 3;
@@ -118,15 +118,15 @@
           position: relative;
 
           .ion-calendar{
-            color: #00a195;
+            color: var(--primary-green);
             position: relative;
-            fill: #00a195;
+            fill: var(--primary-green);
             font-size: 10px;
           }
 
           p {
             font-size: 10px;
-            color: #00a195;
+            color: var(--primary-green);
             display: inline;
             margin-left: 4px;
             top: -2px;
@@ -154,27 +154,27 @@
   }
 }
 .ion-calendar{
-  color: #00a195;
+  color: var(--primary-green);
   position: relative;
-  fill: #00a195;
+  fill: var(--primary-green);
   font-size: 10px;
 }
 
 
 h3{
-  color: #ff6f00;
+  color: var(--primary-orange);
 }
 
 .date{
   font-size: 10px;
-  color: #00a195;
+  color: var(--primary-green);
   display: inline;
   margin-left: 4px;
 }
 
 .read-more{
   font-size: 10px;
-  color: #00a195;
+  color: var(--primary-green);
   text-decoration: none;
 
 }

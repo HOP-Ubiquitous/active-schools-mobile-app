@@ -1,0 +1,515 @@
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="pulse-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Heart Rate History</h1>
+</div>
+
+<div class="rows-container no-padding">
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{dailyValue.heart_rate}}</h2> -->
+        <h2>66</h2>
+        <h3>Avg. Heart Rate (Day)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{weeklyValue.heart_rate}}</h2> -->
+        <h2>65</h2>
+        <h3>Avg. Heart Rate (Week)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{monthlyValue.heart_rate}}</h2> -->
+        <h2>68</h2>
+        <h3>Avg. Heart Rate (Month)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{yearlyValue.heart_rate}}</h2> -->
+        <h2>63</h2>
+        <h3>Avg. Heart Rate (Year)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="heart-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Blood Pressure History (mm Hg)</h1>
+</div>
+
+<div class="rows-container no-padding">
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="heart-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{dailyValue.blood_pressure_systolyc}} / {{dailyValue.blood_pressure_diastolyc}}</h2> -->
+        <h2>12.1 / 7.9</h2>
+        <h3>Avg. Blood Pressure (Day)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="heart-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{weeklyValue.blood_pressure_systolyc}} / {{weeklyValue.blood_pressure_diastolyc}}</h2> -->
+        <h2>12.1 / 7.1</h2>
+        <h3>Avg. Blood Pressure (Week)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="heart-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{monthlyValue.blood_pressure_systolyc}} / {{monthlyValue.blood_pressure_diastolyc}}</h2> -->
+        <h2>11.8 / 8.1</h2>
+        <h3>Avg. Blood Pressure (Month)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="heart-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{yearlyValue.blood_pressure_systolyc}} / {{yearlyValue.blood_pressure_diastolyc}}</h2> -->
+        <h2>12.2 / 7.3</h2>
+        <h3>Avg. Blood Pressure (Year)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="footsteps-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Steps History</h1>
+</div>
+
+<div class="rows-container no-padding">
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="footsteps-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{dailyValue.steps}}</h2> -->
+        <h2>8217</h2>
+        <h3>Avg. Steps (Day)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="footsteps-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{weeklyValue.steps}}</h2> -->
+        <h2>77231</h2>
+        <h3>Avg. Steps (Week)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="footsteps-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{monthlyValue.steps}}</h2> -->
+        <h2>382712</h2>
+        <h3>Avg. Steps (Month)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="footsteps-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{yearlyValue.steps}}</h2> -->
+        <h2>42837834</h2>
+        <h3>Avg. Steps (Year)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="title-container">
+  <div class="title-container-diamond">
+    <div>
+      <ion-icon name="golf-outline"></ion-icon>
+    </div>
+  </div>
+  <h1>Distance History (Km)</h1>
+</div>
+
+<div class="rows-container">
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="golf-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{dailyValue.distance / 1000}}</h2> -->
+        <h2>4.32</h2>
+        <h3>Avg. Distance (Day)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="golf-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{weeklyValue.distance / 1000}}</h2> -->
+        <h2>23.11</h2>
+        <h3>Avg. Distance (Week)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-left">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="golf-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{monthlyValue.distance / 1000}}</h2> -->
+        <h2>116.33</h2>
+        <h3>Avg. Distance (Month)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="square-right">
+
+    <div class="square-inner">
+
+      <div class="achievement-diamond-container">
+        <ion-icon name="golf-outline"></ion-icon>
+        <div class="achievement-diamond-left">
+        </div>
+        <div class="achievement-diamond-right">
+        </div>
+      </div>
+
+      <div class="stat-info-container">
+        <!-- <h2>{{yearlyValue.distance / 1000}}</h2> -->
+        <h2>387.22</h2>
+        <h3>Avg. Distance (Year)</h3>
+      </div>
+
+      <div class="row-progress-bar-bg">
+        <div class="row-progress-bar achievement-bg"
+             [ngStyle]="{ width: '50%' }">
+             <!-- [ngStyle]="{ width: calculateProgressBar(i) + '%', background: 'linear-gradient(0deg, hsl(276deg, 100%, ' +  calculateGradientColorDarkness(100, 60, achievement.id, achievement.target) + '%) 0%, hsl(294deg, 61%, ' +  calculateGradientColorDarkness(70, 30, achievement.id, achievement.target) + '%) 100%)' }"> -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

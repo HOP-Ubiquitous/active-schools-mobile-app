@@ -10,7 +10,7 @@
       <div>
         <a routerLink="/settings">
           <!-- <ion-img [src]="'assets/settings.svg'" class="ion-left-button"></ion-img> -->
-          <ion-icon name="settings" class="ion-left-button"></ion-icon>
+          <ion-icon name="settings-outline" class="ion-left-button"></ion-icon>
         </a>
       </div>
 
@@ -27,124 +27,72 @@
   </div>
 
   <div class="profile-user-container">
-    <div class="profile-user-level" routerLink="/evolution">
+    <div class="profile-user-level" (click)="goToEvolution()">
 
       <div class="profile-user-info-button-container">
-        <ion-icon name="information-circle"></ion-icon>
+        <span>3</span>
+        <!-- <ion-icon name="information-circle"></ion-icon> -->
       </div>
 
       <div class="profile-user-level-container">
 
-        <img src="assets/icon/missions_icons/profile-frame.svg">
+        <!-- <img src="assets/icon/missions_icons/profile-frame.svg"> -->
 
         <div class="profile-user-level-bar"></div>
 
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
-            <img src="assets/icon/missions_icons/profile-image.svg">
+            <!-- <img src="assets/icon/missions_icons/profile-image.svg"> -->
+            <img src="{{selectedHead}}">
           </div>
         </div>
 
       </div>
 
-      <div class="profile-user-level-number-container">
-        <div class="profile-user-level-number-container-inner">
-          <div class="profile-user-level-number-container-bg-left"></div>
-          <div class="profile-user-level-number-container-bg-right"></div>
-        </div>
-        <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
-      </div>
-
     </div>
+
+  </div>
+
+  <div class="profile-main-level-container" (click)="goToEvolution()">
+
+    <div class="profile-user-level-number-container">
+      <div class="profile-user-level-number-container-inner">
+        <div class="profile-user-level-number-container-bg-left"></div>
+        <div class="profile-user-level-number-container-bg-right"></div>
+      </div>
+      <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
+    </div>
+
+    <div class="profile-user-level-customize-arrow"></div>
+
+    <div class="profile-user-level-customize-button">
+      <span>Customize Avatar</span>
+    </div>
+
   </div>
 
   <div class="profile-stats-container">
 
-    <div class="zig-zag-top"></div>
+    <div class="team-main-tabs-container">
 
-    <div class="challenge-expand-button-container daily-primary-button"
-      [ngClass]="{ 'daily-primary-button-active' : showDailyChallenges }"
-      (click)="showDailyChallenges = true; showAchievements = false">
-      <span>Daily Challenges</span>
-    </div>
-
-    <div class="challenge-expand-button-container challenge-second-button"
-      [ngClass]="{ 'challenge-second-button-active' : showAchievements }"
-      (click)="showAchievements = true; showDailyChallenges = false">
-      <span>Achievements</span>
-    </div>
-
-    <div class="rows-container" *ngIf="showDailyChallenges">
-
-      <div class="row" (click)="getReward()" *ngFor="let achievement of achievements; index as i">
-        <div class="row-left-container">
-          <div class="achievement-diamond-container">
-            <img src="{{achievement.icon}}">
-            <div class="achievement-diamond-left daily-diamond-left"></div>
-            <div class="achievement-diamond-right daily-diamond-right"></div>
-          </div>
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text">{{achievement.title}}</span>
-            <span class="row-right-top-right-text">{{achievement.reward}} xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar" [ngStyle]="{ width: calculateProgressBar(achievement) + '%' }"
-                [ngClass]="{ 'row-progress-bar-100' : successReward }">
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="team-main-tab"
+           [ngClass]="{ 'team-main-tab-active' : selectedTab === 'daily' }"
+           (click)="showTabContain('daily')"
+           routerLink="/tabs/achievements/daily-challenges-list">
+        <ion-icon name="star-outline"></ion-icon>
       </div>
-
-    </div>
-
-
-
-    <div class="rows-container" *ngIf="showAchievements">
-
-      <div class="row" (click)="getReward()" *ngFor="let achievement of achievements; index as i">
-        <div class="row-left-container">
-          <div class="achievement-diamond-container">
-            <img src="{{achievement.icon}}">
-            <div class="achievement-diamond-left"></div>
-            <div class="achievement-diamond-right"></div>
-          </div>
-        </div>
-        <div class="row-right-container">
-          <div class="row-right-top-container">
-            <span class="row-right-top-left-text achievement-color">{{achievement.title}}</span>
-            <span class="row-right-top-right-text achievement-color">{{achievement.reward}} xp</span>
-          </div>
-          <div class="row-right-bottom-container">
-            <div class="row-progress-bar-bg">
-              <div class="row-progress-bar achievement-bg"
-                [ngStyle]="{ width: calculateProgressBar(achievement) + '%' }"
-                [ngClass]="{ 'row-progress-bar-100' : successReward }">
-              </div>
-            </div>
-          </div>
-        </div>
+  
+      <div class="team-main-tab"
+           [ngClass]="{ 'team-main-tab-active' : selectedTab === 'achievement' }"
+           (click)="showTabContain('achievement')"
+           routerLink="/tabs/achievements/achievements-list">
+        <ion-icon name="ribbon-outline"></ion-icon>
       </div>
-
+  
     </div>
+
+    <router-outlet class="outlet" name="achievements"></router-outlet>
 
   </div>
 
 </ion-content>
-
-<div class="reward-container" *ngIf="openRewardWindow">
-
-  <div class="reward-container-inner">
-    <img class="reward-diamond" src="assets/icon/challenge-reward.svg">
-
-    <div class="reward-tag-container">
-      <img class="reward-tag" src="assets/icon/challenge-tag.svg">
-      <span>1000</span>
-    </div>
-
-  </div>
-
-</div>

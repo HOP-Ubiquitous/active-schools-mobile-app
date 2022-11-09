@@ -10,13 +10,15 @@ import { NewsService } from '../../services/news/news.service';
 export class SingleNewPage implements OnInit {
   selectedNew: any;
 
-  constructor(private newsService: NewsService) { }
+  constructor(
+    private newsService: NewsService
+  ) { }
 
   ngOnInit() {
     this.getSelectedNew();
   }
 
-  getSelectedNew() {
+  getSelectedNew = () => {
     this.selectedNew = this.newsService.selectedNew;
   }
 

@@ -3,6 +3,29 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  /** CUSTOM **/
+  --primary-orange: #ff6f00;
+  --primary-green: #00a195;
+  --primary-violet-map: #a483c9;
+  --primary-violet: #d58cff;
+  --primary-red: #dc3545;
+
+  --primary-gradient-orange-light: rgba(255, 111, 0, 1);
+  --primary-gradient-orange-dark: rgba(166, 72, 0, 1);
+  --second-gradient-orange-light: rgba(255, 174, 112, 1);
+  --second-gradient-orange-dark: rgba(207, 89, 0, 1);
+
+  --primary-gradient-green-light: rgba(0, 161, 149, 1);
+  --primary-gradient-green-dark: rgba(0, 81, 75, 1);
+  --second-gradient-green-light: rgba(49, 178, 168, 1);
+  --second-gradient-green-dark: rgba(0, 121, 112, 1);
+
+  --primary-gradient-violet-light: rgba(187, 85, 255, 1);
+  --primary-gradient-violet-dark: rgba(129, 34, 140, 1);
+  --second-gradient-violet-light: rgba(213, 140, 255, 1);
+  --second-gradient-violet-dark: rgba(129, 67, 200, 1);
+
   /** primary **/
   --ion-color-primary: #ff6f00;
   --ion-color-primary-rgb: 56, 128, 255;

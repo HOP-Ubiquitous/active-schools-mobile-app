@@ -1,0 +1,348 @@
+.title-container {
+  width: 100%;
+  height: 30px;
+  margin: 20px auto;
+  position: relative;
+
+  .title-container-diamond {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+
+    div {
+      height: 100%;
+      width: 100%;
+      background: var(--primary-green);
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      ion-icon {
+        color: #fff;
+        font-size: 12px;
+      }
+    }
+  }
+
+  h1 {
+    display: block;
+    width: calc(100% - 30px);
+    height: 30px;
+    font-weight: 800;
+    color: var(--primary-green);
+    font-size: 14px;
+    line-height: 30px;
+    margin: 0;
+    padding-left: 5px;
+    float: right;
+  }
+
+  ::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 15px);
+    height: 1px;
+    background: var(--primary-green);
+    bottom: 0;
+    left: 15px;
+  }
+}
+
+.rows-container {
+  width: 100%;
+  height: auto;
+  padding-bottom: 60px;
+
+  .row {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+
+    .row-left-container {
+      height: 40px;
+      width: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      .achievement-diamond-container {
+        width: 30px;
+        height: 30px;
+        -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          height: 12px;
+          width: 12px;
+          object-fit: contain;
+          object-position: center;
+          z-index: 1;
+        }
+
+        .achievement-diamond-left {
+          width: 15px;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: var(--primary-gradient-violet-light);
+          background: linear-gradient(
+            180deg,
+            var(--primary-gradient-violet-light) 0%,
+            var(--primary-gradient-violet-dark) 100%
+          );
+        }
+
+        .achievement-diamond-right {
+          width: 15px;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+          background: var(--second-gradient-violet-light);
+          background: linear-gradient(
+            180deg,
+            var(--second-gradient-violet-light) 0%,
+            var(--second-gradient-violet-dark) 100%
+          );
+        }
+
+        .daily-diamond-left {
+          background: var(--primary-gradient-green-light);
+          background: linear-gradient(
+            0deg,
+            var(--primary-gradient-green-light) 0%,
+            var(--primary-gradient-green-dark) 100%
+          );
+        }
+
+        .daily-diamond-right {
+          background: var(--second-gradient-green-light);
+          background: linear-gradient(
+            0deg,
+            var(--second-gradient-green-light) 0%,
+            var(--second-gradient-green-dark) 100%
+          );
+        }
+      }
+    }
+
+    .row-right-container {
+      width: calc(100% - 30px);
+      height: 40px;
+      padding-left: 5px;
+
+      .row-right-top-container {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .row-right-top-left-text {
+          width: 75%;
+          font-size: 10px;
+          text-align: left;
+          line-height: 20px;
+          color: var(--primary-green);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          margin-top: 10px;
+        }
+
+        .row-right-top-right-text {
+          font-size: 10px;
+          font-weight: 800;
+          text-align: right;
+          line-height: 20px;
+          color: var(--primary-green);
+          margin-top: 10px;
+        }
+
+        .achievement-color {
+          color: var(--primary-violet);
+        }
+      }
+
+      .row-right-bottom-container {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        align-items: center;
+
+        .row-progress-bar-bg {
+          width: 100%;
+          height: 1px;
+          background: #dedede;
+          position: relative;
+
+          .row-progress-bar {
+            // width: 30%;
+            height: 1px;
+            background: var(--primary-green);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 0.5s ease all;
+          }
+
+          .achievement-bg {
+            background: var(--primary-violet);
+          }
+
+          .row-progress-bar-100 {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.reward-container {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  animation: 5s ease forwards;
+  animation-name: reward-bg-appear;
+
+  .reward-container-inner {
+    height: 200px;
+    width: auto;
+    position: relative;
+
+    .reward-diamond {
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      object-position: center;
+      position: relative;
+      animation: 5s ease forwards;
+      animation-name: reward-diamond-appear;
+    }
+
+    .reward-tag-container {
+      width: 90%;
+      height: auto;
+      margin: auto 5%;
+      position: relative;
+      top: -50px;
+      text-align: center;
+      animation: 5s ease forwards;
+      animation-name: reward-tag-appear;
+
+      span {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary-green);
+        position: relative;
+        top: -41px;
+      }
+    }
+  }
+}
+
+@keyframes reward-bg-appear {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes reward-diamond-appear {
+  0% {
+    top: 40px;
+    opacity: 0;
+  }
+
+  10% {
+    top: 40px;
+    opacity: 0;
+  }
+
+  20% {
+    top: 0;
+    opacity: 1;
+  }
+
+  80% {
+    top: 0;
+    opacity: 1;
+  }
+
+  90% {
+    top: 40px;
+    opacity: 0;
+  }
+
+  100% {
+    top: 40px;
+    opacity: 0;
+  }
+}
+
+@keyframes reward-tag-appear {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  20% {
+    top: 0;
+    opacity: 0;
+  }
+
+  30% {
+    top: -50px;
+    opacity: 1;
+  }
+
+  70% {
+    top: -50px;
+    opacity: 1;
+  }
+
+  80% {
+    top: 0;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 0;
+  }
+}

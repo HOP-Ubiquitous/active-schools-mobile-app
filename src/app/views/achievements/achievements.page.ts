@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
-import { AchievementsService } from '../../services/achievements/achievements.service';
+// import { AchievementsService } from '../../services/achievements/achievements.service';
+// import { DailyChallengesService } from '../../services/daily-challenges/daily-challenges.service';
+
+import * as items from '../../services/items/items-constants';
 
 @Component({
   selector: 'app-achievements',
@@ -13,10 +17,21 @@ export class AchievementsPage implements OnInit {
   showDailyChallenges: boolean;
   showAchievements: boolean
   userInfo: any;
-  dailyAchievements: any;
+  dailyChallenges: any;
+  selectedDailyChallenges: any;
   achievements: any;
+  selectedTab: any;
 
-  constructor(private loginService: LoginService, private achievementsService: AchievementsService) {
+  items: any;
+  heads: any;
+  bodies: any;
+  selectedBody: any;
+  selectedHead: any;
+
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+  ) {
     this.successReward = false;
     this.openRewardWindow = false;
   }
@@ -26,46 +41,52 @@ export class AchievementsPage implements OnInit {
     this.showAchievements = false;
     this.userInfo = this.loginService.loggedUser;
 
-    this.achievementsService.getDailyAchievements();
-    this.dailyAchievements = this.achievementsService.dailyAchievementsData;
+    this.selectedTab = 'daily';
 
-    this.achievementsService.getAchievements();
-    this.achievements = this.achievementsService.achievementsData;
+    this.userInfo = this.loginService.loggedUser;
 
+    this.items = items.EVOLUTION_ITEMS;
+    this.heads = items.AVATAR_HEADS;
+    this.bodies = items.AVATAR_BODIES;
+    this.getAvatar();
   }
 
-  calculateProgressBar(achievement) {
+  //-- Load Avatar Info --//
+
+  getAvatar = () => {
 
     const vm = this;
+    let headId = this.userInfo.avatar.avatar_head_id;
+    let bodyId = this.userInfo.avatar.avatar_body_id;
     let i = 0;
-    let totalExp;
+    let x = 0;
 
-    while (i < vm.userInfo.avatar.expInfo.length) {
-      if (vm.userInfo.avatar.expInfo[i].category === achievement.category) {
-        totalExp = vm.userInfo.avatar.expInfo[i].totalExp;
+    while (i < this.heads.length) {
+      if (headId === vm.heads[i].id) {
+        vm.selectedHead = vm.heads[i].icon;
         break;
       }
       i++;
-    }
+    };
 
-    if (totalExp < achievement.target) {
-      return totalExp * 100 / achievement.target;
-    } else {
-      return 100;
-    }
+    while (x < this.bodies.length) {
+      if (bodyId === vm.bodies[x].id) {
+        vm.selectedBody = vm.bodies[x].icon;
+        break;
+      }
+      x++;
+    };
 
   }
 
-  getReward() {
+  // -- -- //
 
-    const vm = this;
-    this.successReward = true;
-    this.openRewardWindow = true;
+  showTabContain = (tab) => {
+    this.selectedTab = tab;
+  }
 
-    setTimeout(function () {
-      vm.openRewardWindow = false;
-    }, 5000);
-
+  goToEvolution = () => {
+    this.router.navigate(['/tabs/evolution']);
   }
 
 }

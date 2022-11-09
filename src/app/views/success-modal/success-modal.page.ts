@@ -8,11 +8,14 @@ import {ModalController} from "@ionic/angular";
 })
 export class SuccessModalPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController
+  ) { }
 
   ngOnInit() {
   }
-  dismiss(){
+
+  dismiss = () =>{
     this.modalCtrl.dismiss();
   }
 }

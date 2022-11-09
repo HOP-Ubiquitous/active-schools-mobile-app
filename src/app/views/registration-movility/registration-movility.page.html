@@ -1,0 +1,114 @@
+<ion-header class="main-nav-parent">
+  <ion-toolbar class="main-nav-container">
+    <div class="main-nav">
+
+      <div>
+        <ion-img [src]="'assets/active-schools-icon.svg'" class="ion-left-button">
+        </ion-img>
+      </div>
+
+      <div>
+        <a (click)="goToLogin()">
+          <ion-icon name="close-outline" class="ion-left-button"></ion-icon>
+        </a>
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="menu-line-container">
+
+  <div class="menu-line-bg">
+    <div class="menu-line" [ngStyle]="{ 'width' : '40%' }">
+    </div>
+  </div>
+
+  <div class="menu-diamond-group-container">
+
+    <div class="menu-diamond-container">
+      <div class="menu-button menu-button-active"></div>
+    </div>
+
+    <div class="menu-diamond-container">
+      <div class="menu-button menu-button-active"></div>
+    </div>
+
+    <div class="menu-diamond-container">
+      <div class="menu-button menu-button-active"></div>
+    </div>
+    
+    <div class="menu-diamond-container">
+      <div class="menu-button"></div>
+    </div>
+
+    <div class="menu-diamond-container">
+      <div class="menu-button"></div>
+    </div>
+
+    <div class="menu-diamond-container">
+      <div class="menu-button"></div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <div class="title-container">
+    <div class="title-container-diamond">
+      <div>
+        <!-- TODO - Crear icono para Customize Avatar -->
+        <ion-icon name="document-text-outline"></ion-icon>
+      </div>
+    </div>
+    <h1>Movility Info</h1>
+  </div>
+
+  <form class="form-registration">
+
+    <ion-item lines="full" class="ion-item-form">
+      <ion-label position="floating">Distance to school? (Km)</ion-label>
+      <ion-input type="text" [(ngModel)]="registerData.distance" name="distance" required></ion-input>
+    </ion-item>
+
+    <ion-col class="ion-question-text">
+      <p>Do you walk to school?</p>
+    </ion-col>
+
+    <ion-row class="ask-question-container">
+      <ion-col class="yes-container">
+        <button (click)="updateTransport(true)" [ngClass]="{ 'transport-button-active': walk === true }" type="submit" expand="block" class="next-button">Yes</button>
+      </ion-col>
+
+      <ion-col class="yes-container">
+        <button (click)="updateTransport(false)" [ngClass]="{ 'transport-button-active': walk === false }" type="submit" expand="block" class="next-button">No</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-item lines="full" class="ion-item-form" *ngIf="!walk && walk !== undefined">
+      <ion-label position="floating">Transport</ion-label>
+      <ion-select [(ngModel)]="registerData.transport" name="transport">
+        <ion-select-option value="bike">Bike</ion-select-option>
+        <ion-select-option value="bus">Bus</ion-select-option>
+        <ion-select-option value="car">Car</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="next-container">
+        <ion-button (click)="saveMovilityInfo()" type="submit" expand="block" class="next-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          Next
+        </ion-button>
+        <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          Back
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

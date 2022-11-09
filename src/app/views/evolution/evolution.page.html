@@ -8,7 +8,7 @@
       </div>
 
       <div>
-        <a routerLink="/tabs/profile">
+        <a routerLink="/tabs/profile/stats">
           <ion-icon name="close" class="ion-left-button"></ion-icon>
         </a>
       </div>
@@ -19,6 +19,15 @@
 
 <ion-content [fullscreen]="true">
 
+  <div class="title-container">
+    <div class="title-container-diamond">
+      <div>
+        <ion-icon name="happy-outline"></ion-icon>
+      </div>
+    </div>
+    <h1>Customize Avatar</h1>
+  </div>
+
   <div class="profile-user-container">
     <div class="profile-user-level">
 
@@ -28,16 +37,74 @@
 
       <div class="profile-user-level-container">
 
-        <!-- <img src="assets/icon/missions_icons/profile-frame.svg"> -->
+        <div class="profile-user-level-customization-container">
+          
+          <div class="profile-user-level-customize previous-custom"
+               [ngClass]="{ 'profile-user-level-customize-unactive' : hidePrevHeadButton }"
+               (click)="changeHeadDecorator(-2)">
+            <div class="profile-user-level-customize-button">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </div>
 
-        <!-- <div class="profile-user-level-bar"></div> -->
+            <div class="profile-user-level-customize-button-bg" *ngIf="!hidePrevHeadButton"></div>
+
+          </div>
+
+          <div class="profile-user-level-customize previous-custom"
+               [ngClass]="{ 'profile-user-level-customize-unactive' : hidePrevBodyButton }"
+               (click)="changeBodyDecorator(-2)">
+            <div class="profile-user-level-customize-button">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </div>
+
+            <div class="profile-user-level-customize-button-bg" *ngIf="!hidePrevBodyButton"></div>
+
+          </div>
+
+        </div>
 
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
-            <img src="assets/icon/missions_icons/profile-image.svg">
+
+            <div class="profile-user-image-body">
+
+              <div class="profile-user-image-head">
+                <img src="{{selectedHead}}">
+              </div>
+
+              <img src="{{selectedBody}}">
+              
+            </div>
+
           </div>
 
           <div class="profile-user-image-shadow"></div>
+        </div>
+
+        <div class="profile-user-level-customization-container">
+          
+          <div class="profile-user-level-customize next-custom"
+               [ngClass]="{ 'profile-user-level-customize-unactive' : hideNextHeadButton }"
+               (click)="changeHeadDecorator(2)">
+            <div class="profile-user-level-customize-button">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </div>
+
+            <div class="profile-user-level-customize-button-bg" *ngIf="!hideNextHeadButton"></div>
+
+          </div>
+
+          <div class="profile-user-level-customize next-custom"
+               [ngClass]="{ 'profile-user-level-customize-unactive' : hideNextBodyButton }"
+               (click)="changeBodyDecorator(2)">
+            <div class="profile-user-level-customize-button">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </div>
+
+            <div class="profile-user-level-customize-button-bg" *ngIf="!hideNextBodyButton"></div>
+
+          </div>
+
         </div>
 
       </div>
@@ -45,39 +112,85 @@
     </div>
   </div>
 
-  <div class="profile-stats-container">
-
-    <div class="zig-zag-top"></div>
+  <div class="profile-user-level-diamond-container">
 
     <div class="profile-user-level-number-container">
       <div class="profile-user-level-number-container-inner">
         <div class="profile-user-level-number-container-bg-left"></div>
         <div class="profile-user-level-number-container-bg-right"></div>
       </div>
-      <span class="profile-user-level-number-text-container"><span>L.</span>99</span>
+      <span class="profile-user-level-number-text-container"><span>L.</span>{{user.avatar.level}}</span>
+    </div>
+
+  </div>
+
+
+  <div class="profile-stats-container">
+
+    <div class="evolution-items-title">
+        
+      <div class="evolution-item-title-container-side">
+        <div class="evolution-item-title-container-side-diamond">
+          <div>
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="evolution-item-title-container-center">
+
+      </div>
+
+      <div class="evolution-item-title-container-side">
+        <div class="evolution-item-title-container-side-diamond">
+          <div>
+            <ion-icon name="body-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="evolution-items-list-container">
 
-      <div class="evolution-items-line-bg">
-        <div class="evolution-items-line" [ngStyle]="{width: lastItemAchieved * 100 + 'px'}"></div>
-      </div>
+      <div class="evolution-single-item" *ngFor="let item of items; index as i">
 
-      <div class="evolution-items-diamond-group">
-
-        <div class="evolution-item-diamond-container" *ngFor="let item of items; index as i">
-          <div class="evolution-item-diamond" [ngClass]="{ 'evolution-item-diamond-active' : item.achieved === true }">
-            <img src="{{item.icon}}">
+        <div class="evolution-single-item-container-side"
+             [ngClass]="{ 'evolution-last-single-item' : i >= items.length - 2,
+                          'evolution-single-item-left-active' : i <= user.avatar.level - 1,
+                          'last-left-diamond-active': checkLastDiamondActive(i, user.avatar.level, 'left') }"
+             *ngIf="i <= items.length - 1">
+          <div class="evolution-single-item-container-side-diamond"
+               [ngClass]="{ 'evolution-single-diamond-unactive' : i >= user.avatar.level,
+                            'diamond-head-seleted' : headDecoratorArray[i] }">
+            <div *ngIf="i % 2 === 0">
+              <!-- <ion-icon name="person-outline"></ion-icon> -->
+            </div>
+          </div>
+        </div>
+  
+        <div class="evolution-single-item-container-center">
+            <div [ngClass]="{ 'container-center-head-selected' : headDecoratorArray[i] === true,
+                              'container-center-body-selected' : bodyDecoratorArray[i] === true }">
+              <p>{{item.name}}</p>
+            </div>
+        </div>
+  
+        <div class="evolution-single-item-container-side"
+             [ngClass]="{ 'evolution-last-single-item' : i === items.length - 1,
+                          'evolution-single-item-right-active' : i <= user.avatar.level - 1,
+                          'last-right-diamond-active': checkLastDiamondActive(i, user.avatar.level, 'right') }">
+          <div class="evolution-single-item-container-side-diamond"
+               [ngClass]="{ 'evolution-single-diamond-unactive' : i >= user.avatar.level,
+                            'diamond-body-seleted' : bodyDecoratorArray[i] }">
+            <div *ngIf="i % 2 !== 0">
+              <!-- <ion-icon name="body-outline"></ion-icon> -->
+            </div>
           </div>
         </div>
 
       </div>
 
-    </div>
-
-    <div class="evolution-item-achieved-container">
-      <span>Last Achieved Item</span>
-      <span class="evolution-item-achieved-name">{{items[lastItemAchieved].name}}</span>
     </div>
 
   </div>

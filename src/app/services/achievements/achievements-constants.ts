@@ -144,9 +144,3 @@ export const ACHIEVEMENTS = [
         reward: 15000
     },
 ];
-
-export const DAILY_ACHIEVEMENTS = [
-    {
-
-    }
-]
