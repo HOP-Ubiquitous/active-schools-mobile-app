@@ -22,7 +22,7 @@
   <div class="menu-line-container">
 
     <div class="menu-line-bg">
-      <div class="menu-line" [ngStyle]="{ 'width' : '80%' }">
+      <div class="menu-line" [ngStyle]="{ 'width': 100 / 3 * 3 + '%'}">
       </div>
     </div>
   
@@ -31,15 +31,19 @@
       <div class="menu-diamond-container">
         <div class="menu-button menu-button-active"></div>
       </div>
-  
-      <div class="menu-diamond-container">
-        <div class="menu-button menu-button-active"></div>
-      </div>
 
       <div class="menu-diamond-container">
         <div class="menu-button menu-button-active"></div>
       </div>
   
+      <!-- <div class="menu-diamond-container">
+        <div class="menu-button menu-button-active"></div>
+      </div> -->
+
+      <!-- <div class="menu-diamond-container">
+        <div class="menu-button menu-button-active"></div>
+      </div> -->
+  
       <div class="menu-diamond-container">
         <div class="menu-button menu-button-active"></div>
       </div>
@@ -48,9 +52,9 @@
         <div class="menu-button menu-button-active"></div>
       </div>
 
-      <div class="menu-diamond-container">
+      <!-- <div class="menu-diamond-container">
         <div class="menu-button"></div>
-      </div>
+      </div> -->
   
     </div>
   
@@ -63,7 +67,7 @@
         <ion-icon name="happy-outline"></ion-icon>
       </div>
     </div>
-    <h1>Customize Avatar</h1>
+    <h1>{{language.AVATAR.customizeAvatar}}</h1>
   </div>
 
   <div class="profile-user-container">
@@ -142,12 +146,12 @@
     <ion-col class="next-container">
       <ion-button (click)="saveAvatarInfo()" type="submit" expand="block" class="next-button">
         <ion-icon name="chevron-forward-outline"></ion-icon>
-        Next
+        {{language.COMMON.next}}
       </ion-button>
-      <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
+      <!-- <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
         <ion-icon name="chevron-back-outline"></ion-icon>
-        Back
-      </ion-button>
+        {{language.COMMON.back}}
+      </ion-button> -->
     </ion-col>
   </ion-row>
 

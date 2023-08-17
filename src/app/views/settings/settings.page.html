@@ -21,34 +21,34 @@
 
   <ion-img [src]="'assets/active-schools.svg'" class="ion-logo"></ion-img>
   <ion-col class="ion-principal-text">
-    <p>settings</p>
+    <p>{{language.SETTINGS.settings}}</p>
   </ion-col>
 
   <ion-list>
 
-    <!-- TODO - Añadir label con título (Steps Number y Sleeping Hours) y valor seleccionado -->
+    <ion-row>
+      <ion-col class="language-container">
 
-    <!-- <div class="label-item-container">
-      <ion-label range-left>Steps Number</ion-label>
-      <ion-label range-rigth>10000</ion-label>
-    </div> -->
-    <ion-item>
-      <ion-range min="2000" max="30000" step="100" value="10000">
-        <ion-icon size="small" slot="start" name="walk"></ion-icon>
-        <ion-icon slot="end" name="walk"></ion-icon>
-      </ion-range>
-    </ion-item>
+        <div (click)="selectLanguage('en')"
+             class="ion-button-language"
+             [ngClass]="{ 'ion-button-language-selected' : languageService.english }">
+          <ion-img [src]="'assets/uk.png'"></ion-img>
+        </div>
 
-    <!-- <div class="label-item-container">
-      <ion-label range-left>Sleeping Hours</ion-label>
-      <ion-label range-rigth>10</ion-label>
-    </div> -->
-    <ion-item>
-      <ion-range min="5" max="12" step="1" value="8">
-        <ion-icon size="small" slot="start" name="alarm"></ion-icon>
-        <ion-icon slot="end" name="alarm"></ion-icon>
-      </ion-range>
-    </ion-item>
+        <div (click)="selectLanguage('el')"
+             class="ion-button-language"
+             [ngClass]="{ 'ion-button-language-selected' : languageService.greece }">
+          <ion-img [src]="'assets/greece.png'"></ion-img>
+        </div>
+
+        <div (click)="selectLanguage('es')"
+             class="ion-button-language"
+             [ngClass]="{ 'ion-button-language-selected' : languageService.spanish }">
+          <ion-img [src]="'assets/spain.png'"></ion-img>
+        </div>
+
+      </ion-col>
+    </ion-row>
 
   </ion-list>
 
@@ -56,22 +56,26 @@
 
     <form class="form-login">
 
-      <ion-row>
+      <!-- <ion-row>
         <ion-col class="enter-container">
           <ion-button type="submit" routerLink="/tabs/route" expand="block" class="ion-button-enter">
-            Edit Profile
+            {{language.SETTINGS.editProfile}}
+          </ion-button>
+        </ion-col>
+      </ion-row> -->
+
+      <ion-row>
+        <ion-col class="enter-container">
+          <ion-button type="submit"
+                      (click)="deleteUser()"
+                      expand="block"
+                      class="ion-button-enter ion-button-delete">
+            {{language.SETTINGS.deleteProfile}}
           </ion-button>
         </ion-col>
       </ion-row>
 
-      <ion-row>
-        <ion-col class="enter-container">
-          <ion-button type="submit" routerLink="/tabs/route" expand="block"
-            class="ion-button-enter ion-button-delete">
-            Delete Profile
-          </ion-button>
-        </ion-col>
-      </ion-row>
+      <!-- {{language.SETTINGS.deleteQuestion}} -->
 
       <!-- <ion-row>
         <ion-col class="enter-container">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login/login.service';
-import { TeamsService } from 'src/app/services/teams/teams.service';
+import { LanguageService } from '../../services/language/language.service';
+import { UserService } from '../../services/users/users.service';
+import { TeamsService } from '../../services/teams/teams.service';
 
 @Component({
   selector: 'app-teams',
@@ -12,14 +13,17 @@ export class TeamsPage implements OnInit {
   
   loggedUser: any;
   selectedTab: any;
+  language: any;
 
   constructor(
-    private loginService: LoginService,
+    private languageService: LanguageService,
+    private userService: UserService,
     private teamsService: TeamsService
   ) { }
 
   ngOnInit() {
-    this.loggedUser = this.loginService.loggedUser;
+    this.language = this.languageService.language;
+    this.loggedUser = this.userService.loggedUser;
     this.selectedTab = this.teamsService.selectedTab;
   }
 

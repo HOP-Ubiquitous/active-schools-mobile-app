@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import { ModalController } from "@ionic/angular";
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-new-details',
@@ -8,11 +9,19 @@ import {ModalController} from "@ionic/angular";
 })
 export class NewDetailsPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private languageService: LanguageService
+  ) { }
+
   data: any;
   selectedPost: any;
+  language: any;
 
   ngOnInit() {
+    
+    this.language = this.languageService.language;
+
     fetch('./assets/json/news.json').then(res => res.json())
       .then(json => {
         this.data = json;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,9 +9,15 @@ import { Router } from '@angular/router';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private router: Router) { }
+  language: any;
+
+  constructor(
+    private router: Router,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
+    this.language = this.languageService.language;
   }
 
   goToRoutes = () => {
@@ -21,13 +28,13 @@ export class TabsPage implements OnInit {
     this.router.navigate(['/tabs/profile/stats']);
   }
 
-  goToAchievements = () => {
-    this.router.navigate(['/tabs/achievements/daily-challenges-list']);
-  }
+  // goToAchievements = () => {
+  //   this.router.navigate(['/tabs/achievements/daily-challenges-list']);
+  // }
 
-  goToTeams = () => {
-    this.router.navigate(['/tabs/teams/search-teams']);
-  }
+  // goToTeams = () => {
+  //   this.router.navigate(['/tabs/teams/search-teams']);
+  // }
 
   goToNews = () => {
     this.router.navigate(['/tabs/news']);

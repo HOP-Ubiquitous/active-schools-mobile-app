@@ -4,14 +4,14 @@
       <ion-icon name="search-outline"></ion-icon>
     </div>
   </div>
-  <h1>Search Teams</h1>
+  <h1>{{language.SEARCH_TEAMS.searchTeams}}</h1>
 </div>
 
 <form class="form-registration">
 
   <ion-item lines="full" class="ion-item-form">
     <ion-label position="floating">
-      Search
+      {{language.SEARCH_TEAMS.search}}
     </ion-label>
     <ion-input type="text" (ionChange)="searchTeam()" [(ngModel)]="search" name="search"></ion-input>
   </ion-item>
@@ -39,7 +39,7 @@
       
       <div class="single-team-center">
         <h3>{{team.name}}</h3>
-        <h5>Members: {{team.members.length}} / {{team.max_members}}</h5>
+        <h5>{{language.TEAM_RANKING.members}}: {{team.members.length}} / {{team.max_members}}</h5>
       </div>
 
       <div class="single-team-right" (click)="addUserToTeam(loggedUser.id, team.team_id)">

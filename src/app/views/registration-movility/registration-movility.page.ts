@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../services/register/register.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-registration-movility',
@@ -10,19 +11,23 @@ import { RegisterService } from '../../services/register/register.service';
 export class RegistrationMovilityPage implements OnInit {
   walk: false;
   registerData: {};
+  language: any;
 
   constructor(
     private router: Router,
+    private languageService: LanguageService,
     private registerService: RegisterService
   ) { }
 
   ngOnInit() {
+    
+    this.language = this.languageService.language;
     this.registerData = {
       transport: '',
       distance: ''
     }
-
     this.walk = undefined;
+
   }
 
   saveMovilityInfo = () => {

@@ -1,0 +1,7 @@
+CONFIGURACIÓN PARA DEBUG EN CONFIG.XML
+
+<preference name="AndroidXEnabled" value="true" />
+
+<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:debuggable="true" />
+</edit-config>

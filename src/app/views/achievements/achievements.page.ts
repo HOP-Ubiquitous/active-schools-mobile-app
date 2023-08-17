@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login/login.service';
-// import { AchievementsService } from '../../services/achievements/achievements.service';
-// import { DailyChallengesService } from '../../services/daily-challenges/daily-challenges.service';
+import { UserServiceData } from '../../services/users/users.service_data';
+import { LanguageService } from '../../services/language/language.service';
 
-import * as items from '../../services/items/items-constants';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Component({
   selector: 'app-achievements',
@@ -28,22 +27,26 @@ export class AchievementsPage implements OnInit {
   selectedBody: any;
   selectedHead: any;
 
+  language: any;
+
   constructor(
     private router: Router,
-    private loginService: LoginService,
+    private usersServiceData: UserServiceData,
+    private languageService: LanguageService
   ) {
     this.successReward = false;
     this.openRewardWindow = false;
   }
 
   ngOnInit() {
+
+    this.language = this.languageService.language;
+
     this.showDailyChallenges = true;
     this.showAchievements = false;
-    this.userInfo = this.loginService.loggedUser;
+    this.userInfo = this.usersServiceData.loggedUser;
 
     this.selectedTab = 'daily';
-
-    this.userInfo = this.loginService.loggedUser;
 
     this.items = items.EVOLUTION_ITEMS;
     this.heads = items.AVATAR_HEADS;

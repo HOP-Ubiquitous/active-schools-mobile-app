@@ -7,30 +7,103 @@
 
     <form class="form-login">
       <ion-item class="ion-item-form" lines="full">
-        <ion-label position="floating" class="user-name">User</ion-label>
+        <ion-label position="floating" class="user-name">{{language.LOGIN.user}}</ion-label>
         <ion-input type="text" [(ngModel)]="userData.username" name="username" required></ion-input>
       </ion-item>
 
       <ion-item class="ion-item-form" lines="full">
-        <ion-label position="floating">Password</ion-label>
+        <ion-label position="floating">{{language.COMMON.password}}</ion-label>
         <ion-input type="password" [(ngModel)]="userData.password" name="password" required></ion-input>
       </ion-item>
 
       <ion-row>
         <ion-col class="enter-container">
-          <ion-button type="submit" (click)="login()" expand="block" class="ion-button-enter">Enter
+          <ion-button type="submit" (click)="login()" expand="block" class="ion-button-enter">
+            {{language.LOGIN.enter}}
           </ion-button>
         </ion-col>
       </ion-row>
 
+      <!-- <div class="login-separator">
+        <hr>
+        <span>{{language.LOGIN.or}}</span>
+        <hr>
+      </div>
+
+      <ion-row>
+        <ion-col class="google-container">
+          <div type="submit" (click)="loginWithGoogle()" expand="block" class="ion-button-google">
+            <div class="google-icon-container">
+              <ion-img [src]="'assets/google-icon.png'"></ion-img>
+            </div>
+            {{language.LOGIN.signGoogle}}
+          </div>
+        </ion-col>
+      </ion-row>
+
+        <ion-row>
+        <ion-col class="secondary-text-container google-info">
+          <span class="small-text">
+            {{language.LOGIN.infoGoogle}}
+          </span>
+        </ion-col>
+      </ion-row> -->
+
+      <div class="login-separator google-line">
+        <hr>
+      </div>
+
       <ion-row>
         <ion-col class="secondary-text-container login-footer">
-          <a routerLink="/forgot-password" class="small-text">Forgot your password?</a>
-          <br>
-          <span>·</span>
-          <br>
-          <!-- <a routerLink="/registration" class="small-text">Are you a new user</a> -->
-          <a routerLink="/registration-personal-data" class="small-text">Are you a new user</a>
+          <a routerLink="/forgot-password" class="small-text">{{language.LOGIN.forgotPassword}}</a>
+        </ion-col>
+      </ion-row>
+
+      <div class="login-separator google-line">
+        <hr>
+      </div>
+
+      <ion-row>
+        <ion-col class="secondary-text-container login-footer">  
+          <a routerLink="/registration-credentials" class="small-text">{{language.LOGIN.newUser}}</a>
+        </ion-col>
+      </ion-row>
+
+      <div class="login-separator google-line">
+        <hr>
+      </div>
+
+      <ion-row>
+        <ion-col class="secondary-text-container login-footer">
+          <a href="https://activeschools.hopu.eu/#/privacy_policy" class="small-text">{{language.LOGIN.privacyPolicy}}</a>
+        </ion-col>
+      </ion-row>
+
+      <div class="login-separator google-line">
+        <hr>
+      </div>
+
+      <ion-row>
+        <ion-col class="language-container">
+
+          <div (click)="selectLanguage('en')"
+               class="ion-button-language"
+               [ngClass]="{ 'ion-button-language-selected' : languageService.english }">
+            <ion-img [src]="'assets/uk.png'"></ion-img>
+          </div>
+
+          <div (click)="selectLanguage('el')"
+               class="ion-button-language"
+               [ngClass]="{ 'ion-button-language-selected' : languageService.greece }">
+            <ion-img [src]="'assets/greece.png'"></ion-img>
+          </div>
+
+          <div (click)="selectLanguage('es')"
+               class="ion-button-language"
+               [ngClass]="{ 'ion-button-language-selected' : languageService.spanish }">
+            <ion-img [src]="'assets/spain.png'"></ion-img>
+          </div>
+
         </ion-col>
       </ion-row>
 

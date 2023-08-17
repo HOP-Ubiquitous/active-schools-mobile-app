@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { LanguageService } from '../../services/language/language.service';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
@@ -8,9 +10,17 @@ import { Router } from '@angular/router';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  constructor(private router:Router) { }
+  language: any;
+
+  constructor(
+    private router:Router,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
+
+    this.language = this.languageService.language;
+
   }
 
   goToLogin = () => {

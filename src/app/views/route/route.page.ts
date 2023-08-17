@@ -1,25 +1,34 @@
 import { Component, Pipe, PipeTransform, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+
 import { ModalController, AnimationController, Platform } from '@ionic/angular';
 import * as L from 'leaflet';
-//import 'leaflet-routing-machine';
 import 'leaflet-rotatedmarker';
+
 import 'src/theme/variables.scss';
+
 import { SuccessModalPage } from '../success-modal/success-modal.page';
 //import { Geofence } from '@ionic-native/geofence';
 //import { Push, PushObject, PushOptions } from '@ionic-native/push';
-import { RoutesService } from '../../services/routes/routes.service';
-import { ChallengesService } from '../../services/challenges/challenges.service';
-import { SettingsService } from '../../services/settings/settings.service';
-import { LoginService } from '../../services/login/login.service';
-//import { NotificationsService } from '../../services/notifications/notifications.service';
-import { HealthService } from '../../services/health/health.service';
 
+import { LanguageService } from '../../services/language/language.service';
+import { RoutesService } from '../../services/routes/routes.service';
+import { RoutesServiceApi } from '../../services/routes/routes.service_api';
+import { ChallengesService } from '../../services/challenges/challenges.service';
+import { ChallengesServiceApi } from '../../services/challenges/challenges.service_api';
+import { SettingsService } from '../../services/settings/settings.service';
+import { UserServiceApi } from '../../services/users/users.service_api';
+
+//import { NotificationsService } from '../../services/notifications/notifications.service';
+
+import { HealthService } from '../../services/health/health.service';
 import { NativeAudio } from '@awesome-cordova-plugins/native-audio';
-import { DeviceOrientation, DeviceOrientationCompassHeading } from '@awesome-cordova-plugins/device-orientation';
+
+import { DeviceOrientation, DeviceOrientationCompassHeading } from '@awesome-cordova-plugins/device-orientation'; //DEPRECATED https://www.w3.org/TR/orientation-event/
+
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
-import * as items from '../../services/items/items-constants';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Pipe({
   name: 'safeUrl'
@@ -85,21 +94,24 @@ export class RoutePage implements PipeTransform, OnInit {
   showVideoDemostration: boolean;
   showCountdown: boolean;
 
+  language: any;
+
   constructor(
     private modalCtrl: ModalController,
     public animationCtrl: AnimationController,
     private platform: Platform,
     private sanitizer: DomSanitizer,
     private geolocation: Geolocation,
+    private languageService: LanguageService,
     private routesService: RoutesService,
+    private routesServiceApi: RoutesServiceApi,
     private challengeService: ChallengesService,
+    private challengeServiceApi: ChallengesServiceApi,
     private settingsService: SettingsService,
-    private loginService: LoginService,
-    //private notificationService: NotificationsService,
+    private userServiceApi: UserServiceApi,
     private healthService: HealthService) {
 
-      // @ts-ignore
-    this.marker = []
+    this.marker = <any>[]
     this.polylinePoints = [];
     this.challengePoints = [];
     this.challengeActive = false;
@@ -112,19 +124,18 @@ export class RoutePage implements PipeTransform, OnInit {
     }
     this.showVideoDemostration = false;
     this.getFirstUserPosition = true;
+    this.userInfo = this.userServiceApi.loggedUser;
+    this.routes = this.routesServiceApi.allRoutes;
+    this.challenges = this.challengeServiceApi.allChallenges;
 
   }
 
   ngOnInit() {
 
     this.routesService.getRoutes();
-    this.routes = this.routesService.routesData;
-
     this.challengeService.getChallenges();
-    this.challenges = this.challengeService.challengesData;
 
     this.settings = this.settingsService.options;
-    this.userInfo = this.loginService.loggedUser;
 
     this.items = items.EVOLUTION_ITEMS;
     this.heads = items.AVATAR_HEADS;
@@ -139,6 +150,8 @@ export class RoutePage implements PipeTransform, OnInit {
     this.getAvatar();
     this.drawMap();
 
+    this.language = this.languageService.language;
+
   }
 
   //-- Preload Audio (Sonar) -- //
@@ -146,7 +159,7 @@ export class RoutePage implements PipeTransform, OnInit {
   loadBeep = () => {
     const vm = this;
 
-    //@ts-ignore
+    // @ts-ignore
     NativeAudio.preloadSimple('beep', '../assets/audio/beep-1.mp3').then(function(response) {
       console.log('Audio Loaded - ' + response);
       vm.audioLoaded = true;
@@ -154,6 +167,7 @@ export class RoutePage implements PipeTransform, OnInit {
       console.log('Audio Error - ' + error);
       vm.audioLoaded = false;
     });
+
   }
 
   // -- -- //
@@ -163,8 +177,17 @@ export class RoutePage implements PipeTransform, OnInit {
   getAvatar = () => {
 
     const vm = this;
-    let headId = this.userInfo.avatar.avatar_head_id;
-    let bodyId = this.userInfo.avatar.avatar_body_id;
+    let headId: any;
+    let bodyId: any;
+
+    if (this.userInfo.avatar === undefined) {
+      headId = 0;
+      bodyId = 0;
+    } else {
+      headId = this.userInfo.avatar.avatar_head_id;
+      bodyId = this.userInfo.avatar.avatar_body_id;
+    }
+    
     let i = 0;
     let x = 0;
 
@@ -217,12 +240,18 @@ export class RoutePage implements PipeTransform, OnInit {
     this.challengeGroup.addTo(routeMap);
     this.userPointGroup.addTo(routeMap);
 
+    this.polylineGroup.fitbound
+
     setTimeout(() => {
       routeMap.invalidateSize();
     }, 0);
 
     this.routeMap = routeMap;
-    this.drawRoute()
+
+    //TODO Resolover con una asíncrona
+    setTimeout(() => {
+      this.drawRoute();
+    }, 1000);
 
   }
 
@@ -234,20 +263,22 @@ export class RoutePage implements PipeTransform, OnInit {
 
     const vm = this;
 
-    this.routes.forEach(function (route, routeIndex) {
+    let routes = this.routesServiceApi.allRoutes;
+
+    routes.forEach(function (route, routeIndex) {
 
       let waypoints = [];
 
       if (route.waypoints[0][0] !== undefined && route.waypoints[0][1] !== undefined) {
         waypoints = route.waypoints;
+        vm.drawStartPoint(route.route_id, route.waypoints[0]);
+        vm.drawEndPoint(route.route_id, route.waypoints[route.waypoints.length - 1]);
       }
 
       vm.line = new L.Polyline(waypoints, {color: '#a483c9'}).addTo(vm.polylineGroup);
 
-      if (route.challenges.info !== undefined) {
-        vm.drawStartPoint(route.id, route.waypoints[0]);
-        vm.drawEndPoint(route.id, route.waypoints[route.waypoints.length - 1]);
-        vm.drawChallengePoints(route.id, route.challenges);
+      if (route.challenges.length !== 0) {
+        vm.drawChallengePoints(route.route_id, routeIndex, route.challenges);
       }
 
     });
@@ -297,41 +328,62 @@ export class RoutePage implements PipeTransform, OnInit {
 
   //-- Create challenge markers, randomize challenges selection and open info challenge function --//
 
-  drawChallengePoints = (id, challenges) => {
+  drawChallengePoints = (id, routeIndex, challenges) => {
 
     //TODO Comprobar la categoría del challenge y asígnar el icono/loco correspondiente al crear el marcador
 
     const vm = this;
+    const challengesList = this.challengeServiceApi.allChallenges;
 
     let challengePoint;
     let challengeMarker;
 
-    challenges.info.forEach(function(challenge, index) {
+    challenges.forEach(function(challenge, index) {
+      
+      challenge.success = false;
+      challenge.active = false;
 
-      if (challenge.coords[0] !== undefined && challenge.coords[1] !== undefined) {
+      Object.keys(challenge).forEach(function(key, value) {
 
-        let randomIndex = vm.randomizeSelectedChallengeID(challenges);
-        let selectedCategory = vm.getSelectedChallengeCategory(challenges.selectedChallenges[randomIndex]);
+        if (challenge[key][0] !== undefined && challenge[key][1] !== undefined) {
 
-        challengePoint = L.divIcon({
-          className: challenge.success ? 'challenge-point challenge-point-success' : 'challenge-point',
-          iconSize: [vm.routeMap.getZoom() * 2, vm.routeMap.getZoom() * 2],
-          iconAnchor: [vm.routeMap.getZoom(), vm.routeMap.getZoom()],
-          html: '<span><img src="../../assets/icon/challenges/challenge-' + selectedCategory + '-icon.svg"></span>'
-        });
+          // let randomIndex = vm.randomizeSelectedChallengeID(challenges);
+          // let selectedCategory = vm.getSelectedChallengeCategory(key);
+          let i = 0;
+          let selectedChallenge: any;
 
-        challengeMarker = L.marker([challenge.coords[0], challenge.coords[1]],{
-          icon: challengePoint,
-          //@ts-ignore
-          routeId: id,
-          challengeId: challenges.selectedChallenges[randomIndex],
-          challengeCategory: selectedCategory,
-          challengeIndex: index,
-          challengeSuccess: challenge.success,
-          completed24h: challenge.completed24h,
-          showChallenge: false
-        }).addTo(vm.challengeGroup).on('click', vm.openChallengeInfo)
-      }
+          while(i < challengesList.length) {
+            if (challengesList[i].challenge_id === key) {
+              selectedChallenge = challengesList[i];
+              // selectedChallenge.video = 'https://www.youtube.com/embed/' + challengesList[i].video + '?autoplay=1&mute=1&enablejsapi=1'
+              selectedChallenge.video = vm.transform('https://www.youtube.com/embed/' + challengesList[i].video);
+              break;
+            }
+            i++;
+          }
+  
+          challengePoint = L.divIcon({
+            className: challenge.success ? 'challenge-point challenge-point-success' : 'challenge-point',
+            iconSize: [vm.routeMap.getZoom() * 2, vm.routeMap.getZoom() * 2],
+            iconAnchor: [vm.routeMap.getZoom(), vm.routeMap.getZoom()],
+            html: '<span><img src="../../assets/icon/challenges/challenge-' + 'mental' + '-icon.svg"></span>'
+          });
+  
+          challengeMarker = L.marker([challenge[key][0], challenge[key][1]],{
+            icon: challengePoint,
+            //@ts-ignore
+            routeId: id,
+            routeIndex: routeIndex,
+            challengeId: key,
+            challengeCategory: selectedChallenge.category,
+            challengeIndex: index,
+            challengeSuccess: challenge.success,
+            completed24h: selectedChallenge.completed24h,
+            showChallenge: false
+          }).addTo(vm.challengeGroup).on('click', vm.openChallengeInfo)
+        }
+
+      });
     })
 
   }
@@ -345,9 +397,11 @@ export class RoutePage implements PipeTransform, OnInit {
     const vm = this;
     let i = 0;
 
-    while (i < vm.challenges.length) {
-      if(vm.challenges[i].id === id) {
-        return vm.challenges[i].category;
+    const challengesList = this.challengeServiceApi.allChallenges;
+    
+    while (i < challengesList.length) {
+      if(challengesList[i].id === id) {
+        return challengesList[i].category;
       }
       i++;
     }
@@ -355,12 +409,18 @@ export class RoutePage implements PipeTransform, OnInit {
   }
 
   openChallengeInfo = (e) => {
-    //TODO Mejorar esta funciona
+    //TODO Mejorar esta funcion
+
     const vm = this;
-    const challengeList = this.challenges;
-    const routeList = this.routes;
+
+    clearInterval(vm.drawInterval);
+    clearInterval(vm.sonarInterval);
+
+    const challengeList = this.challengeServiceApi.allChallenges;
+    const routeList = this.routesServiceApi.allRoutes;
 
     let routeId: any;
+    let routeIndex: any;
     let challengeId: any;
     let challengeIndex: any;
 
@@ -379,29 +439,32 @@ export class RoutePage implements PipeTransform, OnInit {
     }
 
     routeList.forEach(function(route, index) {
-      if (route.id === routeId) {
+      
+      if (route.route_id === routeId) {
+
+        vm.selectedRoute = route;
 
         let i = 0;
 
-        while (i < route.challenges.selectedChallenges.length) {
-          if (route.challenges.selectedChallenges[i] === challengeId) {
+        while (i < route.challenges.length) {
+          let id = Object.keys(route.challenges[i])[0];
+          if (id === challengeId) {
 
             let x = 0;
 
             vm.selectedRouteData = routeList[index];
-            vm.selectedStatsChallenge = routeList[index].challenges.info[challengeIndex];
-            vm.selectedChallengeSuccess = routeList[index].challenges.info[challengeIndex].success;
+            
+            // vm.selectedStatsChallenge = routeList[index].challenges.info[challengeIndex];
+            vm.selectedChallengeSuccess = routeList[index].challenges[e.target.options.routeIndex].success;
 
             vm.selectedRouteIndex = index;
             vm.selectedChallengeIndex = i;
 
             while (x < challengeList.length) {
-              if (challengeList[x].id === challengeId) {
+              if (challengeList[x].challenge_id === challengeId) {
 
                 vm.selectedChallenge = challengeList[x];
                 vm.openChallengeWindow = true;
-                clearInterval(vm.drawInterval);
-                clearInterval(vm.sonarInterval);
                 break;
               }
               x++;
@@ -412,6 +475,8 @@ export class RoutePage implements PipeTransform, OnInit {
         }
       }
     });
+
+    this.openVideoDemo();
   }
 
   // -- -- //
@@ -424,7 +489,7 @@ export class RoutePage implements PipeTransform, OnInit {
       marker.options.showChallenge = false;
     });
     this.drawInterval = window.setInterval(() => this.getCurrentCoordinates(), this.settings.userTimeReportPosition * 1000);
-    this.sonarNoise();
+    // this.sonarNoise();
   }
 
   // -- -- //
@@ -460,7 +525,16 @@ export class RoutePage implements PipeTransform, OnInit {
     const vm = this;
     const settings = this.settings;
 
-    this.healthService.getDailyValues('steps');
+    this.platform.ready().then(() => {
+      this.healthService.getDailyValues(['steps']);
+      if (this.healthService.dailyValue !== undefined &&
+          this.healthService.dailyValue !== null &&
+          this.healthService.dailyValue !== '') {
+        this.dailySteps = this.healthService.dailyValue.toFixed(0);
+      } else {
+        this.dailySteps = 0;
+      }
+    })
 
     this.geolocation.getCurrentPosition({ timeout: settings.userTimeReportPosition * 1000, enableHighAccuracy: true }).then((resp) => {
 
@@ -499,7 +573,6 @@ export class RoutePage implements PipeTransform, OnInit {
       }
 
       this.getCurrentOrientation();
-      this.dailySteps = this.healthService.dailyValue.steps;
 
       return [this.userLatitude, this.userLongitude];
 
@@ -508,9 +581,17 @@ export class RoutePage implements PipeTransform, OnInit {
   }
 
   getCurrentOrientation = () => {
+
+
+    if (this.userMarker === undefined) {
+      this.drawUserPoint();
+    } else {
+      this.updateUserPoint();
+    }
+
     DeviceOrientation.getCurrentHeading().then((data: DeviceOrientationCompassHeading) => {
 
-      console.log('Orientación: ' + data)
+      //console.log('Orientación: ' + data)
       this.deviceDegrees = data.magneticHeading;
 
       if (this.userMarker === undefined) {
@@ -562,7 +643,7 @@ export class RoutePage implements PipeTransform, OnInit {
       this.loopTime = 1000;
     }
 
-    this.sonarNoise();
+    // this.sonarNoise();
 
   }
 
@@ -590,7 +671,7 @@ export class RoutePage implements PipeTransform, OnInit {
   //-- Move center of map to marker with event selected --//
 
   panToRoute = (event) => {
-    this.routeMap.panTo(L.latLng(this.routes[event.detail.value].waypoints[0][0], this.routes[event.detail.value].waypoints[0][1]));
+    this.routeMap.panTo(L.latLng(this.routesServiceApi.allRoutes[event.detail.value].waypoints[0][0], this.routesServiceApi.allRoutes[event.detail.value].waypoints[0][1]));
   }
 
   // -- -- //
@@ -660,7 +741,7 @@ export class RoutePage implements PipeTransform, OnInit {
 
       })
 
-      console.log(vm.challengeActive);
+      // console.log(vm.challengeActive);
 
       if (vm.challengeActive === false && this.settings.sonarNoise === true) {
 
@@ -728,8 +809,10 @@ export class RoutePage implements PipeTransform, OnInit {
     const vm = this;
     this.openRewardWindow = true;
 
-    this.selectedChallengeSuccess = true;
-    this.selectedMarker.target.options.challengeSuccess = true;
+    vm.selectedRoute.challenges[vm.selectedChallengeIndex].success = true;
+
+    this.selectedChallengeSuccess = vm.selectedRoute.challenges[vm.selectedChallengeIndex].success;
+    this.selectedMarker.target.options.challengeSuccess = vm.selectedRoute.challenges[vm.selectedChallengeIndex].success;
 
     setTimeout(function () {
       vm.openRewardWindow = false;
@@ -742,11 +825,74 @@ export class RoutePage implements PipeTransform, OnInit {
   //-- Normalize an url to use in youtube or video target --//
 
   transform = (url) => {
-    let safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    return safeUrl;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   // -- -- //
+
+  checkStepsProgressBar = (value) => {
+
+    let result;
+    let percent;
+
+    if (value <= 2500) {
+
+      if (value <= 1250) {
+        percent = (value * 100 / 1250) / 2;
+        percent = percent >= 50 ? 50 : percent;
+        result = 'polygon(50% 0, ' + (percent + 50) + '% 0, ' + (percent + 50) + '% 0, 50% 50%)'; //50 - 100
+      } else {
+        percent = (value * 100 / 2500) / 2;
+        percent = percent >= 50 ? 50 : percent;
+        result = 'polygon(50% 0, 100% 0, 100% ' + percent + '%, 50% 50%)'; //0-50
+      }
+
+    } else if (value > 2500 && value <= 5000) {
+
+      if (value <= 3750) {
+        percent = ((value - 2500) * 100 / 1250) / 2;
+        percent = percent >= 100 ? 100 : percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% ' + (percent + 50) + '%, 100% ' + (percent + 50) + '%, 50% 50%)'; //50-100
+      } else {
+        percent = ((value - 3750) * 100 / 2500) / 2;
+        percent = percent >= 100 ? 100 : percent;
+        percent = 100 - percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% 100%, ' + (percent + 50) + '% 100%, 50% 50%)'; //100 - 50
+      }
+
+    } else if (value > 5000 && value <= 7500) {
+
+      if (value <= 6250) {
+        percent = ((value - 5000) * 100 / 1250) / 2;
+        percent = percent >= 100 ? 100 : percent;
+        // percent = 100 - percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, ' + percent + '% 100%, ' + percent + '% 100%, 50% 50%)'; //50 - 0
+      } else {
+        percent = ((value - 6250) * 100 / 2500) / 2;
+        percent = percent >= 100 ? 100 : percent;
+        percent = 100 - percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 ' + percent + '%, 50% 50%)'; //100 - 50
+      }
+
+    } else {
+
+      if (value <= 8750) {
+        percent = ((value - 7500) * 100 / 1250) / 2;
+        percent = percent >= 50 ? 50 : percent;
+        percent = 50 - percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 50%, 0 ' + percent + '%, 0 ' + percent + '%, 50% 50%)'; //50 - 0
+      } else {
+        percent = ((value - 8750) * 100 / 2500) / 2;
+        percent = percent >= 50 ? 50 : percent;
+        percent = 50 - percent;
+        result = 'polygon(50% 0, 100% 0, 100% 50%, 100% 100%, 50% 100%, 0 100%, 0 50%, 0 0, ' + percent + '% 0, 50% 50%)'; //50 - 0
+      }
+
+    }
+
+    return result;
+
+  }
 
   //TODO TESTEAR BIEN, Cuando cambio de vista el sonarInterval no deja de sonar
 
@@ -758,7 +904,7 @@ export class RoutePage implements PipeTransform, OnInit {
   ionViewDidEnter() {
     this.drawInterval = window.setInterval(() => this.getCurrentCoordinates(), this.settings.userTimeReportPosition * 1000);
     this.openChallengeWindow = false;
-    this.sonarNoise();
+    // this.sonarNoise();
   }
 
 }

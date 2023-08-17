@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../../services/teams/teams.service';
-import { LoginService } from '../../services/login/login.service';
-import * as items from '../../services/items/items-constants';
+import { UserService } from '../../services/users/users.service';
+import { LanguageService } from '../../services/language/language.service';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Component({
   selector: 'app-my-team',
@@ -26,15 +27,23 @@ export class MyTeamPage implements OnInit {
   orderMembersByTab: any;
   subscribedTeam: any;
   heads: any;
+  language: any;
 
-  constructor(private teamsService: TeamsService, private loginService: LoginService) { }
+  constructor(
+    private teamsService: TeamsService,
+    private userService: UserService,
+    private languageService: LanguageService
+  ) { }
 
   ngOnInit() {
-    this.loggedUser = this.loginService.loggedUser;
-    this.users = this.loginService.users;
+
+    this.language = this.languageService.language;
+
+    this.loggedUser = this.userService.loggedUser;
+    this.users = this.userService.users;
     this.teams = this.teamsService.teams;
     this.heads = items.AVATAR_HEADS;
-    this.selectedTab = 'search';
+    this.selectedTab = 'search'; //TODO Integrar traducciones aquí
     this.tabIcon = 'search';
     this.tabTitle = 'Search Teams';
     this.filteredTeams = this.teamsService.teams;

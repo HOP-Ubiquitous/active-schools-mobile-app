@@ -22,15 +22,15 @@
   <div class="single-new-container">
 
     <div class="single-new-image-container">
-      <img src="{{selectedNew.image}}">
+      <img src="assets/post-bg.svg">
     </div>
 
     <div class="single-new-text-container">
-      <h1>{{selectedNew.title}}</h1>
+      <h1>{{selectedPost.title}}</h1>
       <ion-icon name="calendar" class="ion-calendar"></ion-icon>
-      <span class="date">{{selectedNew.date}}</span>
+      <span class="date">{{selectedPost.date | date: 'dd/MM/yyyy'}}</span>
 
-      <p>{{selectedNew.content}}</p>
+      <p>{{selectedPost.content}}</p>
 
     </div>
 

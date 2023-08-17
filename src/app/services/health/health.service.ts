@@ -1,8 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Injectable, OnInit } from "@angular/core";
+import { Platform } from "@ionic/angular";
 
-import { Health } from '@awesome-cordova-plugins/health';
-//import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions';
+import moment from 'moment';
+
+import { Health } from "@awesome-cordova-plugins/health";
+import { IPedometerData, Pedometer } from "@ionic-native/pedometer";
+import { Router } from '@angular/router';
 
 import {
   HEALTH_REAL_TIME,
@@ -10,13 +13,13 @@ import {
   HEALTH_WEEKLY,
   HEALTH_MONTHLY,
   HEALTH_YEARLY,
-} from './health-constants';
+} from "./health-constants";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
-export class HealthService {
 
+export class HealthService {
   nativePermission: any;
 
   realTimeValue: any;
@@ -34,281 +37,539 @@ export class HealthService {
   yearlyValue: any;
   loadedYearlyValue: boolean;
 
-  constructor(private platform: Platform) {
-    this.realTimeValue = HEALTH_REAL_TIME;
+  dataTypes: any[];
+  pedometer: any;
+
+  constructor(private platform: Platform, private router: Router) {
+
+    this.pedometer = Pedometer;
+
     this.loadedRealTimeValue = false;
-
-    this.dailyValue = HEALTH_DAILY;
     this.loadedDailyValue = false;
-
-    this.weeklyValue = HEALTH_WEEKLY;
     this.loadedWeeklyValue = false;
-
-    this.monthlyValue = HEALTH_MONTHLY;
     this.loadedMonthlyValue = false;
-
-    this.yearlyValue = HEALTH_YEARLY;
     this.loadedYearlyValue = false;
+    
+    this.dataTypes = [{
+      read: ["steps", "distance"]
+    }];
+
   }
-
-  // checkNativeAuthorization = () => {
-  //   if(this.platform.is('ios') === true) {
-  //     //GET PERMISSIONS FROM IOS
-  //   } else {
-  //     AndroidPermissions.hasPermission(AndroidPermissions.PERMISSION.ACTIVITY_RECOGNITION)
-  //     .then(result => {
-  //       if (result.hasPermission) {
-  //         this.nativePermission = result.hasPermission;
-  //         this.getAuthorization();
-  //       } else {
-  //         AndroidPermissions.requestPermission(AndroidPermissions.PERMISSION.ACTIVITY_RECOGNITION)
-  //         .then((result) => {
-  //           if (result.hasPermission) {
-  //             this.getAuthorization();
-  //           }
-  //         })
-  //         .catch((err) => console.log('Error to request permissions'));
-  //       }
-  //     });
-      
-  //   }
-
-  // }
 
   getAuthorization = () => {
 
-    Health.isAvailable()
-      .then((available: boolean) => {
-        Health.requestAuthorization([
-          {
-            read: [
-              'steps',
-              'distance',
-              'appleExcerciseTime', //Only iOS
-              'calories',
-              'activity',
-              'height',
-              'weight',
-              'heart_rate',
-              'heart_rate.resting',
-              'heart_rate.variability',
-              'resp_rate',
-              'vo2max',
-              'temperature',
-              'fat_percentage',
-              'waist_circunference',
-              'blood_glucose',
-              'insulin', //Only iOS
-              'blood_pressure',
-              'blood_pressure_systolic',
-              'blood_pressure_diastolic',
-              'gender', //Only iOS
-              'date_of_birth', //Only iOS
-              'mindfulness', //Only iOS
-              'nutrition', //Only iOS
-              'nutrition.X',
-              'sleep', //Only iOS
-            ]
-          }
-        ])
-          .then((res) =>
-            console.log('Authorized to modified this resources! - ' + res)
-          )
-          .catch((e) => console.log('FIRST AUTH - Health is not authorized!'));
-      })
-      .catch((e) => console.log('FIRST AUTH - Health is not authorized!'));
+    Health.isAvailable().then((available: boolean) => {
+
+      Health.requestAuthorization(this.dataTypes).then((res) => {
+        console.log("Authorized to modified this resources! - " + res);
+      }).catch((e) => {
+        console.log(e);
+        console.log("FIRST AUTH - Health is not authorized!");
+      });
+
+    }).catch((e) => {
+
+      // Health.requestAuthorization(this.dataTypes).then((res) => {
+      //   console.log("Authorized to modified this resources! - " + res);
+      // }).catch((e) => {
+      //   this.getAuthorization()
+      // });
+        
+      console.log(e);
+      console.log("FIRST AUTH - Health is not available!");
+      
+    });
+
   };
 
-  getRealTimeValues = (parameter) => {
-    Health.isAuthorized([parameter])
-      .then((auth) => {
+  getRealTimeValues = (parameter, minutes) => {
 
-        let startDate = new Date(new Date().setHours(new Date().getMinutes() - 10)).toISOString().replace(/T/, ' ').replace(/\..+/, ''); // Current Monent - 5 minutes
-        let now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    Health.isAvailable().then((available: boolean) => {
+        
+      Health.requestAuthorization(this.dataTypes).then((result) => {
 
-        Health.query({
-          startDate: new Date(startDate),
-          endDate: new Date(now), // now
-          dataType: parameter,
-          limit: 1,
-        })
-          .then((res) => {
-            //@ts-ignore
-            this.realTimeValue[parameter] = res;
-            //this.realTimeValue[parameter] = res[0].value;
+        parameter.forEach((singleParameter, index) => {
+
+          Health.query({
+            startDate: moment().utc().subtract(1, 'hour').toDate(),
+            endDate: moment().utc().toDate(),
+            dataType: singleParameter,
+            limit: 1,
+          }).then((res) => {
+
+            if (res.length === 0) {
+              
+              this.getPedometerRealTimeValues();
+
+            } else {
+          
+              this.realTimeValue = res[0].value;
+              this.stopPedomenter();
+              this.loadedRealTimeValue = true;
+
+            }
+                
+          }).catch((e) => {
+            
+            //TODO Comprobar si es necesario llamar al podómetro en todas estas situaciones
+
+            this.getPedometerRealTimeValues();
+            this.realTimeValue = e;
             this.loadedRealTimeValue = true;
-          })
-          .catch((e) => {
-            console.log('Error to retrieve daily ' + parameter);
-            this.realTimeValue[parameter] = e;
-            this.loadedRealTimeValue = true;
-          })
+            console.log("Error to retrieve daily " + singleParameter);
+                
+          });
 
-        }
-      )
-      .catch((e) => console.log('REAL TIME - Health is not authorized!'));
+        });
+          
+      }).catch((e) => {
+
+        this.getPedometerRealTimeValues();
+        console.log("REAL TIME - Health is not authorized! - " + e);
+
+      });
+    
+    }).catch((e) => {
+      
+      this.getPedometerRealTimeValues();
+      console.log("REAL TIME - Health is not authorized! - " + e)
+    
+    });
+
   };
+
+  getPedometerRealTimeValues = () => {
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.startPedometerUpdates().subscribe((data) => {
+        console.log(data);
+        this.realTimeValue = data.numberOfSteps;
+        this.getRealTimeValues('steps', 60);
+      });
+    }).catch((error) => {
+      console.log('Error al cargar Pedometer - ' + error)
+    });
+    
+  }
 
   getDailyValues = (parameter) => {
-    Health.isAuthorized([parameter])
-      .then((auth) =>{
-
-        let startDate = new Date(new Date().setHours(0, 0, 0, 0)).toISOString().replace(/T/, ' ').replace(/\..+/, ''); // Today 00:00
-        let now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+  
+    Health.isAvailable().then((available: boolean) => {
       
-        Health.queryAggregated({
-          startDate: new Date(startDate),
-          endDate: new Date(now), // now
-          dataType: parameter,
-          bucket: 'day',
-        })
-          .then((res) => {
-            let value;
+      Health.requestAuthorization(this.dataTypes).then((res) => {
 
-            res.forEach(function (singleData) {
-              value += singleData.value;
-            });
+        parameter.forEach((singleParameter) => {
 
-            if (parameter !== 'distance') {
-              value = value / res.length;
+          Health.queryAggregated({
+            startDate: moment().utc().set({'hour': 0, 'minute': 0, 'second': 0}).toDate(),
+            endDate: moment().utc().toDate(),
+            dataType: singleParameter,
+            bucket: "day",
+          }).then((res) => {
+
+            if (res.length === 0) {
+
+              if (this.platform.is('ios')) {
+                this.getPedometerWeeklyValues();
+              } else {
+                this.getPedometerRealTimeValues();
+              }
+
+            } else {
+
+              let value:any = 0;
+
+              res.forEach(function (singleData) {
+                value = value + singleData.value;
+              });
+
+              if (singleParameter !== "distance") {
+                value = value / res.length;
+              }
+
+              this.dailyValue = value;
+              this.stopPedomenter();
+              this.loadedDailyValue = true;
+
             }
 
-            this.dailyValue[parameter] = value;
-            this.loadedDailyValue = true;
-          })
-          .catch((e) => {
-            console.log('Error to retrieve daily ' + parameter);
-            this.dailyValue[parameter] = e;
-            this.loadedDailyValue = true;
-          })
+          }).catch((e) => {
 
+            if (this.platform.is('ios')) {
+              this.getPedometerDailyValues();
+            } else {
+              this.getPedometerRealTimeValues();
+            }
+
+            this.dailyValue = e;
+            this.loadedDailyValue = true;
+            console.log("Error to retrieve daily " + singleParameter);
+
+          });
+
+        });
+
+      }).catch((e) => {
+
+        if (this.platform.is('ios')) {
+          this.getPedometerDailyValues();
+        } else {
+          this.getPedometerRealTimeValues();
         }
-      )
-      .catch((e) => console.log('DAILY - Health is not authorized!'));
+
+        console.log("DAILY - Health is not authorized! - " + e);
+
+      });
+
+    }).catch((e) => {
+
+      if (this.platform.is('ios')) {
+        this.getPedometerDailyValues();
+      } else {
+        this.getPedometerRealTimeValues();
+      }
+
+      console.log("DAILY - Health is not authorized! - " + e);
+
+    });
+
   };
+
+  getPedometerDailyValues = () => {
+
+    let options = {
+      startDate: moment().set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+      endDate: moment().utc().toDate()
+    };
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.queryData(options).then((data: IPedometerData) => {
+
+        //TODO Testear como se reciben los datos e igualar a la variable de forma similar a Fitness API
+        console.log(data);
+        this.dailyValue = data;
+        this.getDailyValues('steps');
+
+      }).catch((error) => {console.log('Error al recibir valores diarios - ' + error)});
+    }).catch((error) => {console.log('Error al cargar Pedometer - ' + error)});
+
+  }
 
   getWeeklyValues = (parameter) => {
-    let curr = new Date();
-    let week = [];
 
-    for (let i = 1; i <= 7; i++) {
-      let first = curr.getDate() - curr.getDay() + i;
-      let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-      week.push(day);
-    }
+    Health.isAvailable().then((available: boolean) => {
 
-    Health.isAuthorized([parameter])
-      .then((auth) => {
+      Health.requestAuthorization(this.dataTypes).then((result) => {
 
-        let startDate = new Date(new Date(week[0]).setHours(0, 0, 0, 0)).toISOString().replace(/T/, ' ').replace(/\..+/, ''); // Monday of current week
-        let now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+        parameter.forEach((singleParameter) => {
 
-        Health.queryAggregated({
-          startDate: new Date(startDate), // Monday of current week
-          endDate: new Date(now), // now
-          dataType: parameter,
-          bucket: 'week',
-        })
-          .then((res) => {
-            let value;
+          Health.queryAggregated({
+            startDate: moment().isoWeekday(1).set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+            endDate: moment().utc().toDate(),
+            dataType: singleParameter,
+            bucket: "week",
+          }).then((res) => {
 
-            res.forEach(function (singleData) {
-              value += singleData.value;
-            });
+            if (res.length === 0) {
+              
+              if (this.platform.is('ios')) {
+                this.getPedometerWeeklyValues();
+              } else {
+                this.getPedometerRealTimeValues();
+              }
 
-            if (parameter !== 'distance') {
-              value = value / res.length;
+            } else {
+
+              let value:any = 0;
+
+              res.forEach(function (singleData) {
+                value = value + singleData.value;
+              });
+
+              if (singleParameter !== "distance") {
+                value = value / res.length;
+              }
+
+              this.weeklyValue = value;
+              this.stopPedomenter();
+              this.loadedWeeklyValue = true;
+
             }
 
-            this.dailyValue[parameter] = value;
-            this.loadedWeeklyValue = true;
-          })
-          .catch((e) => {
-            console.log('Error to retrieve weekly ' + parameter);
-            this.weeklyValue[parameter] = e;
-            this.loadedWeeklyValue = true;
-          })
+          }).catch((e) => {
 
+            if (this.platform.is('ios')) {
+              this.getPedometerWeeklyValues();
+            } else {
+              this.getPedometerRealTimeValues();
+            }
+
+            this.weeklyValue = e;
+            this.loadedWeeklyValue = true;
+            console.log("Error to retrieve weekly " + singleParameter);
+
+          });
+
+        });
+
+      }).catch((e) => {
+
+        if (this.platform.is('ios')) {
+          this.getPedometerWeeklyValues();
+        } else {
+          this.getPedometerRealTimeValues();
         }
 
-      )
-      .catch((e) => console.log('WEEKLY - Health is not authorized!'));
+        console.log("WEEKLY - Health is not authorized! - " + e);
+
+      });
+
+    }).catch((e) => {
+      
+      if (this.platform.is('ios')) {
+        this.getPedometerWeeklyValues();
+      } else {
+        this.getPedometerRealTimeValues();
+      }
+
+      console.log("WEEKLY - Health is not authorized! - " + e);
+
+    });
+
   };
+
+  getPedometerWeeklyValues = () => {
+
+    let options = {
+      startDate: moment().isoWeekday(1).set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+      endDate: moment().utc().toDate()
+    };
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.queryData(options).then((data: IPedometerData) => {
+        
+        //TODO Testear como se reciben los datos e igualar a la variable de forma similar a Fitness API
+        console.log(data);
+        this.weeklyValue = data;
+        this.getWeeklyValues('steps');
+
+      }).catch((error) => {console.log('Error al recibir valores semanales' + error)});
+    }).catch((error) => {console.log('Error al cargar Pedometer - ' + error)});
+
+  }
 
   getMonthlyValues = (parameter) => {
-    let curr = new Date();
-    let year = curr.getFullYear();
-    let month = curr.getMonth();
-    var startDate = new Date(year, month, 1, 0, 0, 0, 0).toISOString().replace(/T/, ' ').replace(/\..+/, '');
 
-    Health.isAuthorized([parameter])
-      .then((auth) => {; // Monday of current week
-        
-        let now = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    Health.isAvailable().then((available: boolean) => {
 
-        Health.queryAggregated({
-          startDate: new Date(startDate), // 1st Day of current Month
-          endDate: new Date(now), // now
-          dataType: parameter,
-          bucket: 'month',
-        })
-          .then((res) => {
-            let value;
+      Health.requestAuthorization(this.dataTypes).then((result) => {
 
-            res.forEach(function (singleData) {
-              value += singleData.value;
-            });
+        parameter.forEach((singleParameter) => {
 
-            if (parameter !== 'distance') {
-              value = value / res.length;
+          Health.queryAggregated({
+            startDate: moment().startOf('month').set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+            endDate: moment().utc().toDate(),
+            dataType: singleParameter,
+            bucket: "month",
+          }).then((res) => {
+
+            if (res.length === 0) {
+
+              if (this.platform.is('ios')) {
+                this.getPedometerMonthlyValues();
+              } else {
+                this.getPedometerRealTimeValues();
+              }
+
+            } else {
+
+              let value:any = 0;
+
+              res.forEach(function (singleData) {
+                value = value + singleData.value;
+              });
+
+              if (singleParameter !== "distance") {
+                value = value / res.length;
+              }
+
+              this.monthlyValue = value;
+              this.stopPedomenter();
+              this.loadedMonthlyValue = true;
+
             }
 
-            this.dailyValue[parameter] = value;
-            this.loadedMonthlyValue = true;
-          })
-          .catch((e) => {
-            console.log('Error to retrieve monthly ' + parameter);
-            this.monthlyValue[parameter] = e;
-            this.loadedMonthlyValue = true;
-          })
+          }).catch((e) => {
 
+            if (this.platform.is('ios')) {
+              this.getPedometerMonthlyValues();
+            } else {
+              this.getPedometerRealTimeValues();
+            }
+
+            this.monthlyValue = e;
+            this.loadedMonthlyValue = true;
+            console.log("Error to retrieve monthly " + singleParameter);
+
+          });
+
+        });
+
+      }).catch((e) => {
+
+        if (this.platform.is('ios')) {
+          this.getPedometerMonthlyValues();
+        } else {
+          this.getPedometerRealTimeValues();
         }
 
-      )
-      .catch((e) => console.log('MONTLY - Health is not authorized!'));
+        console.log("MONTHLY - Health is not authorized! - " + e);
+
+      });
+
+    }).catch((e) => {
+
+      if (this.platform.is('ios')) {
+        this.getPedometerMonthlyValues();
+      } else {
+        this.getPedometerRealTimeValues();
+      }
+
+      console.log("MONTHLY - Health is not authorized! - " + e);
+
+    });
+
   };
+
+  getPedometerMonthlyValues = () => {
+
+    let options = {
+      startDate: moment().startOf('month').set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+      endDate: moment().utc().toDate()
+    };
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.queryData(options).then((data: IPedometerData) => {
+        
+        //TODO Testear como se reciben los datos e igualar a la variable de forma similar a Fitness API
+        console.log(data);
+        this.monthlyValue = data;
+        this.getMonthlyValues('steps');
+
+      }).catch((error) => {console.log('Error al recibir valores mensuales ' + error)});
+    }).catch((error) => {console.log('Error al cargar Pedometer - ' + error)});
+
+  }
 
   getYearlyValues = (parameter) => {
-    var startDate = new Date(new Date().getFullYear(), 0, 1);
 
-    Health.isAuthorized([parameter])
-      .then((auth) =>
-        Health.queryAggregated({
-          startDate: startDate, // 1st Day of current Year
-          endDate: new Date(), // now
-          dataType: parameter,
-          bucket: 'year',
-        })
-          .then((res) => {
-            let value;
+    Health.isAvailable().then((available: boolean) => {
 
-            res.forEach(function (singleData) {
-              value += singleData.value;
-            });
+      Health.requestAuthorization(this.dataTypes).then((result) => {
 
-            if (parameter !== 'distance') {
-              value = value / res.length;
+        parameter.forEach((singleParameter) => {
+
+          Health.queryAggregated({
+            startDate: moment().startOf('year').set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+            endDate: moment().utc().toDate(),
+            dataType: singleParameter,
+            bucket: "year",
+          }).then((res) => {
+
+            if (res.length === 0) {
+
+              if (this.platform.is('ios')) {
+                this.getPedometerYearlyValues();
+              } else {
+                this.getPedometerRealTimeValues();
+              }
+
+            } else {
+
+              let value:any = 0;
+  
+              res.forEach(function (singleData) {
+                value = value + singleData.value;
+              });
+    
+              if (singleParameter !== "distance") {
+                value = value / res.length;
+              }
+    
+              this.yearlyValue = value;
+              this.stopPedomenter();
+              this.loadedYearlyValue = true;
+
+            }
+  
+          }).catch((e) => {
+  
+            if (this.platform.is('ios')) {
+              this.getPedometerYearlyValues();
+            } else {
+              this.getPedometerRealTimeValues();
             }
 
-            this.dailyValue[parameter] = value;
+            this.yearlyValue = e;
             this.loadedYearlyValue = true;
-          })
-          .catch((e) => {
-            console.log('Error to retrieve yearly ' + parameter);
-            this.yearlyValue[parameter] = e;
-            this.loadedYearlyValue = true;
-          })
-      )
-      .catch((e) => console.log('YEARLY - Health is not authorized!'));
-  };
+            console.log("Error to retrieve yearly " + singleParameter);
+  
+          });
+
+        });
+
+      }).catch((e) => {
+
+        if (this.platform.is('ios')) {
+          this.getPedometerYearlyValues();
+        } else {
+          this.getPedometerRealTimeValues();
+        }
+
+        console.log("YEARLY - Health is not authorized! - " + e);
+
+      });
+
+    }).catch((e) => {
+
+      if (this.platform.is('ios')) {
+        this.getPedometerYearlyValues();
+      } else {
+        this.getPedometerRealTimeValues();
+      }
+
+      console.log("YEARLY - Health is not authorized! - " + e);
+
+    });
+  
+  }
+
+  getPedometerYearlyValues = () => {
+
+    let options = {
+      startDate: moment().startOf('year').set({'hour': 0, 'minute': 0, 'second': 0}).utc().toDate(),
+      endDate: moment().utc().toDate()
+    };
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.queryData(options).then((data: IPedometerData) => {
+        
+        //TODO Testear como se reciben los datos e igualar a la variable de forma similar a Fitness API
+        console.log(data);
+        this.yearlyValue = data;
+        this.getYearlyValues('steps');
+
+      }).catch((error) => {console.log('Error al recibir valore anuales ' + error)});
+    }).catch((error) => {console.log('Error al cargar Pedometer - ' + error)});
+    
+  }
+
+  stopPedomenter = () => {
+
+    Pedometer.isStepCountingAvailable().then((resource) => {
+      Pedometer.stopPedometerUpdates()
+    });
+
+  }
+
 }

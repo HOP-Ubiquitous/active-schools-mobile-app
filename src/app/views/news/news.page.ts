@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from "@ionic/angular";
-import { Router } from '@angular/router';
-import { NewsService } from 'src/app/services/news/news.service';
+import { Component, OnInit, DoCheck, KeyValueDiffers } from '@angular/core';
+import { LanguageService } from '../../services/language/language.service';
+import { PostsService } from '../../services/posts/posts.service';
+import { PostsServiceApi } from '../../services/posts/posts.service_api';
 
 @Component({
   selector: 'app-news',
@@ -9,24 +9,30 @@ import { NewsService } from 'src/app/services/news/news.service';
   styleUrls: ['./news.page.scss'],
 })
 
-export class NewsPage implements OnInit {
+export class NewsPage implements OnInit, DoCheck {
+  differ: any;
   data: any;
+  language: any;
 
   constructor(
-    private modalCtrl: ModalController,
-    private newsService: NewsService,
-    private router: Router
+    private postsService: PostsService,
+    private postsServiceApi: PostsServiceApi,
+    private languageService: LanguageService
   ) {
-    
+    this.data = [];
   }
 
   ngOnInit() {
-    this.newsService.getNews();
-    this.data = this.newsService.newsData;
+    this.language = this.languageService.language;
+    this.postsService.getPosts();
   }
 
-  goToSingleNew = (id) => {
-    this.newsService.getSingleNew(id);
+  ngDoCheck() {
+    this.data = this.postsServiceApi.allPosts;
+  }
+
+  goToSinglePost = (id) => {
+    this.postsService.getPostById(id);
   }
 
 }

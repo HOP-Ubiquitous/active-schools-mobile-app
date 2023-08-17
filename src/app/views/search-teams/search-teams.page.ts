@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { LanguageService } from '../../services/language/language.service';
 import { TeamsService } from '../../services/teams/teams.service';
-import { LoginService } from '../../services/login/login.service';
+import { UserService } from '../../services/users/users.service';
+
+import el from '../../../assets/i18n/el.json';
+import en from '../../../assets/i18n/en.json';
+import es from '../../../assets/i18n/es.json';
 
 @Component({
   selector: 'app-search-teams',
@@ -23,16 +28,20 @@ export class SearchTeamsPage implements OnInit {
   tabMembersTitle: any;
   orderMembersByTab: any;
   subscribedTeam: any;
+  language: any;
 
   constructor(
+    private languageService: LanguageService,
     private teamsService: TeamsService,
-    private loginService: LoginService
+    private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.loggedUser = this.loginService.loggedUser;
-    this.users = this.loginService.users;
-    this.selectedTab = 'search';
+
+    this.language = this.languageService.language;
+    this.loggedUser = this.userService.loggedUser;
+    this.users = this.userService.users;
+    this.selectedTab = 'search'; //TODO Integrar traducciones en estas variables
     this.tabIcon = 'search';
     this.tabTitle = 'Search Teams';
     this.filteredTeams = this.teamsService.teams;

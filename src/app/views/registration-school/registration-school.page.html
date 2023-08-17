@@ -22,7 +22,7 @@
   <div class="menu-line-container">
 
   <div class="menu-line-bg">
-    <div class="menu-line" [ngStyle]="{ 'width': '20%'}">
+    <div class="menu-line" [ngStyle]="{ 'width': 100 / 3 * 2 + '%'}">
     </div>
   </div>
 
@@ -38,11 +38,16 @@
     </div>
 
     <div class="menu-diamond-container">
-      <div class="menu-button">
+      <div class="menu-button menu-button-active">
       </div>
     </div>
 
     <div class="menu-diamond-container">
+      <div class="menu-button">
+      </div>
+    </div>
+
+    <!-- <div class="menu-diamond-container">
       <div class="menu-button">
       </div>
     </div>
@@ -53,7 +58,7 @@
 
     <div class="menu-diamond-container">
       <div class="menu-button"></div>
-    </div>
+    </div> -->
 
   </div>
 
@@ -66,12 +71,61 @@
         <ion-icon name="document-text-outline"></ion-icon>
       </div>
     </div>
-    <h1>School Info</h1>
+    <h1>{{language.SCHOOL.schoolInfo}}</h1>
   </div>
 
   <form class="form-registration">
 
+    <!-- <h5 class="filter-title">{{language.SEARCH_TEAMS.search}}</h5>
+
+    <ion-item lines="full" class="ion-item-form" [ngClass]="{ 'input-unactive' : availableCountries.length === 0 }">
+      <ion-label>{{language.PERSONAL_DATA.country}}</ion-label>
+      <ion-select (ionChange)="selectedCountry($event)">
+        <ion-select-option *ngFor="let country of availableCountries; index as i" [value]="i">
+          {{country.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-item-form" [ngClass]="{ 'input-unactive' : availableProvinces.length === 0 }">
+      <ion-label>{{language.PERSONAL_DATA.province}}</ion-label>
+      <ion-select (ionChange)="selectedProvince($event)">
+        <ion-select-option *ngFor="let province of availableProvinces; index as i" [value]="i">
+          {{province}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-item-form" [ngClass]="{ 'input-unactive' : availableCities.length === 0 }">
+      <ion-label>{{language.PERSONAL_DATA.city}}</ion-label>
+      <ion-select (ionChange)="selectedCity($event)">
+        <ion-select-option *ngFor="let city of availableCities; index as i" [value]="i">
+          {{city}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <hr class="filter-line"> -->
+
     <ion-item lines="full" class="ion-item-form">
+      <ion-label>{{language.SCHOOL.schools}}</ion-label>
+      <ion-select (ionChange)="selectedSchool($event)">
+        <ion-select-option *ngFor="let school of filteredSchools; index as i" [value]="i">
+          {{school.school_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-item-form" (ngShow)="coursesBySchool.length > 0">
+      <ion-label>{{language.SCHOOL.courses}}</ion-label>
+      <ion-select (ionChange)="selectedCourse($event)">
+        <ion-select-option *ngFor="let course of coursesBySchool; index as i" [value]="i">
+          {{course.course_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- <ion-item lines="full" class="ion-item-form">
       <ion-label position="floating">School Name</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.schoolName" name="schoolName" required></ion-input>
     </ion-item>
@@ -89,17 +143,23 @@
     <ion-item lines="full" class="ion-item-form">
       <ion-label position="floating">Teacher</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.teacher" name="teacher" required></ion-input>
-    </ion-item>
+    </ion-item> -->
 
     <ion-row>
       <ion-col class="next-container">
         <ion-button (click)="saveSchoolInfo()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-forward-outline"></ion-icon>
-          Next
+          {{language.COMMON.next}}
         </ion-button>
+
+        <ion-button (click)="skipButton()" type="submit" expand="block" class="next-button skip-button">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+          {{language.COMMON.skip}}
+        </ion-button>
+
         <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-back-outline"></ion-icon>
-          Back
+          {{language.COMMON.back}}
         </ion-button>
       </ion-col>
     </ion-row>

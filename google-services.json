@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "109969137738",
+    "project_id": "active-schools",
+    "storage_bucket": "active-schools.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109969137738:android:bfe80b10eb07c50b2c46b3",
+        "android_client_info": {
+          "package_name": "hopu.active.schools.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109969137738-opj0gjkvtf9607vuivk6u18ufgv3a4at.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hopu.active.schools.test",
+            "certificate_hash": "2f323318fe92a090a77d73d028aeab2885e976ec"
+          }
+        },
+        {
+          "client_id": "109969137738-s9509qgo30orstfp04la866gr743mlb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQp8N5TdiDFCZLllvJ8Ifo9mQGQu3f0TQ"
+        },
+        {
+          "current_key": "AIzaSyCPWLAU4Z_yNN3BWOcc_Nd5-QwsJHGmo1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109969137738-5q0k776u6fq5ae58ckdcntmngjk4mq4h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "109969137738-edtqthl8jp0ardkbvi0daajqtbumdmor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hopu.activeschools"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109969137738:android:26f4defd22c33fef2c46b3",
+        "android_client_info": {
+          "package_name": "hopu.activeschools"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109969137738-crckd6n00rmr2lc2ju2kkb4i3lu8t0is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hopu.activeschools",
+            "certificate_hash": "396eb8ad685541b7ca58a62ad26319fc89cdbb9e"
+          }
+        },
+        {
+          "client_id": "109969137738-s9509qgo30orstfp04la866gr743mlb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQp8N5TdiDFCZLllvJ8Ifo9mQGQu3f0TQ"
+        },
+        {
+          "current_key": "AIzaSyCPWLAU4Z_yNN3BWOcc_Nd5-QwsJHGmo1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109969137738-5q0k776u6fq5ae58ckdcntmngjk4mq4h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "109969137738-edtqthl8jp0ardkbvi0daajqtbumdmor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "hopu.activeschools"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

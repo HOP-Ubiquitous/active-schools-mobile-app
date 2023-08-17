@@ -59,9 +59,9 @@
   position: relative;
   display: inline-block;
 
-  .square-left {
-    width: 50%;
-    aspect-ratio: 1;
+  .square-center {
+    width: 100%;
+    aspect-ratio: 2/1 !important;
     float: left;
     display: flex;
     justify-content: center;
@@ -215,7 +215,8 @@
 
   .square-right {
     width: 50%;
-    aspect-ratio: 1;
+    height: 50%;
+    aspect-ratio: 1 !important;
     float: right;
     display: flex;
     justify-content: center;

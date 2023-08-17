@@ -11,19 +11,23 @@ const routes: Routes = [
     loadChildren: () => import('./views/login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'registration-credentials',
+    loadChildren: () => import('./views/registration-credentials/registration-credentials.module').then( m => m.RegistrationCredentialsPageModule)
+  },
+  {
     path: 'registration-personal-data',
     loadChildren: () => import('./views/registration-personal-data/registration-personal-data.module').then(m => m.RegistrationPersonalDataPageModule)
   },
   {
-    path: 'registration-school',
+    path: 'registration-school', //NO SE INCLUYE EN ESTA DEMO
     loadChildren: () => import('./views/registration-school/registration-school.module').then(m => m.RegistrationSchoolPageModule)
   },
   {
-    path: 'registration-movility',
+    path: 'registration-movility', //Deprecated
     loadChildren: () => import('./views/registration-movility/registration-movility.module').then(m => m.RegistrationMovilityPageModule)
   },
   {
-    path: 'registration-healthy',
+    path: 'registration-healthy', //Deprecated
     loadChildren: () => import('./views/registration-healthy/registration-healthy.module').then(m => m.RegistrationHealthyPageModule)
   },
   {
@@ -31,44 +35,13 @@ const routes: Routes = [
     loadChildren: () => import('./views/registration-avatar/registration-avatar.module').then(m => m.RegistrationAvatarPageModule)
   },
   {
-    path: 'searching-smart-band',
+    path: 'searching-smart-band', //Deprecated
     loadChildren: () => import('./views/searching-smart-band/searching-smart-band.module').then(m => m.SearchingSmartBandPageModule)
   },
   {
     path: 'forgot-password',
     loadChildren: () => import('./views/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
-
-  // {
-  //   path: '',
-  //   component: CollegeTabsPage,
-  //   children: [
-  //     {
-  //       path: 'route',
-  //       loadChildren: () => import('./route/route.module').then(m => m.RoutePageModule)
-  //     },
-  //     {
-  //       path: 'news',
-  //       loadChildren: () => import('./news/news.module').then(m => m.NewsPageModule)
-  //     },
-  //     {
-  //       path: 'news/:new_id',
-  //       loadChildren: () => import('./new-details/new-details.module').then(m => m.NewDetailsPageModule)
-  //     },
-  //     {
-  //       path: 'success-modal',
-  //       loadChildren: () => import('./success-modal/success-modal.module').then(m => m.SuccessModalPageModule)
-  //     },
-  //     {
-  //       path: 'profile',
-  //       loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
-  //     },
-  //     {
-  //       path: 'resume-missions',
-  //       loadChildren: () => import('./resume-missions/resume-missions.module').then(m => m.ResumeMissionsPageModule)
-  //     }
-  //   ]
-  // },
 
 
   {

@@ -12,8 +12,9 @@
     padding: 0 10px;
   }
   
-  .main-nav div {
+  .main-nav div, .main-nav ion-img {
     height: 20px;
+    width: 20px;
     aspect-ratio: 1;
   }
   
@@ -57,10 +58,15 @@
   }
   
   .ion-item-form {
-    text-align: center;
+    text-align: left;
     color: var(--ion-color-step-250, var(--primary-green));
     font-weight: lighter;
     font-size: 14px;
+  }
+
+  .ion-question-text {
+    font-size: 14px;
+    font-weight: bold !important;
   }
   
   .align-self-center {

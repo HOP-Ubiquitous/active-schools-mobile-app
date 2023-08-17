@@ -4,13 +4,13 @@
       <ion-icon name="create-outline"></ion-icon>
     </div>
   </div>
-  <h1>Create Team</h1>
+  <h1>{{language.CREATE_TEAM.createTeam}}</h1>
 </div>
 
 <form class="form-registration">
 
   <ion-item lines="full" class="ion-item-form">
-    <ion-label position="floating">Name</ion-label>
+    <ion-label position="floating">{{language.COMMON.name}}</ion-label>
     <ion-input type="text" [(ngModel)]="teamName" name="name" required></ion-input>
   </ion-item>
 
@@ -18,7 +18,7 @@
     <ion-col class="next-container">
       <ion-button (click)="createTeam()" type="submit" expand="block" class="next-button">
         <ion-icon name="chevron-forward-outline"></ion-icon>
-        Create Team
+        {{language.CREATE_TEAM.createTeam}}
       </ion-button>
     </ion-col>
   </ion-row>

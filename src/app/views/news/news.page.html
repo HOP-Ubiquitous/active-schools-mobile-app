@@ -22,12 +22,12 @@
 
   <div class="news-container">
 
-    <a (click)="goToSingleNew(item.id)" *ngFor="let item of data; index as i">
+    <a (click)="goToSinglePost(item.post_id)" *ngFor="let item of data; index as i">
 
       <div class="news-container-inner">
 
         <div class="news-left-container">
-          <img class="new-image" src="{{item.image}}">
+          <img class="new-image" src="assets/post-bg.svg">
         </div>
         <div class="news-right-container">
 
@@ -37,7 +37,7 @@
 
           <div class="news-calendar-container">
             <ion-icon name="calendar" class="ion-calendar"></ion-icon>
-            <p>{{item.date}}</p>
+            <p>{{item.date | date: 'dd/MM/yyyy'}}</p>
           </div>
 
           <div class="news-text-container">

@@ -61,7 +61,8 @@
 
   .square-left {
     width: 50%;
-    aspect-ratio: 1;
+    height: 50%;
+    aspect-ratio: 1 !important;
     float: left;
     display: flex;
     justify-content: center;
@@ -215,7 +216,8 @@
 
   .square-right {
     width: 50%;
-    aspect-ratio: 1;
+    height: 50%;
+    aspect-ratio: 1 !important;
     float: right;
     display: flex;
     justify-content: center;

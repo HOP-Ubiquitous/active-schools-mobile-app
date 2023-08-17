@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
+import { UserServiceApi } from '../../services/users/users.service_api';
+import { LanguageService } from '../../services/language/language.service';
 
-import * as items from '../../services/items/items-constants';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Component({
   selector: 'app-profile',
@@ -19,18 +20,19 @@ export class ProfilePage implements OnInit {
   bodies: any;
   selectedBody: any;
   selectedHead: any;
+  language: any;
 
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private userServiceApi: UserServiceApi,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
 
-    this.userInfo = this.loginService.loggedUser;
+    this.language = this.languageService.language;
+    this.userInfo = this.userServiceApi.loggedUser;
     this.selectedTab = 'stats';
-
-    this.userInfo = this.loginService.loggedUser;
 
     this.items = items.EVOLUTION_ITEMS;
     this.heads = items.AVATAR_HEADS;
@@ -44,8 +46,21 @@ export class ProfilePage implements OnInit {
   getAvatar = () => {
 
     const vm = this;
-    let headId = this.userInfo.avatar.avatar_head_id;
-    let bodyId = this.userInfo.avatar.avatar_body_id;
+    
+    let headId:any;
+    let bodyId:any;
+
+    // if (this.userInfo.avatar === undefined) {
+    //   headId = 0;
+    //   bodyId = 0;
+    // } else {
+    //   headId = this.userInfo.avatar.avatar_head_id;
+    //   bodyId = this.userInfo.avatar.avatar_body_id;
+    // }
+
+    headId = 1;
+    bodyId = 1;
+
     let i = 0;
     let x = 0;
 

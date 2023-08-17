@@ -1,0 +1,28 @@
+{
+  "android": {
+    "debug": {
+      "keystore": "./keystore.jks",
+      "storePassword": "AsusBenq",
+      "alias": "upload",
+      "password" : "AsusBenq",
+      "keystoreType": "",
+      "packageType": "apk"
+    },
+    "release": {
+      "keystore": "./keystore.jks",
+      "storePassword": "AsusBenq",
+      "alias": "upload",
+      "password" : "AsusBenq",
+      "keystoreType": "",
+      "packageType": "bundle"
+    }
+  },
+  "ios": {
+    "debug": {
+      "developmentTeam": "mobile@hopu.eu"
+    },
+    "release": {
+      "developmentTeam": "mobile@hopu.eu"
+    }
+  }
+}

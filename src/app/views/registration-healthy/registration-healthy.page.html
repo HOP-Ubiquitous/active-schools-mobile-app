@@ -22,10 +22,14 @@
   <div class="menu-line-container">
 
   <div class="menu-line-bg">
-    <div class="menu-line" [ngStyle]="{ 'width' : '60%' }"></div>
+    <div class="menu-line" [ngStyle]="{ 'width': 100 / 6 * 4 + '%'}"></div>
   </div>
 
   <div class="menu-diamond-group-container">
+
+    <div class="menu-diamond-container">
+      <div class="menu-button menu-button-active"></div>
+    </div>
 
     <div class="menu-diamond-container">
       <div class="menu-button menu-button-active"></div>
@@ -62,12 +66,21 @@
         <ion-icon name="document-text-outline"></ion-icon>
       </div>
     </div>
-    <h1>Healthy Info</h1>
+    <h1>{{language.HEALTHY.healthyInfo}}</h1>
   </div>
 
   <form class="form-registration">
 
     <ion-item lines="full" class="ion-item-form">
+      <ion-label>{{language.HEALTHY.medicalCenter}}</ion-label>
+      <ion-select (ionChange)="selectedMedicalCenter($event)">
+        <ion-select-option *ngFor="let medicalCenter of allMedicalCenters; index as i" [value]="i">
+          {{medicalCenter.medical_center_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <!-- <ion-item lines="full" class="ion-item-form">
       <ion-label position="floating">Centre</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.medicalCenter" name="medicalCenter" required></ion-input>
     </ion-item>
@@ -75,17 +88,17 @@
     <ion-item lines="full" class="ion-item-form">
       <ion-label position="floating">Doctor</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.doctor" name="doctor" required></ion-input>
-    </ion-item>
+    </ion-item> -->
 
     <ion-row>
       <ion-col class="next-container">
         <ion-button (click)="saveHealthyInfo()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-forward-outline"></ion-icon>
-          Next
+          {{language.COMMON.next}}
         </ion-button>
         <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-back-outline"></ion-icon>
-          Back
+          {{language.COMMON.back}}
         </ion-button>
       </ion-col>
     </ion-row>

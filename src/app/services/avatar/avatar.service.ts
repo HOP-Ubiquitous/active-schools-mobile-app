@@ -4,7 +4,7 @@ import { TEAMS } from '../teams/teams-constants';
 @Injectable({
   providedIn: 'root'
 })
-export class ItemsService {
+export class AvatarService {
   teams = TEAMS;
 
   constructor() { }

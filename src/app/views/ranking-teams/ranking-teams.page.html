@@ -4,7 +4,7 @@
       <ion-icon name="podium-outline"></ion-icon>
     </div>
   </div>
-  <h1>Ranking of Teams</h1>
+  <h1>{{language.TEAM_RANKING.teamRanking}}</h1>
 </div>
 
 <form class="form-registration">
@@ -31,7 +31,7 @@
       
       <div class="single-team-center">
         <h3>{{team.name}}</h3>
-        <h5>Members: {{team.members.length}} / {{team.max_members}}</h5>
+        <h5>{{language.TEAM_RANKING.members}}: {{team.members.length}} / {{team.max_members}}</h5>
       </div>
 
       <div class="single-team-right">

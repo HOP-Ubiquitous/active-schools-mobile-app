@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login/login.service';
-import * as items from '../../services/items/items-constants';
+import { UserService } from '../../services/users/users.service';
+import { LanguageService } from '../../services/language/language.service';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Component({
   selector: 'app-evolution',
@@ -29,8 +30,16 @@ export class EvolutionPage implements OnInit {
   selectedHead: any;
   selectedBody: any;
 
-  constructor(private loginService: LoginService) {
-    this.user = loginService.loggedUser;
+  language: any;
+
+  constructor(
+    private userService: UserService,
+    private languageService: LanguageService
+  ) {
+
+    this.language = this.languageService.language;
+
+    this.user = userService.loggedUser;
     this.bodyStep = this.user.avatar.avatar_body_decorator_id;
     this.headStep = this.user.avatar.avatar_head_decorator_id;
     this.heads = items.AVATAR_HEADS;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../../services/news/news.service';
+import { LanguageService } from '../../services/language/language.service';
+import { PostsService } from '../../services/posts/posts.service';
+import { PostsServiceApi } from '../../services/posts/posts.service_api';
 
 @Component({
   selector: 'app-single-new',
@@ -8,18 +10,31 @@ import { NewsService } from '../../services/news/news.service';
 })
 
 export class SingleNewPage implements OnInit {
-  selectedNew: any;
+  language: any;
+  selectedPost: any;
 
   constructor(
-    private newsService: NewsService
-  ) { }
+    private languageService: LanguageService,
+    // private postsService: PostsService,
+    private postsServiceApi: PostsServiceApi
+  ) {
+    this.selectedPost = this.postsServiceApi.postById;
+  }
 
   ngOnInit() {
-    this.getSelectedNew();
+    this.language = this.languageService.language;
+
+    this.postsServiceApi.postById.subscribe(variableUpdated => {
+      if (variableUpdated !== this.selectedPost) {
+        this.selectedPost = variableUpdated;
+      }
+    });
+
+    // this.getSelectedNew();
   }
 
-  getSelectedNew = () => {
-    this.selectedNew = this.newsService.selectedNew;
-  }
+  // getSelectedNew = () => {
+  //   this.selectedPost = this.postsServiceApi.postById;
+  // }
 
 }

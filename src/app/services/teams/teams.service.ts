@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login/login.service';
-import { USERS } from '../login/login-constants';
+import { UserService } from '../users/users.service';
+import { USERS } from '../users/users-constants';
 import { TEAMS } from '../teams/teams-constants';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class TeamsService {
   selectedTab = 'search';
   userInfo: any;
 
-  constructor(private router: Router, private loginService: LoginService) { 
-    this.userInfo = loginService.loggedUser;
+  constructor(private router: Router, private usersService: UserService) { 
+    this.userInfo = usersService.loggedUser;
   } 
 
   addUserToTeam(idUser, idTeam) {

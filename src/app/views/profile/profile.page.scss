@@ -12,13 +12,15 @@
   padding: 0 10px;
 }
 
-.main-nav div {
+.main-nav div, .main-nav ion-img {
   height: 20px;
+  width: 20px;
   aspect-ratio: 1;
 }
 
 .main-nav ion-icon {
   height: 20px;
+  width: 20px;
   aspect-ratio: 1;
   font-size: 20px;
   display: block;
@@ -58,11 +60,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
+  margin: 10px auto 30px auto;
+  pointer-events: none;
 
   .profile-user-level {
     height: 150px;
-    aspect-ratio: 1;
+    width: 150px;
+    aspect-ratio: 1 !important;
     border-radius: 30px;
     position: relative;
     z-index: 999;
@@ -127,7 +131,8 @@
 
     .profile-user-level-container {
       height: 100%;
-      aspect-ratio: 1;
+      width: 100%;
+      aspect-ratio: 1 !important;
       background: #dedede;
       border-radius: 50%;
       position: relative;
@@ -139,7 +144,9 @@
 
       .profile-user-level-bar {
         height: 100%;
-        aspect-ratio: 1;
+        width: 100%;
+        display: none;
+        aspect-ratio: 1 !important;
         background: var(--primary-violet);
         border-radius: 50%;
         clip-path: polygon(0 100%, 50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%);
@@ -150,7 +157,8 @@
 
       .profile-user-image-container {
         height: calc(100% - 2px);
-        aspect-ratio: 1;
+        width: calc(100% - 2px);
+        aspect-ratio: 1 !important;
         border-radius: 50%;
         background: #fff;
         position: absolute;
@@ -159,7 +167,8 @@
 
         .profile-user-image-container-inner {
           height: 100%;
-          aspect-ratio: 1;
+          width: 100%;
+          aspect-ratio: 1 !important;
           border-radius: 0 0 50% 50%;
           text-align: center;
           overflow: hidden;
@@ -188,6 +197,7 @@
   height: auto;
   margin: 0 auto 10px auto;
   position: relative;
+  display: none; /* SOLO PARA LA DEMO */
 
   .profile-user-level-number-container {
     width: 40px;
@@ -223,11 +233,11 @@
 
     .profile-user-level-number-text-container {
       position: absolute;
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100%;
       width: 100%;
-      line-height: 40px;
-      text-align: center;
       top: 0;
       font-size: 14px;
       font-weight: 600;

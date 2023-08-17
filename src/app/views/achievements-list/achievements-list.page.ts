@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login/login.service';
+import { UserService } from '../../services/users/users.service';
 import { AchievementsService } from '../../services/achievements/achievements.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-achievements-list',
@@ -19,18 +20,24 @@ export class AchievementsListPage implements OnInit {
   selectedTab: any;
   currentReward: any;
 
+  language: any;
+
   constructor(
-    private loginService: LoginService,
-    private achievementsService: AchievementsService
+    private userService: UserService,
+    private achievementsService: AchievementsService,
+    private languageService: LanguageService
   ) {
     this.successReward = false;
     this.openRewardWindow = false;
   }
 
   ngOnInit() {
+
+    this.language = this.languageService.language;
+
     this.showDailyChallenges = true;
     this.showAchievements = false;
-    this.userInfo = this.loginService.loggedUser;
+    this.userInfo = this.userService.loggedUser;
 
     this.achievementsService.getAchievements();
     this.achievements = this.achievementsService.achievementsData;

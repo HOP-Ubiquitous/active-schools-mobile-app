@@ -22,17 +22,16 @@
 
   <div class="profile-place-data-container">
     <ion-icon name="location"></ion-icon>
-    <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
-      {{userInfo.personalData.city}}</span>
+    <!-- <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} | {{userInfo.personal_data.city}}</span> -->
+    <span>{{userInfo.personal_data.city || 'DefaultCity'}}</span>
   </div>
 
   <div class="profile-user-container">
-    <div class="profile-user-level" (click)="goToEvolution()">
+    <div class="profile-user-level">
 
-      <div class="profile-user-info-button-container">
+      <!-- <div class="profile-user-info-button-container">
         <span>3</span>
-        <!-- <ion-icon name="information-circle"></ion-icon> -->
-      </div>
+      </div> -->
 
       <div class="profile-user-level-container">
 
@@ -42,8 +41,8 @@
 
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
-            <!-- <img src="assets/icon/missions_icons/profile-image.svg"> -->
-            <img src="{{selectedHead}}">
+            <!-- <img src="{{selectedHead}}"> -->
+            <img src="assets/icon/avatar/heads/head-01.svg">
           </div>
         </div>
 
@@ -53,20 +52,21 @@
 
   </div>
 
-  <div class="profile-main-level-container" (click)="goToEvolution()">
+  <div class="profile-main-level-container">
 
     <div class="profile-user-level-number-container">
       <div class="profile-user-level-number-container-inner">
         <div class="profile-user-level-number-container-bg-left"></div>
         <div class="profile-user-level-number-container-bg-right"></div>
       </div>
-      <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level}}</span>
+      <!-- <span class="profile-user-level-number-text-container"><span>L.</span>{{userInfo.avatar.level || 99}}</span> -->
+      <span class="profile-user-level-number-text-container"><span>L.</span>99</span>
     </div>
 
     <div class="profile-user-level-customize-arrow"></div>
 
     <div class="profile-user-level-customize-button">
-      <span>Customize Avatar</span>
+      <span>{{language.AVATAR.customizeAvatar}}</span>
     </div>
 
   </div>
@@ -92,40 +92,6 @@
     </div>
 
     <router-outlet class="outlet" name="profile"></router-outlet>
-
-    <!-- <div class="zig-zag-top"></div> -->
-
-    <!-- <div class="row">
-
-      <div class="profile-stats-inner-container">
-        <img src="assets/icon/profile_rates/heart_rate.svg">
-        <div class="profile-stats-text-container">
-          <p class="profile-stats-text-heart">73 bpm</p>
-          <p>Heart Rate</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="row">
-
-      <div class="profile-stats-inner-container">
-        <img src="assets/icon/profile_rates/steps_rate.svg">
-        <div class="profile-stats-text-container">
-          <p class="profile-stats-text-steps">5.783 / <span>10.000</span></p>
-          <p>Steps</p>
-        </div>
-      </div>
-
-      <div class="profile-stats-inner-container">
-        <img src="assets/icon/profile_rates/sleep_rate.svg">
-        <div class="profile-stats-text-container">
-          <p class="profile-stats-text-sleep">7:15 / <span>8:00h</span></p>
-          <p>Sleeping Time</p>
-        </div>
-      </div>
-
-    </div> -->
 
   </div>
 

@@ -1,55 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
-import { LoginService } from '../../services/login/login.service';
-import { DailyChallengesService } from '../../services/daily-challenges/daily-challenges.service';
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { UserService } from '../../services/users/users.service';
 import { HealthService } from '../../services/health/health.service';
-//import { NotificationsService } from '../../services/notifications/notifications.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss']
 })
 
 export class LoginPage implements OnInit {
   userData: any;
   reminderNotification: boolean;
+  schoolId: string;
+  permissions: any;
+  nativePermission: any;
+  language: any;
+  selectedLanguage: string;
 
   constructor(
+    private platform: Platform,
     public navCtrl: NavController,
-    private loginService: LoginService,
-    private dailyChallengesService: DailyChallengesService,
+    private userService: UserService,
     private healthService: HealthService,
-    //private notificationService: NotificationsService,
-    private platform: Platform
+    private languageService: LanguageService
     ) {
       const vm = this;
-
       this.reminderNotification = true;
-
-      // setTimeout(function(){
-      //   vm.healthService.getAuthorization();
-      // }, 1000)
-
     }
 
   ngOnInit() {
 
     this.userData = {
-      username: 'test',
-      password: 'test'
+      username: '',
+      password: ''
     }
 
-    this.dailyChallengesService.getDailyChallenges();
-    //this.healthService.checkNativeAuthorization()
-    //this.notificationService.sendReminderNotifications();
+    this.getLanguageData();
+
+    this.platform.ready().then(() => {
+      BackgroundMode.enable();
+      this.healthService.getAuthorization();
+    })
+    
+    this.userService.logout();
+    this.userService.getUsers();
+
   }
 
+  getLanguageData = () => {
+    this.languageService.getLanguageData();
+    this.language = this.languageService.language;
+  }
+
+  selectLanguage = (language) => {
+    this.languageService.selectLanguage(language);
+    this.getLanguageData();
+  }
+  
   login = () => {
+    this.userService.login(this.userData, 'login');
+  }
 
-    console.log(this.userData);
-    this.loginService.postUserLogin(this.userData);
-
+  loginWithGoogle = () => {
+    this.userService.loadGoogleData();
   }
 
 }

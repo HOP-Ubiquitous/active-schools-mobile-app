@@ -33,7 +33,8 @@
         <div class="profile-user-image-container">
           <div class="profile-user-image-container-inner">
 
-            <img src="{{selectedHead}}">
+            <!-- <img src="{{selectedHead}}"> -->
+            <img src="assets/icon/avatar/heads/head-01.svg">
 
           </div>
         </div>
@@ -44,19 +45,22 @@
 
     <div class="profile-user-data">
       <div class="profile-user-data-top-container">
-        <p>{{userInfo.personalData.name}} {{userInfo.personalData.surname}}</p>
+        <p>{{userInfo.personal_data.name}} {{userInfo.personal_data.surname}}</p>
       </div>
       <div class="profile-user-data-bottom-container">
         <ion-icon name="location"></ion-icon>
-        <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
-          {{userInfo.personalData.city}}</span>
+        <span>
+          <!-- {{userInfo.personal_data.schoolName}} |
+          {{userInfo.personal_data.course}} | -->
+          {{userInfo.personal_data.city}}
+        </span>
       </div>
     </div>
 
     <div class="profile-user-challenge">
 
       <div class="profile-user-challenge-progress-container">
-        <div class="profile-user-challenge-progress-bar"></div>
+        <div class="profile-user-challenge-progress-bar" [ngStyle]="{ clipPath: checkStepsProgressBar(dailySteps) }"></div>
 
         <div class="profile-user-challenge-inner">
           <div class="profile-user-challenge-icon-container">
@@ -64,7 +68,7 @@
             <!-- <img src="assets/icon/missions_icons/profile-challenge-walk.svg"> -->
           </div>
           <div class="profile-user-challenge-data-container">
-            <span>{{dailySteps || 5500}} /</span>
+            <span>{{dailySteps}} /</span>
             <span>10000</span>
           </div>
         </div>
@@ -80,11 +84,11 @@
     <div class="challenge-title-container">
 
       <div class="challenge-title-icon-container">
-        <img src="{{selectedChallenge.icon}}">
+        <img src="../../../assets/icon/challenges/challenge-{{selectedChallenge.category}}-icon.svg">
       </div>
 
       <div class="challenge-title-text-container">
-        <span>{{selectedChallenge.name}}</span>
+        <span>{{selectedChallenge.title}}</span>
       </div>
 
       <div class="challenge-title-close-container" (click)="closeChallengeWindow()">
@@ -102,12 +106,15 @@
       <div class="challenge-target-container">
         <div class="challenge-target-container-inner">
           <div class="challenge-target-diamond">
+            <span *ngIf="selectedChallenge.unit === 'reps'">x</span>
             <span>{{selectedChallenge.target}}</span>
+            <span *ngIf="selectedChallenge.unit === 'seconds'">s</span>
+            <span *ngIf="selectedChallenge.unit === 'minutes'">m</span>
           </div>
         </div>
       </div>
 
-      <div class="challenge-instructions-gallery-container" *ngIf="selectedChallenge.instructions.length > 0">
+      <!-- <div class="challenge-instructions-gallery-container" *ngIf="selectedChallenge.instructions.length > 0">
         <div class="challenge-instructions-gallery-inner-container">
 
           <div class="challenges-instructions-image-container"
@@ -116,7 +123,7 @@
           </div>
 
         </div>
-      </div>
+      </div> -->
 
       <div class="challenge-demostration-video" *ngIf="showVideoDemostration">
 
@@ -124,8 +131,10 @@
           <source type="video/mp4" src="../../../assets/videos/active-schools-countdown.mp4" />
         </video>
 
+        <!-- [src]="selectedChallenge.video | safeUrl" -->
+
         <iframe *ngIf="showCountdown === false && showVideoDemostration === true"
-                [src]="selectedChallenge.video.url | safeUrl"
+                [src]="selectedChallenge.video"
                 title="YouTube video player"
                 loading="lazy"
                 frameborder="0"
@@ -141,7 +150,7 @@
 
       </div>
 
-      <ion-button (click)="openVideoDemo()"
+      <!-- <ion-button (click)="openVideoDemo()"
                   type="submit"
                   expand="block"
                   class="challenge-demostration-button">
@@ -149,15 +158,15 @@
           <ion-icon name="play"></ion-icon>
         </div>
         Watch video demostration
-      </ion-button>
+      </ion-button> -->
 
       <div class="challenge-stats-container">
 
         <div class="challenge-stats-title-container">
           <span>
-            Number of times the challenge
+            {{language.ROUTES.challengeCompletedText1}}
             <br>
-            has been completed
+            {{language.ROUTES.challengeCompletedText2}}
           </span>
         </div>
 
@@ -165,26 +174,28 @@
 
           <div class="challenge-stats-left-container">
             <div class="challenge-stats-diamond">
-              <span>{{selectedStatsChallenge.completed24h}}</span>
+              <!-- <span>{{selectedStatsChallenge.completed24h || 9999}}</span> -->
+              <span>2</span>
               <div class="challenge-stats-diamond-left"></div>
               <div class="challenge-stats-diamond-right"></div>
             </div>
 
             <div class="challenge-stats-time-details-container">
-              <span>In the last 24h</span>
+              <span>{{language.ROUTES.last24h}}</span>
             </div>
 
           </div>
 
           <div class="challenge-stats-right-container">
             <div class="challenge-stats-diamond">
-              <span>{{selectedStatsChallenge.completed7d}}</span>
+              <!-- <span>{{selectedStatsChallenge.completed7d}}</span> -->
+              <span>10</span>
               <div class="challenge-stats-diamond-left"></div>
               <div class="challenge-stats-diamond-right"></div>
             </div>
 
             <div class="challenge-stats-time-details-container">
-              <span>In the last 7d</span>
+              <span>{{language.ROUTES.last7d}}</span>
             </div>
           </div>
 
@@ -202,7 +213,7 @@
 
         <div class="challenge-reward-tag-container">
           <img src="assets/icon/challenge-tag.svg">
-          <span>{{selectedChallenge.reward}}</span>
+          <span>{{selectedChallenge.reward || 9999}}</span>
         </div>
 
       </div>
@@ -218,7 +229,7 @@
       </div>
 
       <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess && challengeActive">
-        <span>You must get closer to activate the challenge</span>
+        <span>{{language.ROUTES.closerToChallenge}}</span>
       </div>
       <!-- -->
 
@@ -234,7 +245,7 @@
       </div>
 
       <div class="challenge-upload-text-container" *ngIf="!selectedChallengeSuccess && !challengeActive">
-        <span>Done?</span>
+        <span>{{language.ROUTES.done}}</span>
       </div>
       <!-- -->
 
@@ -249,7 +260,7 @@
       </div>
 
       <div class="challenge-upload-text-container" *ngIf="selectedChallengeSuccess">
-        <span>Share your challenge!</span>
+        <span>{{language.ROUTES.shareChallenge}}</span>
       </div>
       <!-- -->
 
@@ -306,10 +317,14 @@
 </div>
 
 <ion-item>
-  <ion-label>Routes</ion-label>
+  <!-- // -->
+  <!-- TODO cuando se cambia de lenguage desde settings, la página rutas no actualiza el lenguage -->
+  <!-- // -->
+
+  <ion-label>{{language.ROUTES.routes}}</ion-label>
   <ion-select interface="action-sheet" class="custom-options" (ionChange)="panToRoute($event)">
-    <ion-select-option *ngFor="let route of routes; index as i" [value]="i">
-      {{route.name}}
+    <ion-select-option *ngFor="let route of routesServiceApi.allRoutes; index as i" [value]="i">
+      {{route.route_name}}
     </ion-select-option>
   </ion-select>
 </ion-item>
@@ -321,7 +336,7 @@
 
     <div class="reward-tag-container">
       <img class="reward-tag" src="assets/icon/challenge-tag.svg">
-      <span>{{selectedChallenge.reward}}</span>
+      <span>{{selectedChallenge.reward || 9999}}</span>
     </div>
 
   </div>

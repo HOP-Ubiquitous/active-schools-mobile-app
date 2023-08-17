@@ -22,7 +22,7 @@
   <div class="menu-line-container">
 
   <div class="menu-line-bg">
-    <div class="menu-line">
+    <div class="menu-line" [ngStyle]="{ 'width': 100 / 3 * 1 + '%'}">
     </div>
   </div>
 
@@ -33,16 +33,20 @@
     </div>
 
     <div class="menu-diamond-container">
-      <div class="menu-button"></div>
+      <div class="menu-button menu-button-active"></div>
     </div>
 
-    <div class="menu-diamond-container">
+    <!-- <div class="menu-diamond-container">
       <div class="menu-button"></div>
-    </div>
+    </div> -->
 
-    <div class="menu-diamond-container">
+    <!-- <div class="menu-diamond-container">
       <div class="menu-button"></div>
-    </div>
+    </div> -->
+
+    <!-- <div class="menu-diamond-container">
+      <div class="menu-button"></div>
+    </div> -->
 
     <div class="menu-diamond-container">
       <div class="menu-button"></div>
@@ -63,68 +67,72 @@
         <ion-icon name="document-text-outline"></ion-icon>
       </div>
     </div>
-    <h1>Personal Data</h1>
+    <h1>{{language.PERSONAL_DATA.personalData}}</h1>
   </div>
 
   <form class="form-registration">
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" [(ngModel)]="registerData.name" name="name" required></ion-input>
+      <ion-label position="floating">{{language.COMMON.name}}</ion-label>
+      <ion-input type="text" [(ngModel)]="registerData.username" name="username" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Surname</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.surname}}</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.surname" name="surname" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Sex</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.sex}}</ion-label>
       <ion-select [(ngModel)]="registerData.sex" name="sex">
-        <ion-select-option value="female">Female</ion-select-option>
-        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option value="female">{{language.PERSONAL_DATA.female}}</ion-select-option>
+        <ion-select-option value="male">{{language.PERSONAL_DATA.male}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Weight (Kg)</ion-label>
-      <ion-input type="number" [(ngModel)]="registerData.weight" name="weight" required></ion-input>
-    </ion-item>
-
-    <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Height (cm)</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.height}} (cm)</ion-label>
       <ion-input type="number" [(ngModel)]="registerData.height" name="height" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Address</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.weight}} (Kg)</ion-label>
+      <ion-input type="number" [(ngModel)]="registerData.weight" name="weight" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full" class="ion-item-form">
+      <ion-label position="floating">{{language.PERSONAL_DATA.address}}</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.address" name="address" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">City</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.city}}</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.city" name="city" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Province</ion-label>
+      <ion-label position="floating">{{language.PERSONAL_DATA.province}}</ion-label>
       <ion-input type="text" [(ngModel)]="registerData.province" name="province" required></ion-input>
     </ion-item>
 
     <ion-item lines="full" class="ion-item-form">
-      <ion-label position="floating">Country</ion-label>
-      <ion-input type="text" [(ngModel)]="registerData.country" name="country" required></ion-input>
+      <ion-label position="floating">{{language.PERSONAL_DATA.country}}</ion-label>
+      <ion-select (ionChange)="selectedCountry($event)">
+        <ion-select-option *ngFor="let country of countries; index as i" [value]="i">
+          {{country.name}}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-row>
       <ion-col class="next-container">
         <ion-button (click)="savePersonalData()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-forward-outline"></ion-icon>
-          Next
+          {{language.COMMON.next}}
         </ion-button>
         <ion-button (click)="goToBack()" type="submit" expand="block" class="next-button">
           <ion-icon name="chevron-back-outline"></ion-icon>
-          Back
+          {{language.COMMON.back}}
         </ion-button>
       </ion-col>
     </ion-row>

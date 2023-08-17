@@ -22,8 +22,8 @@
 
   <div class="profile-place-data-container">
     <ion-icon name="location"></ion-icon>
-    <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} |
-      {{userInfo.personalData.city}}</span>
+    <!-- <span>{{userInfo.personalData.schoolName}} | {{userInfo.personalData.course}} | {{userInfo.personal_data.city}}</span> -->
+    <span>{{userInfo.personal_data.city}}</span>
   </div>
 
   <div class="profile-user-container">
@@ -66,7 +66,7 @@
     <div class="profile-user-level-customize-arrow"></div>
 
     <div class="profile-user-level-customize-button">
-      <span>Customize Avatar</span>
+      <span>{{language.AVATAR.customizeAvatar}}</span>
     </div>
 
   </div>

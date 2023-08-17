@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../../services/teams/teams.service';
-import { LoginService } from '../../services/login/login.service';
+import { UserService } from '../../services/users/users.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-ranking-teams',
@@ -23,15 +24,20 @@ export class RankingTeamsPage implements OnInit {
   tabMembersTitle: any;
   orderMembersByTab: any;
   subscribedTeam: any;
+  language: any;
 
   constructor(
     private teamsService: TeamsService,
-    private loginService: LoginService
+    private userService: UserService,
+    private languageService: LanguageService
   ) { }
 
   ngOnInit() {
-    this.loggedUser = this.loginService.loggedUser;
-    this.users = this.loginService.users;
+
+    this.language = this.languageService.language;
+
+    this.loggedUser = this.userService.loggedUser;
+    this.users = this.userService.users;
     this.selectedTab = 'search';
     this.tabIcon = 'search';
     this.tabTitle = 'Search Teams';

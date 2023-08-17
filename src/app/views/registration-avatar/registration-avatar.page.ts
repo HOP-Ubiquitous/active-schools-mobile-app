@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterService } from '../../services/register/register.service';
-import * as items from '../../services/items/items-constants';
+import { UserService } from '../../services/users/users.service';
+import { LanguageService } from '../../services/language/language.service';
+import * as items from '../../services/avatar/avatar-constants';
 
 @Component({
   selector: 'app-registration-avatar',
@@ -23,10 +24,12 @@ export class RegistrationAvatarPage implements OnInit {
   selectedHead: any;
   user: any;
   avatarInfo: any;
+  language: any;
 
   constructor(
     private router: Router, 
-    private registerService: RegisterService
+    private userService: UserService,
+    private languageService: LanguageService
   ) {
     this.bodyStep = 0;
     this.headStep = 0;
@@ -42,6 +45,8 @@ export class RegistrationAvatarPage implements OnInit {
     //del personaje a diferentes altura, pudiendo el usuario customizar la apariencia del personaje con los items desbloqueados de los diferentes tipos.
     //Pulsando en las flechas y según la posición de esta, pasará al siguiente o anterior item del tipo superior, medio o inferior.
 
+    this.language = this.languageService.language;
+    
     this.items = items.EVOLUTION_ITEMS;
     this.heads = items.AVATAR_HEADS;
     this.bodies = items.AVATAR_BODIES;
@@ -127,13 +132,13 @@ export class RegistrationAvatarPage implements OnInit {
   }
 
   saveAvatarInfo = () => {
-    this.registerService.avatarInfo = this.avatarInfo;
-    this.registerService.postUserRegister();
+    this.userService.avatarInfo = this.avatarInfo;
+    this.router.navigate(['/tabs/route']);
   }
 
-  goToBack = () => {
-    this.router.navigate(['/registration-healthy']);
-  }
+  // goToBack = () => {
+  //   this.router.navigate(['/registration-personal-data']);
+  // }
 
   goToLogin = () => {
     this.router.navigate(['/login']);

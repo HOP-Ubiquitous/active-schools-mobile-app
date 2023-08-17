@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CHALLENGES } from './challenges-constants';
+import { ChallengesServiceApi } from './challenges.service_api';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +10,12 @@ export class ChallengesService {
   restAPI: string = '';
   challengesData: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private challengeServiceApi: ChallengesServiceApi) { }
 
-  ngOnInit() {
-    this.getChallenges();
-  }
+  ngOnInit() {}
 
   getChallenges() {
-    // const promise = new Promise((resolve, reject) => {
-    //   const URL = this.restAPI;
-    //   this.http.get(URL).toPromise().then((res: any) => {
-    //     this.challengesData = res.data;
-    //   }, err => {
-    //     reject(err);
-    //   })
+    this.challengeServiceApi.getChallenges();
 
-    // });
-
-    this.challengesData = CHALLENGES;
-
-    //return promise;
   }
 }

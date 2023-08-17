@@ -1,7 +1,7 @@
 {
   "name": "active-schools",
   "version": "0.0.1",
-  "author": "Javi Sámchez - Libelium",
+  "author": "Javi Sánchez - Libelium",
   "homepage": "https://libelium.com/",
   "scripts": {
     "ng": "ng",
@@ -15,15 +15,18 @@
   "dependencies": {
     "@angular/common": "~12.0.1",
     "@angular/core": "~12.0.1",
+    "@angular/fire": "^7.5.0",
     "@angular/forms": "~12.0.1",
     "@angular/platform-browser": "~12.0.1",
     "@angular/platform-browser-dynamic": "~12.0.1",
     "@angular/router": "~12.0.1",
-    "@awesome-cordova-plugins/android-permissions": "^5.46.0",
-    "@awesome-cordova-plugins/core": "^5.46.0",
-    "@awesome-cordova-plugins/device-orientation": "^5.41.0",
+    "@awesome-cordova-plugins/core": "^5.1.0",
+    "@awesome-cordova-plugins/device-orientation": "^5.46.0",
+    "@awesome-cordova-plugins/firebase-x": "^5.46.0",
     "@awesome-cordova-plugins/geolocation": "^5.46.0",
-    "@awesome-cordova-plugins/health": "^6.1.0",
+    "@awesome-cordova-plugins/google-plus": "^5.43.0",
+    "@awesome-cordova-plugins/health": "^5.46.0",
+    "@awesome-cordova-plugins/http": "^5.46.0",
     "@awesome-cordova-plugins/local-notifications": "^5.46.0",
     "@awesome-cordova-plugins/native-audio": "^5.46.0",
     "@capacitor/android": "^4.3.0",
@@ -34,19 +37,28 @@
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@ionic-native/android-permissions": "^5.36.0",
+    "@ionic-native/background-mode": "^5.36.0",
     "@ionic-native/core": "^5.36.0",
+    "@ionic-native/firebase-authentication": "^5.36.0",
     "@ionic-native/geolocation": "^5.36.0",
+    "@ionic-native/http": "^5.36.0",
+    "@ionic-native/pedometer": "^5.36.0",
     "@ionic/angular": "^6.0.0-rc.4",
     "@ionic/core": "^6.0.14",
     "cordova-browser": "6.0.0",
+    "cordova-plugin-ionic-wkwebview-engine": "^1.1.4",
+    "cors": "^2.8.5",
+    "firebase": "^9.17.1",
     "leaflet": "^1.7.1",
     "leaflet-marker-rotation": "^0.4.0",
     "leaflet-rotatedmarker": "^0.2.0",
     "leaflet-routing-machine": "^3.2.12",
     "lrm-graphhopper": "^1.3.0",
+    "moment": "^2.29.4",
     "rxjs": "^6.6.7",
     "rxjs-operators": "^1.1.3",
-    "tslib": "^2.0.0",
+    "tslib": "2.1.0",
+    "ws": "^3.3.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -70,15 +82,21 @@
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
     "cordova-android": "^10.1.2",
+    "cordova-ios": "^6.3.0",
     "cordova-plugin-add-swift-support": "^2.0.2",
-    "cordova-plugin-android-permissions": "^1.1.4",
+    "cordova-plugin-advanced-http": "^3.3.1",
+    "cordova-plugin-android-permissions": "^1.1.5",
+    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-device-orientation": "^2.0.1",
+    "cordova-plugin-file": "^7.0.0",
     "cordova-plugin-geolocation": "^4.1.0",
+    "cordova-plugin-googleplus": "^8.5.2",
     "cordova-plugin-health": "^2.0.5",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-nativeaudio": "^3.0.9",
+    "cordova-plugin-pedometer": "^0.4.1",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-support-google-services": "^1.4.1",
@@ -104,19 +122,34 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-device-orientation": {},
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-nativeaudio": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
-      "cordova-plugin-health": {}
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-pedometer": {},
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.109969137738-0ppkq30t4279voph296timchpcq0g8kj",
+        "WEB_APPLICATION_CLIENT_ID": "109969137738-0ppkq30t4279voph296timchpcq0g8kj.apps.googleusercontent.com",
+        "ANDROID_CLIENT_ID": "109969137738-crckd6n00rmr2lc2ju2kkb4i3lu8t0is.apps.googleusercontent.com"
+      },
+      "cordova-plugin-health": {
+        "FIT_API_VERSION": "20.0.0",
+        "PLAY_AUTH_VERSION": "19.0.0",
+        "HEALTH_READ_PERMISSION": " ",
+        "HEALTH_WRITE_PERMISSION": " "
+      },
+      "cordova-plugin-device-orientation": {}
     },
     "platforms": [
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

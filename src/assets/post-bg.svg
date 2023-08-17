@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.6.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 720 540" style="enable-background:new 0 0 720 540;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#CCCCCC;}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="665.2691" y1="479.3436" x2="37.3174" y2="49.0385">
+	<stop  offset="0" style="stop-color:#EC671C"/>
+	<stop  offset="0.4911" style="stop-color:#6F4C99"/>
+	<stop  offset="1" style="stop-color:#D40E70"/>
+</linearGradient>
+<rect x="0.5" y="0.5" class="st0" width="720" height="540"/>
+<g>
+	<g>
+		<polygon class="st1" points="448,319 433.6,354.6 367.1,354.6 272,319 		"/>
+		<g>
+			<polygon class="st2" points="448,319 402.6,319 367.1,230.4 385.2,185.4 394.4,185.4 			"/>
+		</g>
+		<g>
+			<polygon class="st1" points="340,185.4 290,310 335.2,310 367.1,230.4 385.2,185.4 			"/>
+			<polygon class="st1" points="272,354.6 317.2,354.6 320.5,346.6 281.1,331.9 			"/>
+		</g>
+	</g>
+</g>
+</svg>

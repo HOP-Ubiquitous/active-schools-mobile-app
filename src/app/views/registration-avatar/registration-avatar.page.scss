@@ -24,8 +24,9 @@ html {
     padding: 0 10px;
   }
   
-  .main-nav div {
+  .main-nav div, .main-nav ion-img {
     height: 20px;
+    width: 20px;
     aspect-ratio: 1;
   }
   

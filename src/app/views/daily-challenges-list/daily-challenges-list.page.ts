@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login/login.service';
+import { UserService } from '../../services/users/users.service';
 import { DailyChallengesService } from '../../services/daily-challenges/daily-challenges.service';
+import { LanguageService } from '../../services/language/language.service';
 
 @Component({
   selector: 'app-daily-challenges-list',
   templateUrl: './daily-challenges-list.page.html',
   styleUrls: ['./daily-challenges-list.page.scss'],
 })
+
 export class DailyChallengesListPage implements OnInit {
   successReward: boolean;
   openRewardWindow: boolean;
@@ -17,19 +19,23 @@ export class DailyChallengesListPage implements OnInit {
   selectedDailyChallenges: any;
   achievements: any;
   selectedTab: any;
+  language: any;
 
   constructor(
-    private loginService: LoginService,
-    private dailyChallengesService: DailyChallengesService
+    private userService: UserService,
+    private dailyChallengesService: DailyChallengesService,
+    private languageService: LanguageService
   ) {
     this.successReward = false;
     this.openRewardWindow = false;
   }
 
   ngOnInit() {
+
+    this.language = this.languageService.language;
     this.showDailyChallenges = true;
     this.showAchievements = false;
-    this.userInfo = this.loginService.loggedUser;
+    this.userInfo = this.userService.loggedUser;
     
     this.selectedDailyChallenges = this.dailyChallengesService.selectedDailyChallenges;
     console.log(this.selectedDailyChallenges);

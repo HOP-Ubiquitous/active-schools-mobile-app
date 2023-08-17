@@ -37,13 +37,15 @@ body,
   padding: 0 10px;
 }
 
-.main-nav div {
+.main-nav div, .main-nav ion-img {
   height: 20px;
+  width: 20px;
   aspect-ratio: 1;
 }
 
 .main-nav ion-icon {
   height: 20px;
+  width: 20px;
   aspect-ratio: 1;
   font-size: 20px;
   display: block;
@@ -73,6 +75,7 @@ ion-content {
 .profile-user-level,
 .profile-user-challenge {
   height: 60px;
+  width: 60px;
   aspect-ratio: 1;
   border-radius: 30px;
   z-index: 1;
@@ -80,7 +83,8 @@ ion-content {
 
 .profile-user-level-container {
   height: 100%;
-  aspect-ratio: 1;
+  width: 100%;
+  aspect-ratio: 1 !important;
   background: #dedede;
   border-radius: 50%;
   position: relative;
@@ -92,7 +96,8 @@ ion-content {
 
   .profile-user-level-bar {
     height: 100%;
-    aspect-ratio: 1;
+    width: 100%;
+    aspect-ratio: 1 !important;
     background: var(--primary-violet);
     border-radius: 50%;
     clip-path: polygon(0 100%, 50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%);
@@ -103,7 +108,8 @@ ion-content {
 
   .profile-user-image-container {
     height: calc(100% - 2px);
-    aspect-ratio: 1;
+    width: calc(100% - 2px);
+    aspect-ratio: 1 !important;
     border-radius: 50%;
     background: #fff;
     position: absolute;
@@ -113,7 +119,8 @@ ion-content {
   
   .profile-user-image-container-inner {
     height: 100%;
-    aspect-ratio: 1;
+    width: 100%;
+    aspect-ratio: 1 !important;
     border-radius: 0 0 50% 50%;
     text-align: center;
     overflow: hidden;
@@ -175,7 +182,8 @@ ion-content {
 
 .profile-user-challenge-progress-container {
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
+  aspect-ratio: 1 !important;
   border-radius: 50%;
   background: #eaeaea;
   position: relative;
@@ -183,15 +191,18 @@ ion-content {
 
 .profile-user-challenge-progress-bar {
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
+  aspect-ratio: 1 !important;
   clip-path: polygon(0 100%, 50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%);
   border-radius: 50%;
   background: var(--primary-violet);
+  transition: 0.15s ease all;
 }
 
 .profile-user-challenge-inner {
   width: calc(100% - 2px);
-  aspect-ratio: 1;
+  height: calc(100% - 2px);
+  aspect-ratio: 1 !important;
   border-radius: 50%;
   background: #fff;
   position: absolute;
@@ -291,6 +302,8 @@ ion-content {
     .challenge-title-text-container {
       width: calc(100% - 40px);
       height: 30px;
+      display: flex;
+      align-items: center;
 
       span {
         font-size: 16px;
@@ -801,7 +814,8 @@ ion-content {
 
         .challenge-upload-gallery-image-container {
           height: 100%;
-          aspect-ratio: 4 / 3;
+          width: 75%;
+          aspect-ratio: 4 / 3 !important;
           background: red;
           position: relative;
           overflow: hidden;
